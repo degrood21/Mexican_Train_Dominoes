@@ -1,6 +1,7 @@
 package com.example.degrood21.mexican_train_dominoes;
 
 import android.graphics.drawable.Drawable;
+import android.widget.EditText;
 
 import java.util.ArrayList;
 
@@ -24,12 +25,18 @@ public class DominoGameState {
     int playerTurn, round;
     boolean player1Public, player2Public, player3Public, player4Public;
 
+    // Beginning of play
     public DominoGameState(ArrayList<Drawable> allDominoes){
 
         PileofDominoes = allDominoes;
-        PublicTrain.add(0,allDominoes.get(12));
-        round = 12;
-        playerTurn = 0; //0 means it is player 1's turn
+
+        if(allDominoes.size() != 0){ // temporary until we get full set of drawable dominoes
+
+            PublicTrain.add(0, allDominoes.get(12));
+
+        }
+
+        playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
         player2Score = 0;
         player3Score = 0;
@@ -40,4 +47,56 @@ public class DominoGameState {
         player4Public = false;
 
     }
+
+    // Deep Copy Constructor
+    public DominoGameState(DominoGameState newstateInstance){
+
+        PileofDominoes = newstateInstance.PileofDominoes;
+        Player1Train = newstateInstance.Player1Train;
+        Player2Train = newstateInstance.Player2Train;
+        Player3Train = newstateInstance.Player3Train;
+        Player4Train = newstateInstance.Player4Train;
+        player1Public = newstateInstance.player1Public;
+        player2Public = newstateInstance.player2Public;
+        player3Public = newstateInstance.player3Public;
+        player4Public = newstateInstance.player4Public;
+        PublicTrain = newstateInstance.PublicTrain;
+        round = newstateInstance.round;
+
+
+        // Depending on which players game state instance is being sent in
+        // it will deep copy accordingly
+        if(newstateInstance.playerTurn == 0){ // player 1
+
+            playerTurn = newstateInstance.playerTurn;
+            Player1Hand = newstateInstance.Player1Hand;
+
+        }
+        else if(newstateInstance.playerTurn == 1){ // player 2
+
+            playerTurn = newstateInstance.playerTurn;
+            Player2Hand = newstateInstance.Player2Hand;
+
+        }
+        else if(newstateInstance.playerTurn == 2){ // player 3
+
+            playerTurn = newstateInstance.playerTurn;
+            Player3Hand = newstateInstance.Player3Hand;
+
+
+        }
+        else if(newstateInstance.playerTurn == 3){ // player 4
+
+            playerTurn = newstateInstance.playerTurn;
+            Player4Hand = newstateInstance.Player4Hand;
+
+        }
+    }
+
+    public boolean testAction( /*usually is sent a player ID as param */ ){
+
+        return true;
+
+    }
+
 }

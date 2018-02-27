@@ -2,10 +2,7 @@ package com.example.degrood21.mexican_train_dominoes;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-//hello
-//hello -callum
 
-//dasbhuidbhasujbdasjkd
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -13,8 +10,4 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
-
-
-    //Hey This is Logan Hope this
 }

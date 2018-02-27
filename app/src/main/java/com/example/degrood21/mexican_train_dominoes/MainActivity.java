@@ -13,5 +13,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Hey This is Logan Hope this works!
+
+    //Hey This is Logan Hope this
 }

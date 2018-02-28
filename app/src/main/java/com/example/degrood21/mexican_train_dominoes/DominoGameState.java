@@ -99,4 +99,12 @@ public class DominoGameState {
 
     }
 
+    //only have ints/booleans at the moment
+    @Override
+    public String toString() {
+        return round + "\n" + playerTurn + "\n" + player1Score + "\n" + player2Score + "\n" + player3Score +
+                "\n" + player4Score + "\n" + player1Public + "\n" + player2Public + "\n" +
+                player3Public + "\n" + player4Public + "\n" ;
+    }
+
 }

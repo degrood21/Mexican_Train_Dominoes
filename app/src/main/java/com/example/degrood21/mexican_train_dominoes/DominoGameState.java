@@ -11,22 +11,22 @@ import java.util.ArrayList;
 
 public class DominoGameState {
 
-    ArrayList<Drawable> PileofDominoes = new ArrayList<>();
-    ArrayList<Drawable> Player1Hand = new ArrayList<>();
-    ArrayList<Drawable> Player2Hand = new ArrayList<>();
-    ArrayList<Drawable> Player3Hand = new ArrayList<>();
-    ArrayList<Drawable> Player4Hand = new ArrayList<>();
-    ArrayList<Drawable> Player1Train = new ArrayList<>();
-    ArrayList<Drawable> Player2Train = new ArrayList<>();
-    ArrayList<Drawable> Player3Train = new ArrayList<>();
-    ArrayList<Drawable> Player4Train = new ArrayList<>();
-    ArrayList<Drawable> PublicTrain = new ArrayList<>();
+    ArrayList<Integer> PileofDominoes = new ArrayList<>();
+    ArrayList<Integer> Player1Hand = new ArrayList<>();
+    ArrayList<Integer> Player2Hand = new ArrayList<>();
+    ArrayList<Integer> Player3Hand = new ArrayList<>();
+    ArrayList<Integer> Player4Hand = new ArrayList<>();
+    ArrayList<Integer> Player1Train = new ArrayList<>();
+    ArrayList<Integer> Player2Train = new ArrayList<>();
+    ArrayList<Integer> Player3Train = new ArrayList<>();
+    ArrayList<Integer> Player4Train = new ArrayList<>();
+    ArrayList<Integer> PublicTrain = new ArrayList<>();
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round;
     boolean player1Public, player2Public, player3Public, player4Public;
 
     // Beginning of play
-    public DominoGameState(ArrayList<Drawable> allDominoes){
+    public DominoGameState(ArrayList<Integer> allDominoes){
 
         PileofDominoes = allDominoes;
 
@@ -174,7 +174,7 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean placeDomino(int id, Drawable selectedDomino){
+    public boolean placeDomino(int id, int selectedDomino){
         if(id == 0){
            if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
                return true;

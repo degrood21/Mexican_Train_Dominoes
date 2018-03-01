@@ -16,7 +16,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final ArrayList<Drawable> setOfDominoes = new ArrayList<Drawable>();
+        final ArrayList<Integer> setOfDominoes = new ArrayList<Integer>();
+
+             setOfDominoes.add(R.drawable.d0_1);
 
         final EditText editTextView = (EditText) findViewById(R.id.editText);
 

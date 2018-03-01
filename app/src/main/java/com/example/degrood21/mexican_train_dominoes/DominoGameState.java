@@ -26,15 +26,12 @@ public class DominoGameState {
     boolean player1Public, player2Public, player3Public, player4Public;
 
     // Beginning of play
-    public DominoGameState(ArrayList<Integer> allDominoes){
+    public DominoGameState(ArrayList<Integer> allDominoes) {
 
+        round = 12;
         PileofDominoes = allDominoes;
 
-        if(allDominoes.size() != 0){ // temporary until we get full set of drawable dominoes
-
-            PublicTrain.add(0, allDominoes.get(12));
-
-        }
+        PublicTrain.add(0, allDominoes.get(round));
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
@@ -50,40 +47,40 @@ public class DominoGameState {
     }
 
     // Deep Copy Constructor
-    public DominoGameState(DominoGameState newstateInstance){
+    public DominoGameState(DominoGameState newstateInstance) {
 
         PileofDominoes = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
+        for (int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
 
             PileofDominoes.add(i, newstateInstance.PileofDominoes.get(i));
 
         }
         Player1Train = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.Player1Train.size(); i++) {
+        for (int i = 0; i < newstateInstance.Player1Train.size(); i++) {
 
             Player1Train.add(i, newstateInstance.Player1Train.get(i));
 
         }
         Player2Train = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.Player2Train.size(); i++) {
+        for (int i = 0; i < newstateInstance.Player2Train.size(); i++) {
 
             Player2Train.add(i, newstateInstance.Player2Train.get(i));
 
         }
         Player3Train = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.Player3Train.size(); i++) {
+        for (int i = 0; i < newstateInstance.Player3Train.size(); i++) {
 
             Player3Train.add(i, newstateInstance.Player3Train.get(i));
 
         }
         Player4Train = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.Player4Train.size(); i++) {
+        for (int i = 0; i < newstateInstance.Player4Train.size(); i++) {
 
             Player4Train.add(i, newstateInstance.Player4Train.get(i));
 
         }
         PublicTrain = new ArrayList<>();
-        for(int i = 0; i < newstateInstance.PublicTrain.size(); i++) {
+        for (int i = 0; i < newstateInstance.PublicTrain.size(); i++) {
 
             PublicTrain.add(i, newstateInstance.PublicTrain.get(i));
 
@@ -96,43 +93,40 @@ public class DominoGameState {
 
         // Depending on which players game state instance is being sent in
         // it will deep copy accordingly
-        if(newstateInstance.playerTurn == 0){ // player 1
+        if (newstateInstance.playerTurn == 0) { // player 1
 
             Player1Hand = new ArrayList<>();
-            for(int i = 0; i < newstateInstance.Player1Hand.size(); i++) {
+            for (int i = 0; i < newstateInstance.Player1Hand.size(); i++) {
 
                 Player1Hand.add(i, newstateInstance.Player1Hand.get(i));
 
             }
             playerTurn = newstateInstance.playerTurn;
 
-        }
-        else if(newstateInstance.playerTurn == 1){ // player 2
+        } else if (newstateInstance.playerTurn == 1) { // player 2
 
             Player2Hand = new ArrayList<>();
-            for(int i = 0; i < newstateInstance.Player2Hand.size(); i++) {
+            for (int i = 0; i < newstateInstance.Player2Hand.size(); i++) {
 
                 Player2Hand.add(i, newstateInstance.Player2Hand.get(i));
 
             }
             playerTurn = newstateInstance.playerTurn;
 
-        }
-        else if(newstateInstance.playerTurn == 2){ // player 3
+        } else if (newstateInstance.playerTurn == 2) { // player 3
 
             Player3Hand = new ArrayList<>();
-            for(int i = 0; i < newstateInstance.Player3Hand.size(); i++) {
+            for (int i = 0; i < newstateInstance.Player3Hand.size(); i++) {
 
                 Player3Hand.add(i, newstateInstance.Player3Hand.get(i));
 
             }
             playerTurn = newstateInstance.playerTurn;
 
-        }
-        else if(newstateInstance.playerTurn == 3){ // player 4
+        } else if (newstateInstance.playerTurn == 3) { // player 4
 
             Player4Hand = new ArrayList<>();
-            for(int i = 0; i < newstateInstance.Player4Hand.size(); i++) {
+            for (int i = 0; i < newstateInstance.Player4Hand.size(); i++) {
 
                 Player4Hand.add(i, newstateInstance.Player4Hand.get(i));
 
@@ -142,30 +136,27 @@ public class DominoGameState {
         }
     }
 
-    public boolean testAction( /*usually is sent a player ID as param */ ){
+    public boolean testAction( /*usually is sent a player ID as param */) {
 
         return true;
 
     }
 
-    public boolean selectDomino(int id){
-        if(id == 0){
-            if(Player1Hand != null){
+    public boolean selectDomino(int id) { //Callum
+        if (id == 0) {
+            if (Player1Hand != null) {
 
                 return true;
             }
-        }
-        else if(id == 1){
-            if(Player2Hand != null){
+        } else if (id == 1) {
+            if (Player2Hand != null) {
                 return true;
             }
-        }
-        else if(id == 2){
-            if(Player3Hand != null){
+        } else if (id == 2) {
+            if (Player3Hand != null) {
                 return true;
             }
-        }
-        else if(id == 3 ){
+        } else if (id == 3) {
             if (Player4Hand != null) {
                 return true;
             }
@@ -174,36 +165,39 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean placeDomino(int id, int selectedDomino){
-        if(id == 0){
-           if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
-               return true;
-           }
-
-           if(player2Public == true){}
-
-            if(player3Public == true){}
-
-            if(player4Public == true){}
-
-            if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
+    public boolean placeDomino(int id, int selectedDomino) { //Dylan
+        if (id == 0) {
+            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
                 return true;
             }
-            if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
+
+            if (player2Public == true) {
+            }
+
+            if (player3Public == true) {
+            }
+
+            if (player4Public == true) {
+            }
+
+            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
                 return true;
             }
-        }
-        if(id == 1){
-            if(Player2Hand != null){
-                return true;
-            }
-        }
-        if(id == 2){
-            if(Player3Hand != null){
+            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
                 return true;
             }
         }
-        if(id == 3 ){
+        if (id == 1) {
+            if (Player2Hand != null) {
+                return true;
+            }
+        }
+        if (id == 2) {
+            if (Player3Hand != null) {
+                return true;
+            }
+        }
+        if (id == 3) {
             if (Player4Hand != null) {
                 return true;
             }
@@ -212,24 +206,21 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean doublePlay(int id){
-        if(id == 0){
-            if(){
+    public boolean doublePlay(int id) { //Logan
+        if (id == 0) {
+            //if () {
 
+            //    return true;
+            //}
+        } else if (id == 1) {
+            if (Player2Hand != null) {
                 return true;
             }
-        }
-        else if(id == 1){
-            if(Player2Hand != null){
+        } else if (id == 2) {
+            if (Player3Hand != null) {
                 return true;
             }
-        }
-        else if(id == 2){
-            if(Player3Hand != null){
-                return true;
-            }
-        }
-        else if(id == 3 ){
+        } else if (id == 3) {
             if (Player4Hand != null) {
                 return true;
             }
@@ -238,23 +229,20 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean drawAction(int id){
-        if(id == 0){
-            if(Player1Hand != null){
+    public boolean drawAction(int id) { // Devin
+        if (id == 0) {
+            if (Player1Hand != null) {
                 return true;
             }
-        }
-        else if(id == 1){
-            if(Player2Hand != null){
+        } else if (id == 1) {
+            if (Player2Hand != null) {
                 return true;
             }
-        }
-        else if(id == 2){
-            if(Player3Hand != null){
+        } else if (id == 2) {
+            if (Player3Hand != null) {
                 return true;
             }
-        }
-        else if(id == 3 ){
+        } else if (id == 3) {
             if (Player4Hand != null) {
                 return true;
             }
@@ -263,26 +251,27 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean quitGame(int id){
+    public boolean quitGame(int id) {
         return true;
     }
 
-    public boolean endTurn(int id){
+    public boolean endTurn(int id) {
         return true;
     }
 
-    public boolean restartGame(){
+    public boolean restartGame() {
         return true;
     }
 
-    public boolean choosePlayerType(){
-        return true;
-    }
-    public boolean changePlayerName(){
+    public boolean choosePlayerType() {
         return true;
     }
 
-    public void updateScore(){
+    public boolean changePlayerName() {
+        return true;
+    }
+
+    public void updateScore() {
     }
 
     //only have ints/booleans at the moment
@@ -290,7 +279,7 @@ public class DominoGameState {
     public String toString() {
         return round + "\n" + playerTurn + "\n" + player1Score + "\n" + player2Score + "\n" + player3Score +
                 "\n" + player4Score + "\n" + player1Public + "\n" + player2Public + "\n" +
-                player3Public + "\n" + player4Public + "\n" ;
+                player3Public + "\n" + player4Public + "\n";
     }
 
 }

@@ -32,6 +32,14 @@
             android:textSize="30sp"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="0dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/f" />
+
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>

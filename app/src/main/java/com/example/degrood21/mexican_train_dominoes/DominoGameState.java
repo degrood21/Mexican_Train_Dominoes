@@ -51,44 +51,92 @@ public class DominoGameState {
     // Deep Copy Constructor
     public DominoGameState(DominoGameState newstateInstance){
 
-        PileofDominoes = newstateInstance.PileofDominoes;
-        Player1Train = newstateInstance.Player1Train;
-        Player2Train = newstateInstance.Player2Train;
-        Player3Train = newstateInstance.Player3Train;
-        Player4Train = newstateInstance.Player4Train;
+        PileofDominoes = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
+
+            PileofDominoes.add(i, newstateInstance.PileofDominoes.get(i));
+
+        }
+        Player1Train = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.Player1Train.size(); i++) {
+
+            Player1Train.add(i, newstateInstance.Player1Train.get(i));
+
+        }
+        Player2Train = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.Player2Train.size(); i++) {
+
+            Player2Train.add(i, newstateInstance.Player2Train.get(i));
+
+        }
+        Player3Train = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.Player3Train.size(); i++) {
+
+            Player3Train.add(i, newstateInstance.Player3Train.get(i));
+
+        }
+        Player4Train = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.Player4Train.size(); i++) {
+
+            Player4Train.add(i, newstateInstance.Player4Train.get(i));
+
+        }
+        PublicTrain = new ArrayList<>();
+        for(int i = 0; i < newstateInstance.PublicTrain.size(); i++) {
+
+            PublicTrain.add(i, newstateInstance.PublicTrain.get(i));
+
+        }
         player1Public = newstateInstance.player1Public;
         player2Public = newstateInstance.player2Public;
         player3Public = newstateInstance.player3Public;
         player4Public = newstateInstance.player4Public;
-        PublicTrain = newstateInstance.PublicTrain;
         round = newstateInstance.round;
-
 
         // Depending on which players game state instance is being sent in
         // it will deep copy accordingly
         if(newstateInstance.playerTurn == 0){ // player 1
 
+            Player1Hand = new ArrayList<>();
+            for(int i = 0; i < newstateInstance.Player1Hand.size(); i++) {
+
+                Player1Hand.add(i, newstateInstance.Player1Hand.get(i));
+
+            }
             playerTurn = newstateInstance.playerTurn;
-            Player1Hand = newstateInstance.Player1Hand;
 
         }
         else if(newstateInstance.playerTurn == 1){ // player 2
 
+            Player2Hand = new ArrayList<>();
+            for(int i = 0; i < newstateInstance.Player2Hand.size(); i++) {
+
+                Player2Hand.add(i, newstateInstance.Player2Hand.get(i));
+
+            }
             playerTurn = newstateInstance.playerTurn;
-            Player2Hand = newstateInstance.Player2Hand;
 
         }
         else if(newstateInstance.playerTurn == 2){ // player 3
 
-            playerTurn = newstateInstance.playerTurn;
-            Player3Hand = newstateInstance.Player3Hand;
+            Player3Hand = new ArrayList<>();
+            for(int i = 0; i < newstateInstance.Player3Hand.size(); i++) {
 
+                Player3Hand.add(i, newstateInstance.Player3Hand.get(i));
+
+            }
+            playerTurn = newstateInstance.playerTurn;
 
         }
         else if(newstateInstance.playerTurn == 3){ // player 4
 
+            Player4Hand = new ArrayList<>();
+            for(int i = 0; i < newstateInstance.Player4Hand.size(); i++) {
+
+                Player4Hand.add(i, newstateInstance.Player4Hand.get(i));
+
+            }
             playerTurn = newstateInstance.playerTurn;
-            Player4Hand = newstateInstance.Player4Hand;
 
         }
     }
@@ -97,6 +145,9 @@ public class DominoGameState {
 
         return true;
 
+    }
+
+    public void updateScore(){
     }
 
     //only have ints/booleans at the moment

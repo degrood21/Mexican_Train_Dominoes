@@ -148,6 +148,140 @@ public class DominoGameState {
 
     }
 
+    public boolean selectDomino(int id){
+        if(id == 0){
+            if(Player1Hand != null){
+
+                return true;
+            }
+        }
+        else if(id == 1){
+            if(Player2Hand != null){
+                return true;
+            }
+        }
+        else if(id == 2){
+            if(Player3Hand != null){
+                return true;
+            }
+        }
+        else if(id == 3 ){
+            if (Player4Hand != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean placeDomino(int id, Drawable selectedDomino){
+        if(id == 0){
+           if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
+               return true;
+           }
+
+           if(player2Public == true){}
+
+            if(player3Public == true){}
+
+            if(player4Public == true){}
+
+            if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
+                return true;
+            }
+            if(Player1Train.get(Player1Train.size()-1) == selectedDomino){
+                return true;
+            }
+        }
+        if(id == 1){
+            if(Player2Hand != null){
+                return true;
+            }
+        }
+        if(id == 2){
+            if(Player3Hand != null){
+                return true;
+            }
+        }
+        if(id == 3 ){
+            if (Player4Hand != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean doublePlay(int id){
+        if(id == 0){
+            if(){
+
+                return true;
+            }
+        }
+        else if(id == 1){
+            if(Player2Hand != null){
+                return true;
+            }
+        }
+        else if(id == 2){
+            if(Player3Hand != null){
+                return true;
+            }
+        }
+        else if(id == 3 ){
+            if (Player4Hand != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean drawAction(int id){
+        if(id == 0){
+            if(Player1Hand != null){
+                return true;
+            }
+        }
+        else if(id == 1){
+            if(Player2Hand != null){
+                return true;
+            }
+        }
+        else if(id == 2){
+            if(Player3Hand != null){
+                return true;
+            }
+        }
+        else if(id == 3 ){
+            if (Player4Hand != null) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean quitGame(int id){
+        return true;
+    }
+
+    public boolean endTurn(int id){
+        return true;
+    }
+
+    public boolean restartGame(){
+        return true;
+    }
+
+    public boolean choosePlayerType(){
+        return true;
+    }
+    public boolean changePlayerName(){
+        return true;
+    }
+
     public void updateScore(){
     }
 

@@ -145,7 +145,21 @@ public class DominoGameState {
     public boolean selectDomino(int id) { //Callum
         if (id == 0) {
             if (Player1Hand != null) {
+                //if() domino id(for a 9) == c9_9 || c8_9 ||etc && player1train == c9_9 || c8_9 etc?
+                //same for each player
 
+                //check which trains are public
+
+                //so check if domino matches one with the value in player1train || public
+                //train ||any other player train that == public// see above line added after
+                //if true return true, if false return false
+
+                //then check if the end of the piecec that is pointed out is the one that matches
+
+                //maybe check last two pieces and see whats in common then check for other end, if double write
+                //edge case
+
+                //do for all.
                 return true;
             }
         } else if (id == 1) {

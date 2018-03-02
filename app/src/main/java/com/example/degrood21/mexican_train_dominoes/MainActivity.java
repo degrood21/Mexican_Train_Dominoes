@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
         final ArrayList<Integer> setOfDominoes = new ArrayList<Integer>();
 
+        // All double dominoes
         setOfDominoes.add(R.drawable.c0_0);
         setOfDominoes.add(R.drawable.c1_1);
         setOfDominoes.add(R.drawable.c2_2);

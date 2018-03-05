@@ -11,22 +11,22 @@ import java.util.ArrayList;
 
 public class DominoGameState {
 
-    ArrayList<Integer> PileofDominoes = new ArrayList<>();
-    ArrayList<Integer> Player1Hand = new ArrayList<>();
-    ArrayList<Integer> Player2Hand = new ArrayList<>();
-    ArrayList<Integer> Player3Hand = new ArrayList<>();
-    ArrayList<Integer> Player4Hand = new ArrayList<>();
-    ArrayList<Integer> Player1Train = new ArrayList<>();
-    ArrayList<Integer> Player2Train = new ArrayList<>();
-    ArrayList<Integer> Player3Train = new ArrayList<>();
-    ArrayList<Integer> Player4Train = new ArrayList<>();
-    ArrayList<Integer> PublicTrain = new ArrayList<>();
+    ArrayList<Domino> PileofDominoes = new ArrayList<>();
+    ArrayList<Domino> Player1Hand = new ArrayList<>();
+    ArrayList<Domino> Player2Hand = new ArrayList<>();
+    ArrayList<Domino> Player3Hand = new ArrayList<>();
+    ArrayList<Domino> Player4Hand = new ArrayList<>();
+    ArrayList<Domino> Player1Train = new ArrayList<>();
+    ArrayList<Domino> Player2Train = new ArrayList<>();
+    ArrayList<Domino> Player3Train = new ArrayList<>();
+    ArrayList<Domino> Player4Train = new ArrayList<>();
+    ArrayList<Domino> PublicTrain = new ArrayList<>();
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round;
-    boolean player1Public, player2Public, player3Public, player4Public;
+    boolean player1Public, player2Public, player3Public, player4Public, rotationLeft, rotationRight;
 
     // Beginning of play
-    public DominoGameState(ArrayList<Integer> allDominoes) {
+    public DominoGameState(ArrayList<Domino> allDominoes) {
 
         round = 12;
         PileofDominoes = allDominoes;
@@ -89,6 +89,12 @@ public class DominoGameState {
         player2Public = newstateInstance.player2Public;
         player3Public = newstateInstance.player3Public;
         player4Public = newstateInstance.player4Public;
+
+        player1Score = newstateInstance.player1Score;
+        player2Score = newstateInstance.player2Score;
+        player3Score = newstateInstance.player3Score;
+        player4Score = newstateInstance.player4Score;
+
         round = newstateInstance.round;
 
         // Depending on which players game state instance is being sent in
@@ -179,44 +185,52 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean placeDomino(int id, int selectedDomino) { //Dylan
-        if (id == 0) {
-            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
-                return true;
+    public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) { //Dylan
+
+        //TODO Set matching side of played domino to null
+
+        if (playerID == 0) {
+            if (player1Public == true) {
+                if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
+                    Player1Train.add(selectedDomino);
+                    return true;
+                }
             }
 
             if (player2Public == true) {
+                if (Player2Train.get(Player2Train.size() - 1) == selectedDomino) {
+                    return true;
+                }
             }
 
             if (player3Public == true) {
+                if (Player3Train.get(Player3Train.size() - 1) == selectedDomino) {
+                    return true;
+                }
             }
 
             if (player4Public == true) {
+                if (Player4Train.get(Player4Train.size() - 1) == selectedDomino) {
+                    return true;
+                }
             }
 
-            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
-                return true;
+            if (playerID == 1) {
+                if (Player2Hand != null) {
+                    return true;
+                }
             }
-            if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
-                return true;
+            if (playerID == 2) {
+                if (Player3Hand != null) {
+                    return true;
+                }
             }
-        }
-        if (id == 1) {
-            if (Player2Hand != null) {
-                return true;
-            }
-        }
-        if (id == 2) {
-            if (Player3Hand != null) {
-                return true;
-            }
-        }
-        if (id == 3) {
-            if (Player4Hand != null) {
-                return true;
+            if (playerID == 3) {
+                if (Player4Hand != null) {
+                    return true;
+                }
             }
         }
-
         return false;
     }
 

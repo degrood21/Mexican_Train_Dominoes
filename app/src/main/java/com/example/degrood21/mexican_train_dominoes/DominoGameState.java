@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by degrood21 on 2/26/2018.
@@ -257,26 +258,43 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean drawAction(int id) { // Devin
-        if (id == 0) {
-            if (Player1Hand != null) {
-                return true;
-            }
-        } else if (id == 1) {
-            if (Player2Hand != null) {
-                return true;
-            }
-        } else if (id == 2) {
-            if (Player3Hand != null) {
-                return true;
-            }
-        } else if (id == 3) {
-            if (Player4Hand != null) {
-                return true;
-            }
-        }
 
-        return false;
+    /*
+        drawAction takes a random index from PileofDominos and adds it to the current player's hand
+     */
+
+    public boolean drawAction(int id) {
+
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(PileofDominoes.size());
+
+        if (PileofDominoes == null) {
+            return false;
+        }
+        else {
+            if (id == 0) {
+
+                Player1Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 1) {
+                Player2Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 2) {
+                Player3Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 3) {
+                Player4Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            return false;
+        }
     }
 
     public boolean quitGame(int id) {
@@ -302,12 +320,19 @@ public class DominoGameState {
     public void updateScore() {
     }
 
-    //only have ints/booleans at the moment
+    //returns every value as a string
     @Override
     public String toString() {
-        return round + "\n" + playerTurn + "\n" + player1Score + "\n" + player2Score + "\n" + player3Score +
-                "\n" + player4Score + "\n" + player1Public + "\n" + player2Public + "\n" +
-                player3Public + "\n" + player4Public + "\n";
+        return "round: " + round + "\nplayerTurn: " + playerTurn + "\nplayer1Score: " + player1Score +
+                "\nplayer2Score: " + player2Score + "\nplayer3Score: " + player3Score +
+                "\nplayer4Score: " + player4Score + "\nplayer1Public: " + player1Public +
+                "\nplayer2Public: " + player2Public + "\nPlayer3Public: " + player3Public +
+                "\nPlayer4Public: " + player4Public + "\nPileofDominoes: " + PileofDominoes +
+                "\nPlayer1Hand: " + Player1Hand + "\nPlayer2Hand: " + Player2Hand +
+                "\nPlayer3Hand: " + Player3Hand + "\nPlayer4Hand: " + Player4Hand +
+                "\nPlayer1Train: " + Player1Train + "\nPlayer2Train: " + Player2Train +
+                "\nPlayer3Train: " + Player3Train + "\nPlayer4Train: " + Player4Train +
+                "\nPublicTrain: " + PublicTrain;
     }
 
 }

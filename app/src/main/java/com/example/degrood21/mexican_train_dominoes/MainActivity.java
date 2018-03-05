@@ -248,6 +248,8 @@ public class MainActivity extends AppCompatActivity {
 
                     editTextView.append("testAction Method works fine\n");
                     editTextView.append("" + firstInstance.PileofDominoes + "\n");
+                    firstInstance.drawAction(0);
+                    editTextView.append(firstInstance.toString());
 
                 }
                 if (firstInstance.testAction()) {

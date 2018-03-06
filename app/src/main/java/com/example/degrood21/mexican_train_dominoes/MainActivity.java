@@ -58,25 +58,25 @@ public class MainActivity extends AppCompatActivity {
         Domino d1_12 = new Domino(R.drawable.d1_12, 1, 12);
 
         Domino d2_3 = new Domino(R.drawable.d2_3, 2, 3);
-        Domino d2_4 = new Domino(R.drawable.d2_3, 2, 4);
-        Domino d2_5 = new Domino(R.drawable.d2_3, 2, 5);
-        Domino d2_6 = new Domino(R.drawable.d2_3, 2, 6);
-        Domino d2_7 = new Domino(R.drawable.d2_3, 2, 7);
-        Domino d2_8 = new Domino(R.drawable.d2_3, 2, 8);
-        Domino d2_9 = new Domino(R.drawable.d2_3, 2, 9);
-        Domino d2_10 = new Domino(R.drawable.d2_3, 2, 10);
-        Domino d2_11 = new Domino(R.drawable.d2_3, 2, 11);
-        Domino d2_12 = new Domino(R.drawable.d2_3, 2, 12);
+        Domino d2_4 = new Domino(R.drawable.d2_4, 2, 4);
+        Domino d2_5 = new Domino(R.drawable.d2_5, 2, 5);
+        Domino d2_6 = new Domino(R.drawable.d2_6, 2, 6);
+        Domino d2_7 = new Domino(R.drawable.d2_7, 2, 7);
+        Domino d2_8 = new Domino(R.drawable.d2_8, 2, 8);
+        Domino d2_9 = new Domino(R.drawable.d2_9, 2, 9);
+        Domino d2_10 = new Domino(R.drawable.d2_10, 2, 10);
+        Domino d2_11 = new Domino(R.drawable.d2_11, 2, 11);
+        Domino d2_12 = new Domino(R.drawable.d2_12, 2, 12);
 
         Domino d3_4 = new Domino(R.drawable.d3_4, 3, 4);
-        Domino d3_5 = new Domino(R.drawable.d3_4, 3, 5);
-        Domino d3_6 = new Domino(R.drawable.d3_4, 3, 6);
-        Domino d3_7 = new Domino(R.drawable.d3_4, 3, 7);
-        Domino d3_8 = new Domino(R.drawable.d3_4, 3, 8);
-        Domino d3_9 = new Domino(R.drawable.d3_4, 3, 9);
-        Domino d3_10 = new Domino(R.drawable.d3_4, 3, 10);
-        Domino d3_11 = new Domino(R.drawable.d3_4, 3, 11);
-        Domino d3_12 = new Domino(R.drawable.d3_4, 3, 12);
+        Domino d3_5 = new Domino(R.drawable.d3_5, 3, 5);
+        Domino d3_6 = new Domino(R.drawable.d3_6, 3, 6);
+        Domino d3_7 = new Domino(R.drawable.d3_7, 3, 7);
+        Domino d3_8 = new Domino(R.drawable.d3_8, 3, 8);
+        Domino d3_9 = new Domino(R.drawable.d3_9, 3, 9);
+        Domino d3_10 = new Domino(R.drawable.d3_10, 3, 10);
+        Domino d3_11 = new Domino(R.drawable.d3_11, 3, 11);
+        Domino d3_12 = new Domino(R.drawable.d3_12, 3, 12);
 
         Domino d4_5 = new Domino(R.drawable.d4_5, 4, 5);
         Domino d4_6 = new Domino(R.drawable.d4_6, 4, 6);

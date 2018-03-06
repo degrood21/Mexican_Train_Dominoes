@@ -23,8 +23,8 @@ public class DominoGameState {
     ArrayList<Domino> Player4Train = new ArrayList<>();
     ArrayList<Domino> PublicTrain = new ArrayList<>();
     int player1Score, player2Score, player3Score, player4Score;
-    int playerTurn, round;
-    boolean player1Public, player2Public, player3Public, player4Public, rotationLeft, rotationRight;
+    int playerTurn, round, doublePlayTrain, doublePlayDomino;
+    boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
 
     // Beginning of play
     public DominoGameState(ArrayList<Domino> allDominoes) {
@@ -180,37 +180,38 @@ public class DominoGameState {
 
     }
 
-    public boolean selectDomino(int id) { //Callum
+    public boolean selectDomino(int id, Domino domino, int trainselection) { //Callum
         if (id == 0) {
             if (Player1Hand != null) {
-                //if() domino id(for a 9) == c9_9 || c8_9 ||etc && player1train == c9_9 || c8_9 etc?
-                //same for each player
-
-                //check which trains are public
-
-                //so check if domino matches one with the value in player1train || public
-                //train ||any other player train that == public// see above line added after
-                //if true return true, if false return false
-
-                //then check if the end of the piecec that is pointed out is the one that matches
-
-                //maybe check last two pieces and see whats in common then check for other end, if double write
-                //edge case
-
-                //do for all.
-                return true;
+                if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
+                    placeDomino(id, domino, trainselection);
+                }
+                if (placeDomino(id, domino, trainselection)){ return true;}
+                else return false;
             }
         } else if (id == 1) {
             if (Player2Hand != null) {
-                return true;
+                if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
+                    placeDomino(id, domino, trainselection);
+                }
+                if (placeDomino(id, domino, trainselection)){ return true;}
+                else return false;
             }
         } else if (id == 2) {
             if (Player3Hand != null) {
-                return true;
+                if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
+                    placeDomino(id, domino, trainselection);
+                }
+                if (placeDomino(id, domino, trainselection)){ return true;}
+                else return false;
             }
         } else if (id == 3) {
             if (Player4Hand != null) {
-                return true;
+                if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
+                    placeDomino(id, domino, trainselection);
+                }
+                if (placeDomino(id, domino, trainselection)){ return true;}
+                else return false;
             }
         }
 

@@ -9,6 +9,14 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+/**
+ * Main Activity
+ * Creates Permanent Set of Dominoes
+ * by creating individual dominoes with Drawable ID, Right Value, Left Value
+ * and adds them to setOfDominoes ArrayList
+ *
+ * @authors Dylan DeGrood, Callum Morham, Logan Crawford, Devin Smith
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -229,45 +237,63 @@ public class MainActivity extends AppCompatActivity {
 
         final EditText editTextView = (EditText) findViewById(R.id.editText);
 
+        /**
+         * runTest button onClick listener
+         * creates 4 different instances of DominoGameState
+         * 2 of which are deep copies (2 & 4)
+         *
+         * Tests all action methods with firstInstance variable
+         *
+         */
         Button runTest = (Button) findViewById(R.id.buttonTest);
         runTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 editTextView.setText("");
+
+                //Testing Dominoes to show actions work
+                Domino testDomino = new Domino(R.drawable.d9_12, 9, 12);
+                Domino testDomino2 = new Domino(R.drawable.d8_9, 8, 9);
+                Domino testDouble = new Domino(R.drawable.c8_8, 8, 8);
+
                 DominoGameState firstInstance = new DominoGameState(setOfDominoes);
                 DominoGameState secondInstance = new DominoGameState(firstInstance);
 
-                //
-                //
-                // List of firstInstance calling all action methods from GameState
-                //
-                //
-
-                if (firstInstance.testAction()) {
-
-                    editTextView.append("testAction Method works fine. " +
-                            "Starts game by adding 15 dominoes to all players\n");
-                    //editTextView.append("" + firstInstance.PileofDominoes + "\n");
+                if (firstInstance.dealAction()) {
+                    editTextView.append("Dealt Correctly: Starts game by adding 15 dominoes to all players\n");
+                }
+                if (firstInstance.selectDomino(firstInstance.playerTurn, testDomino, 0)) {
+                    editTextView.append("Selected and Placed 9,12 Domino Correctly\n");
+                } else {
+                    editTextView.append("Could not place Domino 9,12 in 1st Players Train. Not in Hand\n");
 
                 }
-
-                Domino test = new Domino(R.drawable.d9_12, 9, 12);
-                Domino test2 = new Domino(R.drawable.d8_9, 8, 9);
-                if(firstInstance.placeDomino(firstInstance.playerTurn, firstInstance.Player1Hand.get(4), 0)
-                        && firstInstance.placeDomino(firstInstance.playerTurn, firstInstance.Player1Hand.get(2), 0)){
-
-                    editTextView.append("Placed 9,10 Domino on 1st Players Train");
+                if (firstInstance.placeDomino(firstInstance.playerTurn, testDomino2, 0)) {
+                    editTextView.append("Placed 8,9 Domino on 1st Players Train\n");
+                } else {
+                    editTextView.append("Could not place Domino 8,9 in 1st Players Train. Not in Hand\n");
 
                 }
+                if (firstInstance.doublePlay(firstInstance.playerTurn, testDouble, 0)) {
+                    editTextView.append("Placed Double 8,8 on 1st Players Train\n");
+                } else {
+                    editTextView.append("Double not playable on 1st Players Train\n");
 
-                //To Strings to be called after all Action Methods called
-                editTextView.append(firstInstance.toString());
-                editTextView.append(secondInstance.toString());
+                }
+                if (firstInstance.drawAction(firstInstance.playerTurn)) {
+                    editTextView.append("Player 1 correctly drew a domino\n");
+                }
 
                 DominoGameState thirdInstance = new DominoGameState(setOfDominoes);
                 DominoGameState fourthInstance = new DominoGameState(thirdInstance);
+
+                //Calls toString method from DominoGameState
+                //and prints out corresponding values of the state
+                editTextView.append(secondInstance.toString());
                 editTextView.append(fourthInstance.toString());
+
+
             }
         });
     }

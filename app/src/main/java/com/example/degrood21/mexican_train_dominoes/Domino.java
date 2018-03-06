@@ -1,7 +1,11 @@
 package com.example.degrood21.mexican_train_dominoes;
 
 /**
- * Created by dylandegrood on 3/4/18.
+ * Domino Class
+ * <p>
+ * creates Dominos with the Drawable id, right side number, and left side number
+ *
+ * @authors Devin Smith, Dylan DeGrood, Callum Morham, Logan Crawford
  */
 
 public class Domino {
@@ -10,6 +14,15 @@ public class Domino {
     int rightSide;
     int leftSide;
 
+    /**
+     * Domino cstor
+     * <p>
+     * creates the domino according to parameters
+     *
+     * @param pID   Drawable id
+     * @param rSide right side value of domino
+     * @param lSide left side value of domino
+     */
     public Domino(int pID, int rSide, int lSide) {
 
         this.pictureID = pID;

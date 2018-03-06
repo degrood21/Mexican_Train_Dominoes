@@ -222,7 +222,7 @@ public class DominoGameState {
     public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) { //Dylan
 
         if (selectedDomino.leftSide == selectedDomino.rightSide) {
-            //doublePlay(playerID, selectedDomino, trainSelection);
+            doublePlay(playerID, selectedDomino, trainSelection);
         } else if (playerID == 0) { // If Player 1
             if (trainSelection == 0) { // Player 1 Train
                 if (Player1Train.size() == 0) {
@@ -885,26 +885,1194 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean doublePlay(int id) { //Logan
-        if (id == 0) {
-            //if () {
+    public boolean doublePlay(int id, Domino playedDouble, int trainSelection) {
+        if (id == 0) { // If Player 1
+            if (trainSelection == 0) { // Player 1 Train
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train == null) {
+                    if (playedDouble.leftSide == round) {
+                        playedDouble.leftSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train == null) {
+                    if (playedDouble.leftSide == round) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (playedDouble.rightSide == round) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (playedDouble.leftSide == round) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (playedDouble.rightSide == round) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            }
+        } else if (id == 1)
 
-            //    return true;
-            //}
-        } else if (id == 1) {
-            if (Player2Hand != null) {
-                return true;
+        { // If Player 2
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 1) { // Player 2 Train
+                if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (playedDouble.leftSide == round) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (playedDouble.rightSide == round) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player2Hand.size(); i++) {
+                            if (Player2Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player2Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
             }
-        } else if (id == 2) {
-            if (Player3Hand != null) {
-                return true;
+        } else if (id == 2)
+
+        { // If Player 3
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 2) { // Player 3 Train
+                if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player3Hand.size(); i++) {
+                            if (Player3Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player3Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
             }
-        } else if (id == 3) {
-            if (Player4Hand != null) {
-                return true;
+        } else if (id == 3)
+
+        { // If Player 4
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player1Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player2Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player3Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 3) { // Player 4 Train
+                if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        Player4Train.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                        playedDouble.rightSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.leftSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                        playedDouble.leftSide = -1;
+                        PublicTrain.add(playedDouble);
+                        doublePlay = true;
+                        doublePlayDomino = playedDouble.rightSide;
+                        for (int i = 0; i < Player4Hand.size(); i++) {
+                            if (Player4Hand.get(i).pictureID == playedDouble.pictureID) {
+                                Player4Hand.remove(i);
+                            }
+                        }
+                        doublePlayTrain = trainSelection;
+                        return true;
+                    }
+                }
             }
         }
-
         return false;
     }
 

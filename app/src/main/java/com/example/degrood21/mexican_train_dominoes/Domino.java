@@ -17,4 +17,16 @@ public class Domino {
         this.leftSide = lSide;
 
     }
+
+    public int getPictureID() {
+        return this.pictureID;
+    }
+
+    public int getRightSide() {
+        return this.rightSide;
+    }
+
+    public int getLeftSide() {
+        return this.leftSide;
+    }
 }

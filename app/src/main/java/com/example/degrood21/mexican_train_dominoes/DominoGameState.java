@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by degrood21 on 2/26/2018.
@@ -29,9 +30,17 @@ public class DominoGameState {
     public DominoGameState(ArrayList<Domino> allDominoes) {
 
         round = 12;
-        PileofDominoes = allDominoes;
+        //PileofDominoes = allDominoes;
+        PileofDominoes = new ArrayList<>();
+        Domino copyDom;
+        for (int i = 0; i < allDominoes.size(); i++) {
+            copyDom = allDominoes.get(i);
+            PileofDominoes.add(i, allDominoes.get(i));
+
+        }
 
         PublicTrain.add(0, allDominoes.get(round));
+        PileofDominoes.remove(allDominoes.get(round));
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
@@ -43,7 +52,6 @@ public class DominoGameState {
         player3Public = false;
         player4Public = false;
 
-        //comment to test GitHub
     }
 
     // Deep Copy Constructor
@@ -51,8 +59,11 @@ public class DominoGameState {
 
         PileofDominoes = new ArrayList<>();
         for (int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
-
-            PileofDominoes.add(i, newstateInstance.PileofDominoes.get(i));
+            int pID = newstateInstance.PileofDominoes.get(i).getPictureID();
+            int rSide = newstateInstance.PileofDominoes.get(i).getRightSide();
+            int lSide = newstateInstance.PileofDominoes.get(i).getLeftSide();
+            Domino copy = new Domino(pID, rSide, lSide);
+            PileofDominoes.add(i, copy);
 
         }
         Player1Train = new ArrayList<>();
@@ -144,6 +155,26 @@ public class DominoGameState {
 
     public boolean testAction( /*usually is sent a player ID as param */) {
 
+        for (int i = 0; i < 15; i++) {
+            int dom = randomDomino();
+            Player1Hand.add(PileofDominoes.get(dom));
+            PileofDominoes.remove(dom);
+        }
+        for (int i = 0; i < 15; i++) {
+            int dom = randomDomino();
+            Player2Hand.add(PileofDominoes.get(dom));
+            PileofDominoes.remove(dom);
+        }
+        for (int i = 0; i < 15; i++) {
+            int dom = randomDomino();
+            Player3Hand.add(PileofDominoes.get(dom));
+            PileofDominoes.remove(dom);
+        }
+        for (int i = 0; i < 15; i++) {
+            int dom = randomDomino();
+            Player4Hand.add(PileofDominoes.get(dom));
+            PileofDominoes.remove(dom);
+        }
         return true;
 
     }
@@ -185,49 +216,667 @@ public class DominoGameState {
         return false;
     }
 
+    // placeDomino spans from Line 188 to 844 (656 Lines of Code)
     public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) { //Dylan
 
-        //TODO Set matching side of played domino to null
-
-        if (playerID == 0) {
-            if (player1Public == true) {
-                if (Player1Train.get(Player1Train.size() - 1) == selectedDomino) {
-                    Player1Train.add(selectedDomino);
-                    return true;
+        if (selectedDomino.leftSide == selectedDomino.rightSide) {
+            //doublePlay(playerID, selectedDomino, trainSelection);
+        } else if (playerID == 0) { // If Player 1
+            if (trainSelection == 0) { // Player 1 Train
+                if (Player1Train.size() == 0) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        for (int i = 0; i < Player1Hand.size(); i++) {
+                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
+                                Player1Hand.remove(i);
+                            }
+                        }
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
                 }
             }
-
-            if (player2Public == true) {
-                if (Player2Train.get(Player2Train.size() - 1) == selectedDomino) {
-                    return true;
+        } else if (playerID == 1) { // If Player 2
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 1) { // Player 2 Train
+                if (Player2Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
                 }
             }
-
-            if (player3Public == true) {
-                if (Player3Train.get(Player3Train.size() - 1) == selectedDomino) {
-                    return true;
+        } else if (playerID == 2) { // If Player 3
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 2) { // Player 3 Train
+                if (Player3Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
                 }
             }
-
-            if (player4Public == true) {
-                if (Player4Train.get(Player4Train.size() - 1) == selectedDomino) {
-                    return true;
+        } else if (playerID == 3) { // If Player 4
+            if (player1Public == true && trainSelection == 0) { // Player 1 Train
+                if (Player1Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player1Train.add(selectedDomino);
+                        return true;
+                    }
                 }
-            }
-
-            if (playerID == 1) {
-                if (Player2Hand != null) {
-                    return true;
+            } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
+                if (Player2Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player2Train.add(selectedDomino);
+                        return true;
+                    }
                 }
-            }
-            if (playerID == 2) {
-                if (Player3Hand != null) {
-                    return true;
+            } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
+                if (Player3Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player3Train.add(selectedDomino);
+                        return true;
+                    }
                 }
-            }
-            if (playerID == 3) {
-                if (Player4Hand != null) {
-                    return true;
+            } else if (trainSelection == 3) { // Player 4 Train
+                if (Player4Train == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        Player4Train.add(selectedDomino);
+                        return true;
+                    }
+                }
+            } else if (trainSelection == 4) { // Public Train
+                if (PublicTrain == null) {
+                    if (selectedDomino.leftSide == round) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (selectedDomino.rightSide == round) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                        selectedDomino.rightSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                        selectedDomino.leftSide = -1;
+                        PublicTrain.add(selectedDomino);
+                        return true;
+                    }
                 }
             }
         }
@@ -302,12 +951,63 @@ public class DominoGameState {
     public void updateScore() {
     }
 
+    public int randomDomino() { // Helps with giving all players 15 dominoes @ start
+
+        Random ran = new Random();
+        return ran.nextInt(PileofDominoes.size());
+
+    }
+
     //only have ints/booleans at the moment
     @Override
     public String toString() {
-        return round + "\n" + playerTurn + "\n" + player1Score + "\n" + player2Score + "\n" + player3Score +
-                "\n" + player4Score + "\n" + player1Public + "\n" + player2Public + "\n" +
-                player3Public + "\n" + player4Public + "\n";
+        String completePrint = "";
+        completePrint = "Dominoes in Player 1 Train: \n";
+        for (int i = 0; i < Player1Train.size(); i++) {
+            completePrint += "Domino: "
+                    + Player1Train.get(i).leftSide + "," + Player1Train.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Player 2 Train: \n";
+        for (int i = 0; i < Player2Train.size(); i++) {
+            completePrint += "Domino: "
+                    + Player2Train.get(i).leftSide + "," + Player2Train.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Player 3 Train: \n";
+        for (int i = 0; i < Player3Train.size(); i++) {
+            completePrint += "Domino: "
+                    + Player3Train.get(i).leftSide + "," + Player3Train.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Player 4 Train: \n";
+        for (int i = 0; i < Player4Train.size(); i++) {
+            completePrint += "Domino: "
+                    + Player4Train.get(i).leftSide + "," + Player4Train.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Public Train: \n";
+        for (int i = 0; i < PublicTrain.size(); i++) {
+            completePrint += "Domino: "
+                    + PublicTrain.get(i).leftSide + "," + PublicTrain.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes left in Pile: \n";
+        for (int i = 0; i < PileofDominoes.size(); i++) {
+            completePrint += "Domino: "
+                    + PileofDominoes.get(i).leftSide + "," + PileofDominoes.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Player 1's Hand: \n";
+        for (int i = 0; i < Player1Hand.size(); i++) {
+            completePrint += "Domino: "
+                    + Player1Hand.get(i).leftSide + "," + Player1Hand.get(i).rightSide + "\n";
+        }
+        completePrint += "Dominoes in Player 2's Hand: \n";
+        for (int i = 0; i < Player2Hand.size(); i++) {
+            completePrint += "Domino: "
+                    + Player2Hand.get(i).leftSide + "," + Player2Hand.get(i).rightSide + "\n";
+        }
+
+        return "\nRound: " + round + "\nPlayer Turn: " + playerTurn + "\nPlayer 1 Score: " +
+                player1Score + "\nPlayer 2 Score: " + player2Score + "\nPlayer 3 Score: " + player3Score +
+                "\nPlayer 4 Score: " + player4Score + "\nIs Player 1's Train Public: " + player1Public +
+                "\nIs Player 2's Train Public: " + player2Public + "\nIs Player 3's Train Public: " +
+                player3Public + "\nIs Player 4's Train Public: " + player4Public + "\n" + completePrint + "\n";
     }
 
 }

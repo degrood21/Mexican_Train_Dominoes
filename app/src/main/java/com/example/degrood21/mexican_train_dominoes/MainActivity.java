@@ -246,16 +246,28 @@ public class MainActivity extends AppCompatActivity {
 
                 if (firstInstance.testAction()) {
 
-                    editTextView.append("testAction Method works fine\n");
-                    editTextView.append("" + firstInstance.PileofDominoes + "\n");
-
-                }
-                if (firstInstance.testAction()) {
-
-                    editTextView.append("Understanding how to append EditText\n");
+                    editTextView.append("testAction Method works fine. " +
+                            "Starts game by adding 15 dominoes to all players\n");
+                    //editTextView.append("" + firstInstance.PileofDominoes + "\n");
 
                 }
 
+                Domino test = new Domino(R.drawable.d9_12, 9, 12);
+                Domino test2 = new Domino(R.drawable.d8_9, 8, 9);
+                if(firstInstance.placeDomino(firstInstance.playerTurn, firstInstance.Player1Hand.get(4), 0)
+                        && firstInstance.placeDomino(firstInstance.playerTurn, firstInstance.Player1Hand.get(2), 0)){
+
+                    editTextView.append("Placed 9,10 Domino on 1st Players Train");
+
+                }
+
+                //To Strings to be called after all Action Methods called
+                editTextView.append(firstInstance.toString());
+                editTextView.append(secondInstance.toString());
+
+                DominoGameState thirdInstance = new DominoGameState(setOfDominoes);
+                DominoGameState fourthInstance = new DominoGameState(thirdInstance);
+                editTextView.append(fourthInstance.toString());
             }
         });
     }

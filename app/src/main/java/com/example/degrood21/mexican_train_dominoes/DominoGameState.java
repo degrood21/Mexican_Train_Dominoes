@@ -925,21 +925,25 @@ public class DominoGameState {
 
                 Player1Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
+                player1Public = true;
                 return true;
             }
             else if (id == 1) {
                 Player2Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
+                player2Public = true;
                 return true;
             }
             else if (id == 2) {
                 Player3Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
+                player3Public = true;
                 return true;
             }
             else if (id == 3) {
                 Player4Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
+                player4Public = true;
                 return true;
             }
             return false;

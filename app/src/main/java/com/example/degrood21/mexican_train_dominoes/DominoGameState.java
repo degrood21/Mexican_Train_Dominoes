@@ -52,6 +52,7 @@ public class DominoGameState {
         player3Public = false;
         player4Public = false;
 
+        //comment to test GitHub
     }
 
     // Deep Copy Constructor
@@ -906,26 +907,43 @@ public class DominoGameState {
         return false;
     }
 
-    public boolean drawAction(int id) { // Devin
-        if (id == 0) {
-            if (Player1Hand != null) {
-                return true;
-            }
-        } else if (id == 1) {
-            if (Player2Hand != null) {
-                return true;
-            }
-        } else if (id == 2) {
-            if (Player3Hand != null) {
-                return true;
-            }
-        } else if (id == 3) {
-            if (Player4Hand != null) {
-                return true;
-            }
-        }
 
-        return false;
+    /*
+        drawAction takes a random index from PileofDominos and adds it to the current player's hand
+     */
+
+    public boolean drawAction(int id) {
+
+        Random rand = new Random();
+        int randomIndex = rand.nextInt(PileofDominoes.size());
+
+        if (PileofDominoes == null) {
+            return false;
+        }
+        else {
+            if (id == 0) {
+
+                Player1Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 1) {
+                Player2Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 2) {
+                Player3Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            else if (id == 3) {
+                Player4Hand.add(PileofDominoes.get(randomIndex));
+                PileofDominoes.remove(randomIndex);
+                return true;
+            }
+            return false;
+        }
     }
 
     public boolean quitGame(int id) {

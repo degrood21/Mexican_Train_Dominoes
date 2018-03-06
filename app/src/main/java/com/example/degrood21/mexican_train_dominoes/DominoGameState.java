@@ -180,37 +180,37 @@ public class DominoGameState {
 
     }
 
-    public boolean selectDomino(int id, Domino domino, int trainselection) { //Callum
+    public boolean selectDomino(int id, Domino domino, int trainselection) {
         if (id == 0) {
             if (Player1Hand != null) {
                 if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
-                    placeDomino(id, domino, trainselection);
+                    placeDomino(id, domino, trainselection);//calls placed domino for a double
                 }
-                if (placeDomino(id, domino, trainselection)){ return true;}
+                if (placeDomino(id, domino, trainselection)){ return true;}//calls place domino for a non double
                 else return false;
             }
         } else if (id == 1) {
             if (Player2Hand != null) {
                 if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
-                    placeDomino(id, domino, trainselection);
+                    placeDomino(id, domino, trainselection);//calls placed domino for a double
                 }
-                if (placeDomino(id, domino, trainselection)){ return true;}
+                if (placeDomino(id, domino, trainselection)){ return true;}//calls place domino for a non double
                 else return false;
             }
         } else if (id == 2) {
             if (Player3Hand != null) {
                 if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
-                    placeDomino(id, domino, trainselection);
+                    placeDomino(id, domino, trainselection);//calls placed domino for a double
                 }
-                if (placeDomino(id, domino, trainselection)){ return true;}
+                if (placeDomino(id, domino, trainselection)){ return true;}//calls place domino for a non double
                 else return false;
             }
         } else if (id == 3) {
             if (Player4Hand != null) {
                 if(doublePlay && trainselection == doublePlayTrain && (domino.leftSide == doublePlayDomino || domino.rightSide == doublePlayDomino)) {
-                    placeDomino(id, domino, trainselection);
+                    placeDomino(id, domino, trainselection);//calls placed domino for a double
                 }
-                if (placeDomino(id, domino, trainselection)){ return true;}
+                if (placeDomino(id, domino, trainselection)){ return true;}//calls place domino for a non double
                 else return false;
             }
         }

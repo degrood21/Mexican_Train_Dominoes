@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
 
         setOfDominoes.add(d11_12);
 
-        final EditText editTextView = (EditText) findViewById(R.id.editText);
+       //final EditText editTextView = (EditText) findViewById(R.id.editText);
 
         /**
          * runTest button onClick listener
@@ -245,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
          * Tests all action methods with firstInstance variable
          *
          */
-        Button runTest = (Button) findViewById(R.id.buttonTest);
+       /*Button runTest = (Button) findViewById(R.id.buttonTest);
         runTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -295,6 +295,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-        });
+        }); */
     }
 }

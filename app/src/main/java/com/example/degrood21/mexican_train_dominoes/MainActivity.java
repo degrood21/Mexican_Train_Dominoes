@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                 DominoGameState secondInstance = new DominoGameState(firstInstance);
 
                 if (firstInstance.dealAction()) {
-                    editTextView.append("Dealt Correctly: Starts game by adding 15 dominoes to all players\n");
+                    editTextView.append("Dealt Correctly: Starts com.example.degrood21.mexican_train_dominoes.game by adding 15 dominoes to all players\n");
                 }
                 if (firstInstance.selectDomino(firstInstance.playerTurn, testDomino, 0)) {
                     editTextView.append("Selected and Placed 9,12 Domino Correctly\n");

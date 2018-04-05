@@ -144,7 +144,7 @@ public class DominoGameState {
 
         round = newstateInstance.round;
 
-        // Depending on which players game state instance is being sent in
+        // Depending on which players com.example.degrood21.mexican_train_dominoes.game state instance is being sent in
         // it will deep copy accordingly
         if (newstateInstance.playerTurn == 0) { // player 1
 
@@ -192,7 +192,7 @@ public class DominoGameState {
     /**
      * dealAction method
      * <p>
-     * deals 15 dominoes to each player for start of game
+     * deals 15 dominoes to each player for start of com.example.degrood21.mexican_train_dominoes.game
      *
      * @return if dealt correctly return true
      */

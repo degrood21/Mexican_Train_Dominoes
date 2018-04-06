@@ -17,10 +17,17 @@ import java.util.ArrayList;
  *
  * @authors Dylan DeGrood, Callum Morham, Logan Crawford, Devin Smith
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private Button quitButton, restartButton, helpButton, drawButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        quitButton = (Button)findViewById(R.id.quitButton);
+        restartButton = (Button)findViewById(R.id.restartButton);
+        helpButton = (Button)findViewById(R.id.button);
+        drawButton = (Button)findViewById(R.id.drawButton);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -235,66 +242,40 @@ public class MainActivity extends AppCompatActivity {
 
         setOfDominoes.add(d11_12);
 
-       //final EditText editTextView = (EditText) findViewById(R.id.editText);
 
-        /**
-         * runTest button onClick listener
-         * creates 4 different instances of DominoGameState
-         * 2 of which are deep copies (2 & 4)
-         *
-         * Tests all action methods with firstInstance variable
-         *
-         */
-       /*Button runTest = (Button) findViewById(R.id.buttonTest);
-        runTest.setOnClickListener(new View.OnClickListener() {
+        quitButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-
-                editTextView.setText("");
-
-                //Testing Dominoes to show actions work
-                Domino testDomino = new Domino(R.drawable.d9_12, 9, 12);
-                Domino testDomino2 = new Domino(R.drawable.d8_9, 8, 9);
-                Domino testDouble = new Domino(R.drawable.c8_8, 8, 8);
-
-                DominoGameState firstInstance = new DominoGameState(setOfDominoes);
-                DominoGameState secondInstance = new DominoGameState(firstInstance);
-
-                if (firstInstance.dealAction()) {
-                    editTextView.append("Dealt Correctly: Starts com.example.degrood21.mexican_train_dominoes.game by adding 15 dominoes to all players\n");
-                }
-                if (firstInstance.selectDomino(firstInstance.playerTurn, testDomino, 0)) {
-                    editTextView.append("Selected and Placed 9,12 Domino Correctly\n");
-                } else {
-                    editTextView.append("Could not place Domino 9,12 in 1st Players Train. Not in Hand\n");
-
-                }
-                if (firstInstance.placeDomino(firstInstance.playerTurn, testDomino2, 0)) {
-                    editTextView.append("Placed 8,9 Domino on 1st Players Train\n");
-                } else {
-                    editTextView.append("Could not place Domino 8,9 in 1st Players Train. Not in Hand\n");
-
-                }
-                if (firstInstance.doublePlay(firstInstance.playerTurn, testDouble, 0)) {
-                    editTextView.append("Placed Double 8,8 on 1st Players Train\n");
-                } else {
-                    editTextView.append("Double not playable on 1st Players Train\n");
-
-                }
-                if (firstInstance.drawAction(firstInstance.playerTurn)) {
-                    editTextView.append("Player 1 correctly drew a domino\n");
-                }
-
-                DominoGameState thirdInstance = new DominoGameState(setOfDominoes);
-                DominoGameState fourthInstance = new DominoGameState(thirdInstance);
-
-                //Calls toString method from DominoGameState
-                //and prints out corresponding values of the state
-                editTextView.append(secondInstance.toString());
-                editTextView.append(fourthInstance.toString());
-
+            public void onClick(View v){
 
             }
-        }); */
+        });
+
+        restartButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
+
+        helpButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
+
+        drawButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
+
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
     }
 }

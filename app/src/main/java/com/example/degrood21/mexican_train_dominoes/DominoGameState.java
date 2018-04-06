@@ -2998,6 +2998,8 @@ public class DominoGameState {
     }
 
 
+
+
     /*
         drawAction takes a random index from PileofDominos and adds it to the current player's hand
      */
@@ -3013,27 +3015,63 @@ public class DominoGameState {
 
                 Player1Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
-                //Check for playable domino drawn
                 player1Public = true;
-                return true;
+                if(checkPlayable(id, 0)){return true;}
+                return false;
             } else if (id == 1) {
                 Player2Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player2Public = true;
-                return true;
+                if(checkPlayable(id, 0)){return true;}
+                return false;
             } else if (id == 2) {
                 Player3Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player3Public = true;
-                return true;
+                if(checkPlayable(id, 0)){return true;}
+                return false;
             } else if (id == 3) {
                 Player4Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player4Public = true;
-                return true;
+                if(checkPlayable(id, 0)){return true;}
+                return false;
             }
             return false;
         }
+    }
+
+    public boolean checkPlayable(int id, int trainSelection){
+        if(trainSelection >= 5){return false;}
+        ArrayList<Domino> currentHand = new ArrayList<Domino>();
+        ArrayList<Domino> currentTrain = new ArrayList<Domino>();
+
+        if(id == 0){currentHand = Player1Hand;}
+        else if(id == 1){currentHand = Player2Hand;}
+        else if(id == 2){currentHand = Player3Hand;}
+        else if(id == 3){currentHand = Player4Hand;}
+
+        if(trainSelection == 0){currentTrain = Player1Train;}
+        else if(trainSelection == 1){currentTrain = Player2Train;}
+        else if(trainSelection == 2){currentTrain = Player3Train;}
+        else if(trainSelection == 3){currentTrain = Player4Train;}
+        else if(trainSelection == 4){currentTrain = PublicTrain;}
+
+
+            for(int i = 0; i < currentHand.size(); i++){
+
+                if(currentHand.get(i).rightSide == currentTrain.get(currentTrain.size()-1).rightSide
+                        || currentHand.get(i).rightSide == currentTrain.get(currentTrain.size()-1).leftSide) {
+                    return true;
+                }
+                else if(currentHand.get(i).leftSide == currentTrain.get(currentTrain.size()-1).rightSide
+                        || currentHand.get(i).leftSide == currentTrain.get(currentTrain.size()-1).leftSide){
+                    return true;
+                }
+
+            }
+            return checkPlayable(id, trainSelection++);
+
     }
 
     /**

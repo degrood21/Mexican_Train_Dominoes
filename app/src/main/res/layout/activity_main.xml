@@ -41,7 +41,8 @@
                 android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:alpha="0.4"
-                android:background="@drawable/questionmark" />
+                android:background="@color/green_playboard" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -337,7 +338,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:translationY="-2dp"
-                app:srcCompat="@drawable/trainmarker" />
+                android:background="@color/green_playboard"></ImageView>
+                //app:srcCompat="@drawable/trainmarker" />
         </LinearLayout>
 
         <LinearLayout

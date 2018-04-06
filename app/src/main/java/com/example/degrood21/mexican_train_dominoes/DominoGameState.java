@@ -298,7 +298,8 @@ public class DominoGameState {
             } else {
                 return false;
             }
-        } else if (playerID == 0) { // If Player 1
+        }
+        else if (playerID == 0) { // If Player 1
             if (trainSelection == 0) { // Player 1 Train
                 if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
@@ -324,7 +325,8 @@ public class DominoGameState {
                         }
                         return true;
                     }
-                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
+                }
+                else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
                     if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
@@ -3011,6 +3013,7 @@ public class DominoGameState {
 
                 Player1Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
+                //Check for playable domino drawn
                 player1Public = true;
                 return true;
             } else if (id == 1) {

@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
         quitButton = (Button)findViewById(R.id.quitButton);
         restartButton = (Button)findViewById(R.id.restartButton);
         helpButton = (Button)findViewById(R.id.button);
         drawButton = (Button)findViewById(R.id.drawButton);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         final ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();
 
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setOfDominoes.add(d11_12);
 
 
-        quitButton.setOnClickListener(new View.OnClickListener(){
+      quitButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
 
@@ -272,10 +272,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
 
-
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
+
     }
 }

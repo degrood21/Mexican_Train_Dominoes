@@ -807,4 +807,3 @@ View.OnClickListener {
 		finish();
 	}
 }
-

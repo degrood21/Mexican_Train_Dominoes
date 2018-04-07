@@ -5,12 +5,15 @@ import com.example.degrood21.mexican_train_dominoes.game.LocalGame;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by crawforl20 on 4/4/2018.
+ * This is the LocalGame class for our Mexican Train Dominoes game. This class
+ * defines and enforces the game rules, handles interactions between players of the game.
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTLocalGame extends LocalGame {
 
-    DominoGameState state = new DominoGameState();
+    DominoGameState state;
 
     public MTLocalGame(){
 
@@ -18,6 +21,73 @@ public class MTLocalGame extends LocalGame {
 
     }
 
+    /**
+     * checks whether the game is over, if so return a string with result.
+     *
+     * @return
+     *      the end-of-game message, or null if game is not over.
+     */
+    @Override
+    protected String checkIfGameOver() {
+        //If the round is not the last, then decide who won the round and reset.
+        if(state.round > 0) {
+            //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
+            //in their hand and won the round.
+            if(state.Player1Hand.size() == 0) {
+                return this.playerNames[0]+" won the Round"; //player one ran out of dominoes and won the round.
+            }
+            else if(state.Player2Hand.size() == 0) {
+                return this.playerNames[1]+" won the Round"; //player two ran out of dominoes and won the round.
+            }
+            else if(state.Player3Hand.size() == 0){
+                return this.playerNames[2]+" won the Round"; //player three ran out of dominoes and won the round.
+            }
+            else if(state.Player4Hand.size() == 0){
+                return this.playerNames[3]+" won the Round"; //player four ran out of dominoes and won the round.
+            }
+            else {
+                //All players still have dominoes in their hands, the game goes on.
+                return null;
+            }
+        }
+        //if it's the final round, then check player scores to see who won the game.
+        else if(state.round == 0){
+            //check if any of the players' hands have ran out of dominoes, ending the final round of the game
+            //resulting in the end of the game.
+            if(state.Player1Hand.size() == 0 || state.Player2Hand.size() == 0 || state.Player3Hand.size() == 0
+                    || state.Player4Hand.size() == 0) {
+                //if player one's score is higher than the others...
+                if (state.player1Score > state.player2Score && state.player1Score > state.player3Score
+                        && state.player1Score > state.player4Score) {
+                    return this.playerNames[0] + " is the Winner!"; //then player one won the game.
+                //if player two's score is higher than the others...
+                } else if (state.player2Score > state.player1Score && state.player2Score > state.player3Score
+                        && state.player2Score > state.player4Score) {
+                    return this.playerNames[1] + " is the Winner!";//then player two won the game.
+                //if player three's score is higher than the others...
+                } else if (state.player3Score > state.player1Score && state.player3Score > state.player2Score
+                        && state.player3Score > state.player4Score) {
+                    return this.playerNames[2] + " is the Winner!";//then player three won the game.
+                //if player four's score is higher than the others...
+                } else if (state.player4Score > state.player1Score && state.player4Score > state.player2Score
+                        && state.player4Score > state.player3Score) {
+                    return this.playerNames[3] + " is the Winner!";//then player four won the game.
+                }
+            }
+            else{
+                //All players still have dominoes in their hands, the game goes on.
+                return null;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sends the updated state to the given player.
+     *
+     * @param p
+     *      the player which is sent the updated state.
+     */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
 
@@ -37,11 +107,6 @@ public class MTLocalGame extends LocalGame {
 
         return false;
 
-    }
-
-    @Override
-    protected String checkIfGameOver() {
-        return null;
     }
 
     @Override

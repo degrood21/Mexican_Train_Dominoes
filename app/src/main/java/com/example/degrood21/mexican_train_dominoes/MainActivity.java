@@ -37,7 +37,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // Pig has two player types:  human and computer
+        // MexicanTrain has two player types:  human and computer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 return new MTHumanPlayer(name);
@@ -47,8 +47,8 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
                 return new MTComputerPlayer(name);
             }});
 
-        // Create a game configuration class for Pig:
-        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "Pig", PORT_NUMBER);
+        // Create a game configuration class for MexicanTrain:
+        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 2, "MexicanTrain", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Smart Computer", 2);
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player

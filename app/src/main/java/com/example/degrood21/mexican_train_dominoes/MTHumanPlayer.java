@@ -15,7 +15,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
- * Created by crawforl20 on 4/4/2018.
+ * Human Player class that allows the user to interact with a GUI to play Mexican Train Dominoes.
+ * Designed for landscape orientation, player plays the game by touching the screen.
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListener {

@@ -4,7 +4,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GameComputerPlayer;
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameInfo;
 
 /**
- * Created by crawforl20 on 4/4/2018.
+ *
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTComputerPlayer extends GameComputerPlayer {

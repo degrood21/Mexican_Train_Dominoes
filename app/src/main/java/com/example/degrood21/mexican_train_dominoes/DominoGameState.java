@@ -3,6 +3,8 @@ package com.example.degrood21.mexican_train_dominoes;
 import android.graphics.drawable.Drawable;
 import android.widget.EditText;
 
+import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameState;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +14,7 @@ import java.util.Random;
  * @authors Dylan DeGrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
-public class DominoGameState {
+public class DominoGameState extends GameState {
 
     ArrayList<Domino> PileofDominoes = new ArrayList<>();
     ArrayList<Domino> Player1Hand = new ArrayList<>();
@@ -55,6 +57,8 @@ public class DominoGameState {
                 PileofDominoes.remove(i);
             }
         }
+
+        dealAction();
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;

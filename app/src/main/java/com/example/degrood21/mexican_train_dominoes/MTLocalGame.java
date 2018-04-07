@@ -10,7 +10,7 @@ import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 public class MTLocalGame extends LocalGame {
 
-    DominoGameState state;
+    DominoGameState state = new DominoGameState();
 
     public MTLocalGame(){
 
@@ -21,13 +21,22 @@ public class MTLocalGame extends LocalGame {
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
 
-        DominoGameState gs = new DominoGameState(state);
+        DominoGameState Current = new DominoGameState(state);
+        p.sendInfo(state);
 
     }
 
     @Override
     protected boolean canMove(int playerIdx) {
+
+        if(playerIdx == state.playerTurn){
+
+            return true;
+
+        }
+
         return false;
+
     }
 
     @Override
@@ -37,6 +46,10 @@ public class MTLocalGame extends LocalGame {
 
     @Override
     protected boolean makeMove(GameAction action) {
+
+
+
+
         return false;
     }
 }

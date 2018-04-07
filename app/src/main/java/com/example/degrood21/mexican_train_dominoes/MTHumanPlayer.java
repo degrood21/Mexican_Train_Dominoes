@@ -11,6 +11,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GameHumanPlayer;
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameInfo;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by crawforl20 on 4/4/2018.
  */
@@ -20,6 +23,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     protected DominoGameState state;
 
     private Activity myActivity;
+
+    private ArrayList<ImageView> HandIVs = new ArrayList<ImageView>();
 
     private Button quitButton, restartButton, helpButton, drawButton;
     private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV;
@@ -46,150 +51,36 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     @Override
     public void receiveInfo(GameInfo info) {
 
-        if(!(info instanceof DominoGameState)){
+        if (!(info instanceof DominoGameState)) {
 
             return;
 
         }
 
         this.state = (DominoGameState) info;
-
-    }
-
-    @Override
-    public void setAsGui(GameMainActivity activity) {
-
-        myActivity = activity;
-
-        activity.setContentView(R.layout.activity_main);
-
-        /**
-         * Creating the button and ImageViews used to draw the dominoes onto the screen
-         *
-         */
-        quitButton = (Button) myActivity.findViewById(R.id.quitButton);
-
-        restartButton = (Button) myActivity.findViewById(R.id.restartButton);
-
-        helpButton = (Button) myActivity.findViewById(R.id.button);
-
-        drawButton = (Button) myActivity.findViewById(R.id.drawButton);
-
-
-        p1ScoreTV = (TextView) myActivity.findViewById(R.id.player1Score);
-        p2ScoreTV = (TextView) myActivity.findViewById(R.id.player2Score);
-        p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
-        p4ScoreTV = (TextView) myActivity.findViewById(R.id.player4Score);
-        roundTV = (TextView) myActivity.findViewById(R.id.roundView);
-        roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
-        turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
-        turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
-        turnMarker3 = (ImageView) myActivity.findViewById(R.id.turnMarker3);
-        turnMarker4 = (ImageView) myActivity.findViewById(R.id.turnMarker4);
-
-        p1First = (ImageView) myActivity.findViewById(R.id.p1IVone);
-
-        p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo);
-
-        p1Third = (ImageView) myActivity.findViewById(R.id.p1IVthree);
-
-        p1Fourth = (ImageView) myActivity.findViewById(R.id.p1IVfour);
-
-        p1Fifth = (ImageView) myActivity.findViewById(R.id.p1IVfive);
-
-        p1Sixth = (ImageView) myActivity.findViewById(R.id.p1IVsix);
-
-        p2First = (ImageView) myActivity.findViewById(R.id.p2IVone);
-
-        p2Second = (ImageView) myActivity.findViewById(R.id.p2IVtwo);
-
-        p2Third = (ImageView) myActivity.findViewById(R.id.p2IVthree);
-
-        p2Fourth = (ImageView) myActivity.findViewById(R.id.p2IVfour);
-
-        p2Fifth = (ImageView) myActivity.findViewById(R.id.p2IVfive);
-
-        p2Sixth = (ImageView) myActivity.findViewById(R.id.p2IVsix);
-
-        p3First = (ImageView) myActivity.findViewById(R.id.p3IVone);
-
-        p3Second = (ImageView) myActivity.findViewById(R.id.p3IVtwo);
-
-        p3Third = (ImageView) myActivity.findViewById(R.id.p3IVthree);
-
-        p3Fourth = (ImageView) myActivity.findViewById(R.id.p3IVfour);
-
-        p3Fifth = (ImageView) myActivity.findViewById(R.id.p3IVfive);
-
-        p3Sixth = (ImageView) myActivity.findViewById(R.id.p3IVsix);
-
-        p4First = (ImageView) myActivity.findViewById(R.id.p4IVone);
-
-        p4Second = (ImageView) myActivity.findViewById(R.id.p4IVtwo);
-
-        p4Third = (ImageView) myActivity.findViewById(R.id.p4IVthree);
-
-        p4Fourth = (ImageView) myActivity.findViewById(R.id.p4IVfour);
-
-        p4Fifth = (ImageView) myActivity.findViewById(R.id.p4IVfive);
-
-        p4Sixth = (ImageView) myActivity.findViewById(R.id.p4IVsix);
-
-        publicFirst = (ImageView) myActivity.findViewById(R.id.pTrainIVone);
-
-        publicSecond = (ImageView) myActivity.findViewById(R.id.pTrainIVtwo);
-
-        publicThird = (ImageView) myActivity.findViewById(R.id.pTrainIVthree);
-
-        publicFourth = (ImageView) myActivity.findViewById(R.id.pTrainIVfour);
-
-        publicFifth = (ImageView) myActivity.findViewById(R.id.pTrainIVfive);
-
-        publicSixth = (ImageView) myActivity.findViewById(R.id.pTrainIVsix);
-
-        handOne = (ImageView) myActivity.findViewById(R.id.handIVone);
-
-        handTwo = (ImageView) myActivity.findViewById(R.id.handIVtwo);
-
-        handThree = (ImageView) myActivity.findViewById(R.id.handIVthree);
-
-        handFour = (ImageView) myActivity.findViewById(R.id.handIVfour);
-
-        handFive = (ImageView) myActivity.findViewById(R.id.handIVfive);
-
-        handSix = (ImageView) myActivity.findViewById(R.id.handIVsix);
-
-        handSeven = (ImageView) myActivity.findViewById(R.id.handIVseven);
-
-        handEight = (ImageView) myActivity.findViewById(R.id.handIVeight);
-
-        handNine = (ImageView) myActivity.findViewById(R.id.handIVnine);
-
-        handTen = (ImageView) myActivity.findViewById(R.id.handIVten);
-
-        handEleven = (ImageView) myActivity.findViewById(R.id.handIVeleven);
-
-        handTwelve = (ImageView) myActivity.findViewById(R.id.handIVtwelve);
-
-        handThirteen = (ImageView) myActivity.findViewById(R.id.handIVthirteen);
-
-        handFourteen = (ImageView) myActivity.findViewById(R.id.handIVfourteen);
-
-        handFifteen = (ImageView) myActivity.findViewById(R.id.handIVfifteen);
-        handSixteen = (ImageView) myActivity.findViewById(R.id.handIVsixteen);
-        handSeventeen = (ImageView) myActivity.findViewById(R.id.handIVseventeen);
-        handEighteen = (ImageView) myActivity.findViewById(R.id.handIVeighteen);
-        handNineteen = (ImageView) myActivity.findViewById(R.id.handIVnineteen);
-        handTwenty = (ImageView) myActivity.findViewById(R.id.handIVtwenty);
+        //this.state = new DominoGameState();
 
         /**
          * Tests of how to draw the dominoes into the ImageViews
          *
          */
-        handOne.setImageResource(state.Player1Hand.get(0).pictureID);
-        handOne.getLayoutParams().width = 200;
+        for (int i = 0; i < state.Player1Hand.size(); i++) {
+
+            HandIVs.get(i).setImageResource(state.Player1Hand.get(i).pictureID);
+            HandIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        for(int i = state.Player1Hand.size(); i < 20; i++){
+
+            HandIVs.get(i).setImageResource(R.color.green_playboard);
+            HandIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        /*handOne.getLayoutParams().width = 200;
         handTwo.setImageResource(R.drawable.d1_2);
-        handTwo.setRotation(180);
+        handTwo.setRotation(0);
         handTwo.getLayoutParams().width = 200;
         handThree.setImageResource(R.drawable.c2_2);
         handThree.getLayoutParams().width = 200;
@@ -227,6 +118,93 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         handNineteen.getLayoutParams().width = 200;
         handTwenty.setImageResource(R.color.green_playboard);
         handTwenty.getLayoutParams().width = 200;
+*/
+
+    }
+
+    @Override
+    public void setAsGui(GameMainActivity activity) {
+
+        myActivity = activity;
+
+        activity.setContentView(R.layout.activity_main);
+
+        /**
+         * Creating the button and ImageViews used to draw the dominoes onto the screen
+         *
+         */
+        quitButton = (Button) myActivity.findViewById(R.id.quitButton);
+
+        restartButton = (Button) myActivity.findViewById(R.id.restartButton);
+
+        helpButton = (Button) myActivity.findViewById(R.id.button);
+
+        drawButton = (Button) myActivity.findViewById(R.id.drawButton);
+
+
+        p1ScoreTV = (TextView) myActivity.findViewById(R.id.player1Score);
+        p2ScoreTV = (TextView) myActivity.findViewById(R.id.player2Score);
+        p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
+        p4ScoreTV = (TextView) myActivity.findViewById(R.id.player4Score);
+        roundTV = (TextView) myActivity.findViewById(R.id.roundView);
+        roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
+        turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
+        turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
+        turnMarker3 = (ImageView) myActivity.findViewById(R.id.turnMarker3);
+        turnMarker4 = (ImageView) myActivity.findViewById(R.id.turnMarker4);
+
+        p1First = (ImageView) myActivity.findViewById(R.id.p1IVone);
+        p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo);
+        p1Third = (ImageView) myActivity.findViewById(R.id.p1IVthree);
+        p1Fourth = (ImageView) myActivity.findViewById(R.id.p1IVfour);
+        p1Fifth = (ImageView) myActivity.findViewById(R.id.p1IVfive);
+        p1Sixth = (ImageView) myActivity.findViewById(R.id.p1IVsix);
+        p2First = (ImageView) myActivity.findViewById(R.id.p2IVone);
+        p2Second = (ImageView) myActivity.findViewById(R.id.p2IVtwo);
+        p2Third = (ImageView) myActivity.findViewById(R.id.p2IVthree);
+        p2Fourth = (ImageView) myActivity.findViewById(R.id.p2IVfour);
+        p2Fifth = (ImageView) myActivity.findViewById(R.id.p2IVfive);
+        p2Sixth = (ImageView) myActivity.findViewById(R.id.p2IVsix);
+        p3First = (ImageView) myActivity.findViewById(R.id.p3IVone);
+        p3Second = (ImageView) myActivity.findViewById(R.id.p3IVtwo);
+        p3Third = (ImageView) myActivity.findViewById(R.id.p3IVthree);
+        p3Fourth = (ImageView) myActivity.findViewById(R.id.p3IVfour);
+        p3Fifth = (ImageView) myActivity.findViewById(R.id.p3IVfive);
+        p3Sixth = (ImageView) myActivity.findViewById(R.id.p3IVsix);
+        p4First = (ImageView) myActivity.findViewById(R.id.p4IVone);
+        p4Second = (ImageView) myActivity.findViewById(R.id.p4IVtwo);
+        p4Third = (ImageView) myActivity.findViewById(R.id.p4IVthree);
+        p4Fourth = (ImageView) myActivity.findViewById(R.id.p4IVfour);
+        p4Fifth = (ImageView) myActivity.findViewById(R.id.p4IVfive);
+        p4Sixth = (ImageView) myActivity.findViewById(R.id.p4IVsix);
+        publicFirst = (ImageView) myActivity.findViewById(R.id.pTrainIVone);
+        publicSecond = (ImageView) myActivity.findViewById(R.id.pTrainIVtwo);
+        publicThird = (ImageView) myActivity.findViewById(R.id.pTrainIVthree);
+        publicFourth = (ImageView) myActivity.findViewById(R.id.pTrainIVfour);
+        publicFifth = (ImageView) myActivity.findViewById(R.id.pTrainIVfive);
+        publicSixth = (ImageView) myActivity.findViewById(R.id.pTrainIVsix);
+
+        HandIVs.add(handOne = (ImageView) myActivity.findViewById(R.id.handIVone));
+        HandIVs.add(handTwo = (ImageView) myActivity.findViewById(R.id.handIVtwo));
+        HandIVs.add(handThree = (ImageView) myActivity.findViewById(R.id.handIVthree));
+        HandIVs.add(handFour = (ImageView) myActivity.findViewById(R.id.handIVfour));
+        HandIVs.add(handFive = (ImageView) myActivity.findViewById(R.id.handIVfive));
+        HandIVs.add(handSix = (ImageView) myActivity.findViewById(R.id.handIVsix));
+        HandIVs.add(handSeven = (ImageView) myActivity.findViewById(R.id.handIVseven));
+        HandIVs.add(handEight = (ImageView) myActivity.findViewById(R.id.handIVeight));
+        HandIVs.add(handNine = (ImageView) myActivity.findViewById(R.id.handIVnine));
+        HandIVs.add(handTen = (ImageView) myActivity.findViewById(R.id.handIVten));
+        HandIVs.add(handEleven = (ImageView) myActivity.findViewById(R.id.handIVeleven));
+        HandIVs.add(handTwelve = (ImageView) myActivity.findViewById(R.id.handIVtwelve));
+        HandIVs.add(handThirteen = (ImageView) myActivity.findViewById(R.id.handIVthirteen));
+        HandIVs.add(handFourteen = (ImageView) myActivity.findViewById(R.id.handIVfourteen));
+        HandIVs.add(handFifteen = (ImageView) myActivity.findViewById(R.id.handIVfifteen));
+        HandIVs.add(handSixteen = (ImageView) myActivity.findViewById(R.id.handIVsixteen));
+        HandIVs.add(handSeventeen = (ImageView) myActivity.findViewById(R.id.handIVseventeen));
+        HandIVs.add(handEighteen = (ImageView) myActivity.findViewById(R.id.handIVeighteen));
+        HandIVs.add(handNineteen = (ImageView) myActivity.findViewById(R.id.handIVnineteen));
+        HandIVs.add(handTwenty = (ImageView) myActivity.findViewById(R.id.handIVtwenty));
+
 
         quitButton.setOnClickListener(new View.OnClickListener()
 

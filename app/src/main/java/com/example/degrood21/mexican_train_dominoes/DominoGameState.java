@@ -32,9 +32,12 @@ public class DominoGameState {
      * Default cstor
      * Sets all instance variables above accordingly
      *
-     * @param allDominoes allDominoes is the complete set of unchanging Dominoes
      */
-    public DominoGameState(ArrayList<Domino> allDominoes) {
+    public DominoGameState() {
+
+        ArrayList<Domino> allDominoes = new ArrayList<Domino>();
+        DominoPile pile = new DominoPile();
+        allDominoes = pile.setOfDominoes;
 
         round = 12;
         //PileofDominoes = new ArrayList<>();

@@ -53,12 +53,19 @@ public class DominoGameState extends GameState {
         }
         for (int i = 0; i < allDominoes.size() - 1; i++) {
             if (PileofDominoes.get(i).leftSide == 12 && PileofDominoes.get(i).rightSide == 12) {
+                allDominoes.get(i).leftSide = -1;
                 PublicTrain.add(0, allDominoes.get(i));
                 PileofDominoes.remove(i);
             }
         }
 
         dealAction();
+
+        // TESTING FOR PLACE DOMINO
+        for (int i = 0; i < Player1Hand.size(); i++) {
+            placeDomino(0, Player1Hand.get(i), 4);
+        }
+
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;

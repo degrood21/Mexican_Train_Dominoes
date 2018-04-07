@@ -28,6 +28,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private Activity myActivity;
 
     private ArrayList<ImageView> HandIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> PublicTrainIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> Player1TrainIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> Player2TrainIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> Player3TrainIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>();
+
 
     private Button quitButton, restartButton, helpButton, drawButton;
     private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV;
@@ -67,6 +73,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
          * Tests of how to draw the dominoes into the ImageViews
          *
          */
+        for(int i = state.Player1Hand.size(); i < 20; i++){
+
+            HandIVs.get(i).setImageResource(R.color.green_playboard);
+            HandIVs.get(i).getLayoutParams().width = 200;
+
+        }
         for (int i = 0; i < state.Player1Hand.size(); i++) {
 
             HandIVs.get(i).setImageResource(state.Player1Hand.get(i).pictureID);
@@ -74,54 +86,80 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
 
-        for(int i = state.Player1Hand.size(); i < 20; i++){
+        for (int i = 0; i < Player1TrainIVs.size(); i++) {
 
-            HandIVs.get(i).setImageResource(R.color.green_playboard);
-            HandIVs.get(i).getLayoutParams().width = 200;
+            Player1TrainIVs.get(i).setImageResource(R.color.green_playboard);
+            Player1TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+        for (int i = 0; i < state.Player1Train.size(); i++) {
+
+            //if(state.PublicTrain.get())
+            Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(i).pictureID);
+            Player1TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
 
-        /*handOne.getLayoutParams().width = 200;
-        handTwo.setImageResource(R.drawable.d1_2);
-        handTwo.setRotation(0);
-        handTwo.getLayoutParams().width = 200;
-        handThree.setImageResource(R.drawable.c2_2);
-        handThree.getLayoutParams().width = 200;
-        handFour.setImageResource(R.drawable.d1_2);
-        handFour.getLayoutParams().width = 200;
-        handFive.setImageResource(R.drawable.c2_2);
-        handFive.getLayoutParams().width = 200;
-        handSix.setImageResource(R.drawable.d1_2);
-        handSix.getLayoutParams().width = 200;
-        handSeven.setImageResource(R.drawable.c2_2);
-        handSeven.getLayoutParams().width = 200;
-        handEight.setImageResource(R.drawable.d1_2);
-        handEight.getLayoutParams().width = 200;
-        handNine.setImageResource(R.drawable.d0_5);
-        handNine.getLayoutParams().width = 200;
-        handTen.setImageResource(R.drawable.d1_2);
-        handTen.getLayoutParams().width = 200;
-        handEleven.setImageResource(R.drawable.c2_2);
-        handEleven.getLayoutParams().width = 200;
-        handTwelve.setImageResource(R.drawable.d1_2);
-        handTwelve.getLayoutParams().width = 200;
-        handThirteen.setImageResource(R.drawable.d1_2);
-        handThirteen.getLayoutParams().width = 200;
-        handFourteen.setImageResource(R.drawable.d1_2);
-        handFourteen.getLayoutParams().width = 200;
-        handFifteen.setImageResource(R.drawable.d1_2);
-        handFifteen.getLayoutParams().width = 200;
-        handSixteen.setImageResource(R.color.green_playboard);
-        handSixteen.getLayoutParams().width = 200;
-        handSeventeen.setImageResource(R.drawable.d1_2);
-        handSeventeen.getLayoutParams().width = 200;
-        handEighteen.setImageResource(R.drawable.d1_2);
-        handEighteen.getLayoutParams().width = 200;
-        handNineteen.setImageResource(R.drawable.d1_2);
-        handNineteen.getLayoutParams().width = 200;
-        handTwenty.setImageResource(R.color.green_playboard);
-        handTwenty.getLayoutParams().width = 200;
-*/
+        for (int i = 0; i < Player2TrainIVs.size(); i++) {
+
+            Player2TrainIVs.get(i).setImageResource(R.color.green_playboard);
+            Player2TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+        for (int i = 0; i < state.Player2Train.size(); i++) {
+
+            //if(state.PublicTrain.get())
+            Player2TrainIVs.get(i).setImageResource(state.Player2Train.get(i).pictureID);
+            Player2TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        for (int i = 0; i < Player3TrainIVs.size(); i++) {
+
+            Player3TrainIVs.get(i).setImageResource(R.color.green_playboard);
+            Player3TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+        for (int i = 0; i < state.Player3Train.size(); i++) {
+
+            //if(state.PublicTrain.get())
+            Player3TrainIVs.get(i).setImageResource(state.Player3Train.get(i).pictureID);
+            Player3TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        for (int i = 0; i < Player4TrainIVs.size(); i++) {
+
+            Player4TrainIVs.get(i).setImageResource(R.color.green_playboard);
+            Player4TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+        for (int i = 0; i < state.Player4Train.size(); i++) {
+
+            //if(state.PublicTrain.get())
+            Player4TrainIVs.get(i).setImageResource(state.Player4Train.get(i).pictureID);
+            Player4TrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        for (int i = 0; i < PublicTrainIVs.size(); i++) {
+
+            PublicTrainIVs.get(i).setImageResource(R.color.green_playboard);
+            PublicTrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+        for (int i = 0; i < state.PublicTrain.size(); i++) {
+
+            //if(state.PublicTrain.get())
+            PublicTrainIVs.get(i).setImageResource(state.PublicTrain.get(i).pictureID);
+            PublicTrainIVs.get(i).getLayoutParams().width = 200;
+
+        }
+
+        roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
+        roundDom.getLayoutParams().width = 150;
+
+        roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
 
     }
 
@@ -156,36 +194,40 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         turnMarker3 = (ImageView) myActivity.findViewById(R.id.turnMarker3);
         turnMarker4 = (ImageView) myActivity.findViewById(R.id.turnMarker4);
 
-        p1First = (ImageView) myActivity.findViewById(R.id.p1IVone);
-        p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo);
-        p1Third = (ImageView) myActivity.findViewById(R.id.p1IVthree);
-        p1Fourth = (ImageView) myActivity.findViewById(R.id.p1IVfour);
-        p1Fifth = (ImageView) myActivity.findViewById(R.id.p1IVfive);
-        p1Sixth = (ImageView) myActivity.findViewById(R.id.p1IVsix);
-        p2First = (ImageView) myActivity.findViewById(R.id.p2IVone);
-        p2Second = (ImageView) myActivity.findViewById(R.id.p2IVtwo);
-        p2Third = (ImageView) myActivity.findViewById(R.id.p2IVthree);
-        p2Fourth = (ImageView) myActivity.findViewById(R.id.p2IVfour);
-        p2Fifth = (ImageView) myActivity.findViewById(R.id.p2IVfive);
-        p2Sixth = (ImageView) myActivity.findViewById(R.id.p2IVsix);
-        p3First = (ImageView) myActivity.findViewById(R.id.p3IVone);
-        p3Second = (ImageView) myActivity.findViewById(R.id.p3IVtwo);
-        p3Third = (ImageView) myActivity.findViewById(R.id.p3IVthree);
-        p3Fourth = (ImageView) myActivity.findViewById(R.id.p3IVfour);
-        p3Fifth = (ImageView) myActivity.findViewById(R.id.p3IVfive);
-        p3Sixth = (ImageView) myActivity.findViewById(R.id.p3IVsix);
-        p4First = (ImageView) myActivity.findViewById(R.id.p4IVone);
-        p4Second = (ImageView) myActivity.findViewById(R.id.p4IVtwo);
-        p4Third = (ImageView) myActivity.findViewById(R.id.p4IVthree);
-        p4Fourth = (ImageView) myActivity.findViewById(R.id.p4IVfour);
-        p4Fifth = (ImageView) myActivity.findViewById(R.id.p4IVfive);
-        p4Sixth = (ImageView) myActivity.findViewById(R.id.p4IVsix);
-        publicFirst = (ImageView) myActivity.findViewById(R.id.pTrainIVone);
-        publicSecond = (ImageView) myActivity.findViewById(R.id.pTrainIVtwo);
-        publicThird = (ImageView) myActivity.findViewById(R.id.pTrainIVthree);
-        publicFourth = (ImageView) myActivity.findViewById(R.id.pTrainIVfour);
-        publicFifth = (ImageView) myActivity.findViewById(R.id.pTrainIVfive);
-        publicSixth = (ImageView) myActivity.findViewById(R.id.pTrainIVsix);
+        Player1TrainIVs.add(p1First = (ImageView) myActivity.findViewById(R.id.p1IVone));
+        Player1TrainIVs.add(p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo));
+        Player1TrainIVs.add(p1Third = (ImageView) myActivity.findViewById(R.id.p1IVthree));
+        Player1TrainIVs.add(p1Fourth = (ImageView) myActivity.findViewById(R.id.p1IVfour));
+        Player1TrainIVs.add(p1Fifth = (ImageView) myActivity.findViewById(R.id.p1IVfive));
+        Player1TrainIVs.add(p1Sixth = (ImageView) myActivity.findViewById(R.id.p1IVsix));
+
+        Player2TrainIVs.add(p2First = (ImageView) myActivity.findViewById(R.id.p2IVone));
+        Player2TrainIVs.add(p2Second = (ImageView) myActivity.findViewById(R.id.p2IVtwo));
+        Player2TrainIVs.add(p2Third = (ImageView) myActivity.findViewById(R.id.p2IVthree));
+        Player2TrainIVs.add(p2Fourth = (ImageView) myActivity.findViewById(R.id.p2IVfour));
+        Player2TrainIVs.add(p2Fifth = (ImageView) myActivity.findViewById(R.id.p2IVfive));
+        Player2TrainIVs.add(p2Sixth = (ImageView) myActivity.findViewById(R.id.p2IVsix));
+
+        Player3TrainIVs.add(p3First = (ImageView) myActivity.findViewById(R.id.p3IVone));
+        Player3TrainIVs.add(p3Second = (ImageView) myActivity.findViewById(R.id.p3IVtwo));
+        Player3TrainIVs.add(p3Third = (ImageView) myActivity.findViewById(R.id.p3IVthree));
+        Player3TrainIVs.add(p3Fourth = (ImageView) myActivity.findViewById(R.id.p3IVfour));
+        Player3TrainIVs.add(p3Fifth = (ImageView) myActivity.findViewById(R.id.p3IVfive));
+        Player3TrainIVs.add(p3Sixth = (ImageView) myActivity.findViewById(R.id.p3IVsix));
+
+        Player4TrainIVs.add(p4First = (ImageView) myActivity.findViewById(R.id.p4IVone));
+        Player4TrainIVs.add(p4Second = (ImageView) myActivity.findViewById(R.id.p4IVtwo));
+        Player4TrainIVs.add(p4Third = (ImageView) myActivity.findViewById(R.id.p4IVthree));
+        Player4TrainIVs.add(p4Fourth = (ImageView) myActivity.findViewById(R.id.p4IVfour));
+        Player4TrainIVs.add(p4Fifth = (ImageView) myActivity.findViewById(R.id.p4IVfive));
+        Player4TrainIVs.add(p4Sixth = (ImageView) myActivity.findViewById(R.id.p4IVsix));
+
+        PublicTrainIVs.add(publicFirst = (ImageView) myActivity.findViewById(R.id.pTrainIVone));
+        PublicTrainIVs.add(publicSecond = (ImageView) myActivity.findViewById(R.id.pTrainIVtwo));
+        PublicTrainIVs.add(publicThird = (ImageView) myActivity.findViewById(R.id.pTrainIVthree));
+        PublicTrainIVs.add(publicFourth = (ImageView) myActivity.findViewById(R.id.pTrainIVfour));
+        PublicTrainIVs.add(publicFifth = (ImageView) myActivity.findViewById(R.id.pTrainIVfive));
+        PublicTrainIVs.add(publicSixth = (ImageView) myActivity.findViewById(R.id.pTrainIVsix));
 
         HandIVs.add(handOne = (ImageView) myActivity.findViewById(R.id.handIVone));
         HandIVs.add(handTwo = (ImageView) myActivity.findViewById(R.id.handIVtwo));
@@ -283,171 +325,50 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         });
 
         //which domino in hand is selected
-        handOne.setOnClickListener(new View.OnClickListener()
+        for(int i = 0; i < HandIVs.size(); i++) {
+            HandIVs.get(i).setOnClickListener(new View.OnClickListener()
 
-        {
-            @Override
-            public void onClick(View v) {
+            {
+                @Override
+                public void onClick(View v) {
 
-            }
-        });
-        handTwo.setOnClickListener(new View.OnClickListener()
+                    for(int i = 0; i < HandIVs.size(); i++) {
 
-        {
-            @Override
-            public void onClick(View v) {
+                        HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
 
-            }
-        });
-        handThree.setOnClickListener(new View.OnClickListener()
+                    }
 
-        {
-            @Override
-            public void onClick(View v) {
+                    for(int i = 0; i < HandIVs.size(); i++) {
 
-            }
-        });
-        handFour.setOnClickListener(new View.OnClickListener()
+                        if (v == HandIVs.get(i)) {
 
-        {
-            @Override
-            public void onClick(View v) {
+                            HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
 
-            }
-        });
-        handFive.setOnClickListener(new View.OnClickListener()
+                        }
 
-        {
-            @Override
-            public void onClick(View v) {
+                    }
 
-            }
-        });
-        handSix.setOnClickListener(new View.OnClickListener()
+                }
+            });
 
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handSeven.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handEight.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handNine.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handTen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handEleven.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handTwelve.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handThirteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handFourteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handFifteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handSixteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handSeventeen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handEighteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handNineteen.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        handTwenty.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        }
 
     }
 
     @Override
     public void onClick(View view) {
+
+        for(int i = 0; i < HandIVs.size(); i++){
+
+            if(view == HandIVs.get(i)){
+
+                HandIVs.get(i).getLayoutParams().width = 230;
+
+            }
+
+
+        }
+
 
     }
 }

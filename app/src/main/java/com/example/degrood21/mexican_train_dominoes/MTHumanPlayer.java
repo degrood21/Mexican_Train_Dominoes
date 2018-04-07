@@ -344,6 +344,44 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                             HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
 
+                            Player1TrainIVs.get(4).setImageResource(R.color.colorPrimary);
+                            Player1TrainIVs.get(4).getLayoutParams().height = 200;
+
+                            Player2TrainIVs.get(4).setImageResource(R.color.colorPrimary);
+                            Player2TrainIVs.get(4).getLayoutParams().height = 200;
+
+                            PublicTrainIVs.get(4).setImageResource(R.color.colorPrimary);
+                            PublicTrainIVs.get(4).getLayoutParams().height= 200;
+                            PublicTrainIVs.get(4).getLayoutParams().width= 200;
+
+
+                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)){
+                                Player1TrainIVs.get(4).setBackgroundResource(R.color.colorAccent);
+                                //Player1TrainIVs.get(4).getLayoutParams().height = 200;
+                                //Player1TrainIVs.get(4).getLayoutParams().width = 200;
+                            }
+                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)){
+                                Player2TrainIVs.get(4).setBackgroundResource(R.color.colorPrimary);
+                                //Player2TrainIVs.get(4).getLayoutParams().height = 200;
+                                //Player2TrainIVs.get(4).getLayoutParams().width= 200;
+                            }
+                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)){
+                                Player3TrainIVs.get(4).setImageResource(R.color.colorPrimary);
+                                Player3TrainIVs.get(4).getLayoutParams().height = 200;
+                                Player3TrainIVs.get(4).getLayoutParams().width = 200;
+                            }
+                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 3)){
+                                Player4TrainIVs.get(4).setImageResource(R.color.colorPrimary);
+                                Player4TrainIVs.get(4).getLayoutParams().height = 200;
+                                Player4TrainIVs.get(4).getLayoutParams().width = 200;
+                            }
+                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)){
+                                PublicTrainIVs.get(4).setBackgroundResource(R.color.colorPrimary);
+                                //PublicTrainIVs.get(4).getLayoutParams().height= 200;
+                                //PublicTrainIVs.get(4).getLayoutParams().width= 200;
+
+                            }
+
                         }
 
                     }

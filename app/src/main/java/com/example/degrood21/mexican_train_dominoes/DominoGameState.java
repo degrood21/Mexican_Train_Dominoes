@@ -3011,9 +3011,6 @@ public class DominoGameState extends GameState {
         return false;
     }
 
-
-
-
     /*
         drawAction takes a random index from PileofDominos and adds it to the current player's hand
      */

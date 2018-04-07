@@ -37,7 +37,7 @@ public class DominoGameState {
     public DominoGameState(ArrayList<Domino> allDominoes) {
 
         round = 12;
-        PileofDominoes = new ArrayList<>();
+        //PileofDominoes = new ArrayList<>();
         for (int i = 0; i < allDominoes.size(); i++) {
             int pID = allDominoes.get(i).getPictureID();
             int rSide = allDominoes.get(i).getRightSide();

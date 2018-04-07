@@ -4,7 +4,10 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by morham20 on 4/7/2018.
+ * CheckPlayableAction is used at the start of each turn, to check whether the player is permitted
+ * to play, is it their turn?, and which train is designated as their own.
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTCheckPlayableAction extends GameAction {

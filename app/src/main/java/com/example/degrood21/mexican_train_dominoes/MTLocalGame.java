@@ -90,31 +90,44 @@ public class MTLocalGame extends LocalGame {
      */
     @Override
     protected void sendUpdatedStateTo(GamePlayer p) {
+        //If there is no updated state, return
+        if(state == null) return;
 
-        DominoGameState Current = new DominoGameState(state);
+        //make a copy of the state and null out all dominoes that are irrelevant to the player.
+        DominoGameState Current = new DominoGameState(state);//copy of state
+
+        //send modified copy of state to the player.
         p.sendInfo(state);
-
     }
 
+    /**
+     * Whether a player is allowed to move
+     *
+     * @param playerIdx
+     * 		the player's player-number (ID)
+     * @return
+     */
     @Override
     protected boolean canMove(int playerIdx) {
-
-        if(playerIdx == state.playerTurn){
-
-            return true;
-
+        if(playerIdx < 0 || playerIdx > 3){
+            //if our player-number is out of range, return false.
+            return false;
         }
-
+        else if(playerIdx == state.playerTurn){
+            return true;
+        }
         return false;
-
     }
 
+    /**
+     * makes a move on behalf of a player
+     *
+     * @param action
+     * 			The move that the player has sent to the com.example.degrood21.mexican_train_dominoes.game
+     * @return
+     */
     @Override
     protected boolean makeMove(GameAction action) {
-
-
-
-
         return false;
     }
 }

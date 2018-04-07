@@ -4,7 +4,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by morham20 on 4/7/2018.
+ * SelectAction selects a domino for the user to do some other action with.
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTSelectAction extends GameAction {

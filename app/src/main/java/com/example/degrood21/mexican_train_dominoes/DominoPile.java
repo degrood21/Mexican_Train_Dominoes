@@ -3,12 +3,12 @@ package com.example.degrood21.mexican_train_dominoes;
 import java.util.ArrayList;
 
 /**
- * Created by morham20 on 4/6/2018.
+ * @authors Devin Smith, Dylan DeGrood, Callum Morham, Logan Crawford
  */
 
 public class DominoPile {
 
-    ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();
+    public ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();
 
     Domino d0_0 = new Domino(R.drawable.c0_0, 0, 0);
     Domino d1_1 = new Domino(R.drawable.c1_1, 1, 1);

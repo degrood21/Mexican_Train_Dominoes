@@ -4,7 +4,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by morham20 on 4/7/2018.
+ * PlaceAction places the selected domino in the space specified, if allowed.
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTPlaceAction extends GameAction {

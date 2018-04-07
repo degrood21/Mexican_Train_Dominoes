@@ -46,7 +46,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     @Override
     public void receiveInfo(GameInfo info) {
 
-        //this.state = (DominoGameState) info;
+        /**
+         * This works in SlapJack but not working here
+         *
+         */
+        this.state = (DominoGameState) info;
 
     }
 
@@ -57,6 +61,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         activity.setContentView(R.layout.activity_main);
 
+        /**
+         * Creating the button and ImageViews used to draw the dominoes onto the screen
+         *
+         */
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
 
         restartButton = (Button) myActivity.findViewById(R.id.restartButton);
@@ -172,6 +180,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         handNineteen = (ImageView) myActivity.findViewById(R.id.handIVnineteen);
         handTwenty = (ImageView) myActivity.findViewById(R.id.handIVtwenty);
 
+        /**
+         * Tests of how to draw the dominoes into the ImageViews
+         *
+         */
         handOne.setImageResource(state.Player1Hand.get(0).pictureID);
         handOne.getLayoutParams().width = 200;
         handTwo.setImageResource(R.drawable.d1_2);

@@ -3044,6 +3044,13 @@ public class DominoGameState {
         }
     }
 
+    /**
+     * Only to be used for start of every turn and for draw action
+     *
+     * @param id
+     * @param trainSelection
+     * @return
+     */
     public boolean checkPlayable(int id, int trainSelection){
         if(trainSelection >= 5){return false;}
         ArrayList<Domino> currentHand = new ArrayList<Domino>();

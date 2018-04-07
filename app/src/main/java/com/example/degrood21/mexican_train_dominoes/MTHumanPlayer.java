@@ -46,10 +46,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     @Override
     public void receiveInfo(GameInfo info) {
 
-        /**
-         * This works in SlapJack but not working here
-         *
-         */
+        if(!(info instanceof DominoGameState)){
+
+            return;
+
+        }
+
         this.state = (DominoGameState) info;
 
     }

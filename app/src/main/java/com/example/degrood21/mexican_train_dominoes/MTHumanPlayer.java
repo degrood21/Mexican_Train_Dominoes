@@ -27,6 +27,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     private Activity myActivity;
 
+    private int selectedDomino;
+
     private ArrayList<ImageView> HandIVs = new ArrayList<ImageView>();
     private ArrayList<ImageView> PublicTrainIVs = new ArrayList<ImageView>();
     private ArrayList<ImageView> Player1TrainIVs = new ArrayList<ImageView>();
@@ -67,13 +69,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
 
         this.state = (DominoGameState) info;
-        //this.state = new DominoGameState();
+
 
         /**
          * Tests of how to draw the dominoes into the ImageViews
          *
          */
-        for(int i = state.Player1Hand.size(); i < 20; i++){
+        for (int i = 0; i < 20; i++) {
 
             HandIVs.get(i).setImageResource(R.color.green_playboard);
             HandIVs.get(i).getLayoutParams().width = 200;
@@ -86,18 +88,23 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
 
-        for (int i = 0; i < Player1TrainIVs.size(); i++) {
+        for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {
 
             Player1TrainIVs.get(i).setImageResource(R.color.green_playboard);
             Player1TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        for (int i = 0; i < state.Player1Train.size(); i++) {
+        if(state.Player1Train.size() != 0) {
+            int j = state.Player1Train.size()-1;
+            for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {
 
-            //if(state.PublicTrain.get())
-            Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(i).pictureID);
-            Player1TrainIVs.get(i).getLayoutParams().width = 200;
+                if(j >= 0){
+                    Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
+                    Player1TrainIVs.get(i).getLayoutParams().width = 200;
+                    j--;
+                }
 
+            }
         }
 
         for (int i = 0; i < Player2TrainIVs.size(); i++) {
@@ -287,11 +294,35 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
             }
         });
+
         p1Sixth.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
             public void onClick(View v) {
+
+            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)){
+
+                    state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 0 );
+                    sendInfo(state);
+                }
+
+
+            }
+        });
+
+        p2Sixth.setOnClickListener(new View.OnClickListener()
+
+        {
+            @Override
+            public void onClick(View v) {
+
+                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 1)){
+
+                    state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 1);
+                    sendInfo(state);
+
+                }
 
 
             }
@@ -303,6 +334,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
+                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 2)){
+
+                    state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 2);
+                    sendInfo(state);
+
+                }
+
             }
         });
 
@@ -311,6 +349,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         {
             @Override
             public void onClick(View v) {
+
+                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 3)){
+
+                    state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 3);
+                    sendInfo(state);
+
+                }
 
             }
         });
@@ -321,62 +366,70 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
+                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)){
+
+                    state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 4);
+                    sendInfo(state);
+
+                }
+
             }
         });
 
         //which domino in hand is selected
-        for(int i = 0; i < HandIVs.size(); i++) {
+
+        for (int i = 0; i < HandIVs.size(); i++) {
             HandIVs.get(i).setOnClickListener(new View.OnClickListener()
 
             {
                 @Override
                 public void onClick(View v) {
 
-                    for(int i = 0; i < HandIVs.size(); i++) {
+                    for (int i = 0; i < HandIVs.size(); i++) {
 
                         HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
 
                     }
 
-                    for(int i = 0; i < HandIVs.size(); i++) {
+                    Player1TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player2TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player3TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player4TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
+
+
+                    for (int i = 0; i < HandIVs.size(); i++) {
 
                         if (v == HandIVs.get(i)) {
 
+                            selectedDomino = i;
+
                             HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
 
-                            Player1TrainIVs.get(4).setImageResource(R.color.colorPrimary);
-                            Player1TrainIVs.get(4).getLayoutParams().height = 200;
 
-                            Player2TrainIVs.get(4).setImageResource(R.color.colorPrimary);
-                            Player2TrainIVs.get(4).getLayoutParams().height = 200;
-
-                            PublicTrainIVs.get(4).setImageResource(R.color.colorPrimary);
-                            PublicTrainIVs.get(4).getLayoutParams().height= 200;
-                            PublicTrainIVs.get(4).getLayoutParams().width= 200;
-
-
-                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)){
-                                Player1TrainIVs.get(4).setBackgroundResource(R.color.colorAccent);
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)) {
+                                Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player1TrainIVs.get(5).getLayoutParams().height = 50;
                                 //Player1TrainIVs.get(4).getLayoutParams().height = 200;
                                 //Player1TrainIVs.get(4).getLayoutParams().width = 200;
                             }
-                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)){
-                                Player2TrainIVs.get(4).setBackgroundResource(R.color.colorPrimary);
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)) {
+                                Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player2TrainIVs.get(5).getLayoutParams().height = 50;
                                 //Player2TrainIVs.get(4).getLayoutParams().height = 200;
                                 //Player2TrainIVs.get(4).getLayoutParams().width= 200;
                             }
-                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)){
-                                Player3TrainIVs.get(4).setImageResource(R.color.colorPrimary);
-                                Player3TrainIVs.get(4).getLayoutParams().height = 200;
-                                Player3TrainIVs.get(4).getLayoutParams().width = 200;
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)) {
+                                Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player3TrainIVs.get(5).getLayoutParams().height = 50;
                             }
-                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 3)){
-                                Player4TrainIVs.get(4).setImageResource(R.color.colorPrimary);
-                                Player4TrainIVs.get(4).getLayoutParams().height = 200;
-                                Player4TrainIVs.get(4).getLayoutParams().width = 200;
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 3)) {
+                                Player4TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player4TrainIVs.get(5).getLayoutParams().height = 50;
                             }
-                            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)){
-                                PublicTrainIVs.get(4).setBackgroundResource(R.color.colorPrimary);
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)) {
+                                PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                PublicTrainIVs.get(5).getLayoutParams().height = 50;
                                 //PublicTrainIVs.get(4).getLayoutParams().height= 200;
                                 //PublicTrainIVs.get(4).getLayoutParams().width= 200;
 
@@ -395,18 +448,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-
-        for(int i = 0; i < HandIVs.size(); i++){
-
-            if(view == HandIVs.get(i)){
-
-                HandIVs.get(i).getLayoutParams().width = 230;
-
-            }
-
-
-        }
-
 
     }
 }

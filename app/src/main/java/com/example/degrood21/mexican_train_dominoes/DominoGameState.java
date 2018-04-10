@@ -61,11 +61,6 @@ public class DominoGameState extends GameState {
 
         dealAction();
 
-        // TESTING FOR PLACE DOMINO
-        for (int i = 0; i < Player1Hand.size(); i++) {
-            placeDomino(0, Player1Hand.get(i), 4);
-        }
-
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
@@ -323,10 +318,9 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
+                        // does not need to return false in for loop since we check playable in humanPlayer
                         return true;
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
@@ -334,8 +328,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -348,8 +340,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -359,32 +349,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -398,8 +382,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -409,8 +391,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -422,8 +402,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -433,32 +411,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -472,8 +444,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -483,8 +453,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -496,8 +464,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -507,32 +473,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -546,8 +506,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -557,8 +515,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -570,8 +526,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -581,32 +535,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -620,8 +568,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -631,8 +577,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -644,8 +588,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -655,32 +597,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -696,8 +632,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -707,8 +641,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -720,8 +652,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -731,32 +661,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -770,8 +694,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -781,8 +703,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -794,8 +714,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -805,32 +723,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -844,8 +756,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -855,8 +765,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -868,8 +776,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -879,32 +785,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -918,8 +818,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -929,8 +827,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -942,8 +838,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -953,32 +847,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -992,8 +880,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1003,8 +889,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1016,8 +900,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1027,32 +909,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1068,8 +944,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1079,8 +953,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1092,8 +964,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1103,32 +973,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1142,8 +1006,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1153,8 +1015,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1166,8 +1026,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1177,32 +1035,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1216,8 +1068,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1227,8 +1077,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1240,8 +1088,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1251,32 +1097,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1290,8 +1130,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1301,8 +1139,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1314,8 +1150,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1325,32 +1159,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1364,8 +1192,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1375,8 +1201,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1388,8 +1212,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1399,32 +1221,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1440,8 +1256,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1451,8 +1265,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1464,8 +1276,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1475,32 +1285,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1514,8 +1318,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1525,8 +1327,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1538,8 +1338,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1549,32 +1347,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1588,8 +1380,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1599,8 +1389,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1612,8 +1400,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1623,32 +1409,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1662,8 +1442,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1673,8 +1451,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1686,8 +1462,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1697,32 +1471,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1736,8 +1504,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1747,8 +1513,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1760,8 +1524,6 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
@@ -1771,32 +1533,26 @@ public class DominoGameState extends GameState {
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
-                            } else {
-                                return false;
                             }
                         }
                         return true;

@@ -68,7 +68,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         this.state = (DominoGameState) info;
 
-
         /**
          * Tests of how to draw the dominoes into the ImageViews
          *

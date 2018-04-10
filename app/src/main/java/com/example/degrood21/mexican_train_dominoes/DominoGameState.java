@@ -2773,35 +2773,30 @@ public class DominoGameState extends GameState {
     public boolean drawAction(int id) {
 
         Random rand = new Random();
-        int randomIndex = rand.nextInt(PileofDominoes.size());
 
         if (PileofDominoes == null || PileofDominoes.size() == 0) {
             return false;
         } else {
+            int randomIndex = rand.nextInt(PileofDominoes.size());
             if (id == 0) {
-
                 Player1Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player1Public = true;
-                //if(checkPlayable(id, 0)){return true;}
                 return true;
             } else if (id == 1) {
                 Player2Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player2Public = true;
-                // if(checkPlayable(id, 0)){return true;}
                 return true;
             } else if (id == 2) {
                 Player3Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player3Public = true;
-                //if(checkPlayable(id, 0)){return true;}
                 return true;
             } else if (id == 3) {
                 Player4Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player4Public = true;
-                //if(checkPlayable(id, 0)){return true;}
                 return true;
             }
             return false;

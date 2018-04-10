@@ -179,7 +179,9 @@ public class MTComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
+
             sendInfo(mtState);
+
         } else {
             //intelligent implementation of computer player, for now does nothing.
 

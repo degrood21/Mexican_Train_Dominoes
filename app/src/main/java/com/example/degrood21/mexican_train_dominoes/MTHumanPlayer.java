@@ -92,14 +92,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             Player1TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if(state.Player1Train.size() != 0) {
-            int j = state.Player1Train.size()-1;
+        if (state.Player1Train.size() != 0) {
+            int j = state.Player1Train.size() - 1;
             for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {
 
-                if(j >= 0){
-                    Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
-                    Player1TrainIVs.get(i).getLayoutParams().width = 200;
-                    j--;
+                if (j >= 0) {
+                    if (state.Player1Train.get(j).rightSide == -1) {
+                        Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
+                        Player1TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player1TrainIVs.get(i).setRotation(180);
+                        j--;
+                    }else{
+                        Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
+                        Player1TrainIVs.get(i).getLayoutParams().width = 200;
+                        j--;
+                    }
                 }
 
             }
@@ -111,14 +118,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             Player2TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if(state.Player2Train.size() != 0) {
-            int j = state.Player2Train.size()-1;
+        if (state.Player2Train.size() != 0) {
+            int j = state.Player2Train.size() - 1;
             for (int i = Player2TrainIVs.size() - 2; i >= 0; i--) {
 
-                if(j >= 0){
-                    Player2TrainIVs.get(i).setImageResource(state.Player2Train.get(j).pictureID);
-                    Player2TrainIVs.get(i).getLayoutParams().width = 200;
-                    j--;
+                if (j >= 0) {
+                    if (state.Player2Train.get(j).rightSide == -1) {
+                        Player2TrainIVs.get(i).setImageResource(state.Player2Train.get(j).pictureID);
+                        Player2TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player2TrainIVs.get(i).setRotation(180);
+                        j--;
+                    } else{
+                        Player2TrainIVs.get(i).setImageResource(state.Player2Train.get(j).pictureID);
+                        Player2TrainIVs.get(i).getLayoutParams().width = 200;
+                        j--;
+                    }
                 }
 
             }
@@ -130,14 +144,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             Player3TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if(state.Player3Train.size() != 0) {
-            int j = state.Player3Train.size()-1;
+        if (state.Player3Train.size() != 0) {
+            int j = state.Player3Train.size() - 1;
             for (int i = Player3TrainIVs.size() - 2; i >= 0; i--) {
 
-                if(j >= 0){
-                    Player3TrainIVs.get(i).setImageResource(state.Player3Train.get(j).pictureID);
-                    Player3TrainIVs.get(i).getLayoutParams().width = 200;
-                    j--;
+                if (j >= 0) {
+                    if (state.Player3Train.get(j).rightSide == -1) {
+                        Player3TrainIVs.get(i).setImageResource(state.Player3Train.get(j).pictureID);
+                        Player3TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player3TrainIVs.get(i).setRotation(180);
+                        j--;
+                    } else {
+                        Player3TrainIVs.get(i).setImageResource(state.Player3Train.get(j).pictureID);
+                        Player3TrainIVs.get(i).getLayoutParams().width = 200;
+                        j--;
+                    }
                 }
 
             }
@@ -149,65 +170,100 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             Player4TrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if(state.Player4Train.size() != 0) {
-            int j = state.Player4Train.size()-1;
+        if (state.Player4Train.size() != 0) {
+            int j = state.Player4Train.size() - 1;
             for (int i = Player4TrainIVs.size() - 2; i >= 0; i--) {
 
-                if(j >= 0){
-                    Player4TrainIVs.get(i).setImageResource(state.Player4Train.get(j).pictureID);
-                    Player4TrainIVs.get(i).getLayoutParams().width = 200;
-                    j--;
+                if (j >= 0) {
+                    if (state.Player4Train.get(j).rightSide == -1) {
+                        Player4TrainIVs.get(i).setImageResource(state.Player4Train.get(j).pictureID);
+                        Player4TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player4TrainIVs.get(i).setRotation(180);
+                        j--;
+                    } else {
+                        Player4TrainIVs.get(i).setImageResource(state.Player4Train.get(j).pictureID);
+                        Player4TrainIVs.get(i).getLayoutParams().width = 200;
+                        j--;
+                    }
                 }
 
             }
         }
 
 
-        for (int i = PublicTrainIVs.size() - 2; i >= 0; i--) {
+        for (
+                int i = PublicTrainIVs.size() - 2;
+                i >= 0; i--)
+
+        {
 
             PublicTrainIVs.get(i).setImageResource(R.color.green_playboard);
             PublicTrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if(state.PublicTrain.size() != 0) {
-            int j = state.PublicTrain.size()-1;
+        if (state.PublicTrain.size() != 0)
+
+        {
+            int j = state.PublicTrain.size() - 1;
             for (int i = PublicTrainIVs.size() - 2; i >= 0; i--) {
 
-                if(j >= 0){
-                    PublicTrainIVs.get(i).setImageResource(state.PublicTrain.get(j).pictureID);
-                    PublicTrainIVs.get(i).getLayoutParams().width = 200;
-                    j--;
+                if (j >= 0) {
+                    if (state.PublicTrain.get(j).rightSide == -1) {
+                        PublicTrainIVs.get(i).setImageResource(state.PublicTrain.get(j).pictureID);
+                        PublicTrainIVs.get(i).getLayoutParams().width = 200;
+                        PublicTrainIVs.get(i).setRotation(180);
+                        j--;
+                    } else{
+                        PublicTrainIVs.get(i).setImageResource(state.PublicTrain.get(j).pictureID);
+                        PublicTrainIVs.get(i).getLayoutParams().width = 200;
+                        j--;
+                    }
                 }
 
             }
         }
 
-        if(state.player1Public){
+        if (state.player1Public)
+
+        {
             turnMarker1.setImageResource(R.drawable.trainmarker);
             turnMarker1.getLayoutParams().width = 40;
-        }
-        else{
+        } else
+
+        {
             turnMarker1.setImageResource(R.color.green_playboard);
             turnMarker1.getLayoutParams().width = 40;
         }
-        if(state.player2Public){
+        if (state.player2Public)
+
+        {
             turnMarker2.setImageResource(R.drawable.trainmarker);
             turnMarker2.getLayoutParams().width = 40;
-        }else{
+        } else
+
+        {
             turnMarker2.setImageResource(R.color.green_playboard);
             turnMarker2.getLayoutParams().width = 40;
         }
-        if(state.player3Public){
+        if (state.player3Public)
+
+        {
             turnMarker3.setImageResource(R.drawable.trainmarker);
             turnMarker3.getLayoutParams().width = 40;
-        }else{
+        } else
+
+        {
             turnMarker3.setImageResource(R.color.green_playboard);
             turnMarker3.getLayoutParams().width = 40;
         }
-        if(state.player4Public){
+        if (state.player4Public)
+
+        {
             turnMarker4.setImageResource(R.drawable.trainmarker);
             turnMarker4.getLayoutParams().width = 40;
-        }else{
+        } else
+
+        {
             turnMarker4.setImageResource(R.color.green_playboard);
             turnMarker4.getLayoutParams().width = 40;
         }
@@ -344,12 +400,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 state.drawAction(0);
-                if(state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size()-1), 0)){
-                    state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size()-1), 0);
+                if (state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0)) {
+                    state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0);
                     state.player1Public = false;
                     state.playerTurn++;
-                }
-                else{
+                } else {
                     state.playerTurn++;
                 }
 
@@ -364,15 +419,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-            if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)){
+                if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)) {
 
-                    if(state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 0 )){
+                    if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)) {
 
                         state.player1Public = false;
-                        if(state.playerTurn >= 3) {
+                        if (state.playerTurn >= 3) {
                             state.playerTurn = 0;
-                        }
-                        else{
+                        } else {
                             state.playerTurn++;
                         }
 
@@ -390,19 +444,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if(state.playerTurn == 0){
-                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 1)) {
+                if (state.playerTurn == 0) {
+                    if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 1)) {
 
-                    if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 1)) {
+                        if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 1)) {
 
-                        if (state.playerTurn >= 3) {
-                            state.playerTurn = 0;
-                        } else {
-                            state.playerTurn++;
+                            if (state.playerTurn >= 3) {
+                                state.playerTurn = 0;
+                            } else {
+                                state.playerTurn++;
+                            }
+
                         }
-
                     }
-                }
                     sendInfo(state);
 
                 }
@@ -417,19 +471,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if(state.playerTurn == 0){
-                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 2)) {
+                if (state.playerTurn == 0) {
+                    if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 2)) {
 
-                    if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 2)) {
+                        if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 2)) {
 
-                        if (state.playerTurn >= 3) {
-                            state.playerTurn = 0;
-                        } else {
-                            state.playerTurn++;
+                            if (state.playerTurn >= 3) {
+                                state.playerTurn = 0;
+                            } else {
+                                state.playerTurn++;
+                            }
+
                         }
-
                     }
-                }
                     sendInfo(state);
 
                 }
@@ -443,19 +497,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if(state.playerTurn == 0){
-                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 3)) {
+                if (state.playerTurn == 0) {
+                    if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 3)) {
 
-                    if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 3)) {
+                        if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 3)) {
 
-                        if (state.playerTurn >= 3) {
-                            state.playerTurn = 0;
-                        } else {
-                            state.playerTurn++;
+                            if (state.playerTurn >= 3) {
+                                state.playerTurn = 0;
+                            } else {
+                                state.playerTurn++;
+                            }
+
                         }
-
                     }
-                }
                     sendInfo(state);
 
                 }
@@ -469,19 +523,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if(state.playerTurn == 0){
-                if(state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
+                if (state.playerTurn == 0) {
+                    if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 
-                    if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
+                        if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 
-                        if (state.playerTurn >= 3) {
-                            state.playerTurn = 0;
-                        } else {
-                            state.playerTurn++;
+                            if (state.playerTurn >= 3) {
+                                state.playerTurn = 0;
+                            } else {
+                                state.playerTurn++;
+                            }
+
                         }
-
                     }
-                }
                     sendInfo(state);
 
                 }

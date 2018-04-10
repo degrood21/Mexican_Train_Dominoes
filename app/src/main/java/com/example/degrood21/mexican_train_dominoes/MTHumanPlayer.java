@@ -186,17 +186,30 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             turnMarker1.setImageResource(R.drawable.trainmarker);
             turnMarker1.getLayoutParams().width = 40;
         }
+        else{
+            turnMarker1.setImageResource(R.color.green_playboard);
+            turnMarker1.getLayoutParams().width = 40;
+        }
         if(state.player2Public){
             turnMarker2.setImageResource(R.drawable.trainmarker);
+            turnMarker2.getLayoutParams().width = 40;
+        }else{
+            turnMarker2.setImageResource(R.color.green_playboard);
             turnMarker2.getLayoutParams().width = 40;
         }
         if(state.player3Public){
             turnMarker3.setImageResource(R.drawable.trainmarker);
             turnMarker3.getLayoutParams().width = 40;
+        }else{
+            turnMarker3.setImageResource(R.color.green_playboard);
+            turnMarker3.getLayoutParams().width = 40;
         }
         if(state.player4Public){
-            turnMarker3.setImageResource(R.drawable.trainmarker);
-            turnMarker3.getLayoutParams().width = 40;
+            turnMarker4.setImageResource(R.drawable.trainmarker);
+            turnMarker4.getLayoutParams().width = 40;
+        }else{
+            turnMarker4.setImageResource(R.color.green_playboard);
+            turnMarker4.getLayoutParams().width = 40;
         }
 
         roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
@@ -333,6 +346,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 state.drawAction(0);
                 if(state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size()-1), 0)){
                     state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size()-1), 0);
+                    state.player1Public = false;
                     state.playerTurn++;
                 }
                 else{
@@ -354,6 +368,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                     if(state.placeDomino(state.playerTurn,state.Player1Hand.get(selectedDomino), 0 )){
 
+                        state.player1Public = false;
                         if(state.playerTurn >= 3) {
                             state.playerTurn = 0;
                         }

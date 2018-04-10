@@ -26,6 +26,8 @@ public class DominoGameState extends GameState {
     ArrayList<Domino> Player3Train = new ArrayList<>();
     ArrayList<Domino> Player4Train = new ArrayList<>();
     ArrayList<Domino> PublicTrain = new ArrayList<>();
+    ArrayList<Domino> currentHand = new ArrayList<Domino>();
+    ArrayList<Domino> currentTrain = new ArrayList<Domino>();
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
     boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
@@ -375,7 +377,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
-                if (Player2Train == null) {
+                if (Player2Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
@@ -437,7 +439,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
-                if (Player3Train == null) {
+                if (Player3Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
@@ -499,7 +501,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
@@ -561,7 +563,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 4) { // Public Train
-                if (PublicTrain == null) {
+                if (PublicTrain.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
@@ -625,7 +627,7 @@ public class DominoGameState extends GameState {
             }
         } else if (playerID == 1) { // If Player 2
             if (player1Public == true && trainSelection == 0) { // Player 1 Train
-                if (Player1Train == null) {
+                if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
@@ -687,7 +689,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 1) { // Player 2 Train
-                if (Player2Train == null) {
+                if (Player2Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
@@ -749,7 +751,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
-                if (Player3Train == null) {
+                if (Player3Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
@@ -811,7 +813,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
@@ -873,7 +875,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 4) { // Public Train
-                if (PublicTrain == null) {
+                if (PublicTrain.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
@@ -937,7 +939,7 @@ public class DominoGameState extends GameState {
             }
         } else if (playerID == 2) { // If Player 3
             if (player1Public == true && trainSelection == 0) { // Player 1 Train
-                if (Player1Train == null) {
+                if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
@@ -999,7 +1001,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
-                if (Player2Train == null) {
+                if (Player2Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
@@ -1061,7 +1063,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 2) { // Player 3 Train
-                if (Player3Train == null) {
+                if (Player3Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
@@ -1123,7 +1125,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
@@ -1185,7 +1187,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 4) { // Public Train
-                if (PublicTrain == null) {
+                if (PublicTrain.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
@@ -1249,7 +1251,7 @@ public class DominoGameState extends GameState {
             }
         } else if (playerID == 3) { // If Player 4
             if (player1Public == true && trainSelection == 0) { // Player 1 Train
-                if (Player1Train == null) {
+                if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
@@ -1311,7 +1313,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
-                if (Player2Train == null) {
+                if (Player2Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
@@ -1373,7 +1375,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
-                if (Player3Train == null) {
+                if (Player3Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
@@ -1435,7 +1437,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
@@ -1497,7 +1499,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 4) { // Public Train
-                if (PublicTrain == null) {
+                if (PublicTrain.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
@@ -1634,7 +1636,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player2Public == true && trainSelection == 1) { // Player 2 Train
-                if (Player2Train == null) {
+                if (Player2Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
@@ -1702,7 +1704,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player3Public == true && trainSelection == 2) { // Player 3 Train
-                if (Player3Train == null) {
+                if (Player3Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
@@ -1782,7 +1784,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
@@ -2082,7 +2084,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (player4Public == true && trainSelection == 3) { // Player 4 Train
-                if (Player4Train == null) {
+                if (Player4Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
@@ -2776,7 +2778,7 @@ public class DominoGameState extends GameState {
         Random rand = new Random();
         int randomIndex = rand.nextInt(PileofDominoes.size());
 
-        if (PileofDominoes == null) {
+        if (PileofDominoes == null || PileofDominoes.size() == 0) {
             return false;
         } else {
             if (id == 0) {
@@ -2784,26 +2786,26 @@ public class DominoGameState extends GameState {
                 Player1Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player1Public = true;
-                if(checkPlayable(id, 0)){return true;}
-                return false;
+                //if(checkPlayable(id, 0)){return true;}
+                return true;
             } else if (id == 1) {
                 Player2Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player2Public = true;
-                if(checkPlayable(id, 0)){return true;}
-                return false;
+               // if(checkPlayable(id, 0)){return true;}
+                return true;
             } else if (id == 2) {
                 Player3Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player3Public = true;
-                if(checkPlayable(id, 0)){return true;}
-                return false;
+                //if(checkPlayable(id, 0)){return true;}
+                return true;
             } else if (id == 3) {
                 Player4Hand.add(PileofDominoes.get(randomIndex));
                 PileofDominoes.remove(randomIndex);
                 player4Public = true;
-                if(checkPlayable(id, 0)){return true;}
-                return false;
+                //if(checkPlayable(id, 0)){return true;}
+                return true;
             }
             return false;
         }
@@ -2818,8 +2820,6 @@ public class DominoGameState extends GameState {
      */
     public boolean checkPlayable(int id, int trainSelection){
         if(trainSelection >= 5){return false;}
-        ArrayList<Domino> currentHand = new ArrayList<Domino>();
-        ArrayList<Domino> currentTrain = new ArrayList<Domino>();
 
         if(id == 0){currentHand = Player1Hand;}
         else if(id == 1){currentHand = Player2Hand;}

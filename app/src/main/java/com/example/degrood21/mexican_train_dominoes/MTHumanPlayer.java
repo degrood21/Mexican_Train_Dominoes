@@ -92,14 +92,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
         if (state.Player1Train.size() != 0) {
-            int j = state.Player1Train.size() - 1;
-            for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {
+            int j = state.Player1Train.size() - 1;//j=4
+            for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {//i=3
 
                 if (j >= 0) {
                     if (state.Player1Train.get(j).rightSide == -1) {
                         Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
                         Player1TrainIVs.get(i).getLayoutParams().width = 200;
-                        Player1TrainIVs.get(i).setRotation(180);
+                        Player1TrainIVs.get(i).setRotation(360);
                         j--;
                     } else {
                         Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);

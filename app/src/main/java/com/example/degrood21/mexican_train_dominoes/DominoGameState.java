@@ -1607,7 +1607,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -1619,7 +1619,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -1675,7 +1675,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -1687,7 +1687,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -1755,7 +1755,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -1767,7 +1767,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -1835,7 +1835,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -1847,7 +1847,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -1889,7 +1889,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -1901,7 +1901,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -1947,7 +1947,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -1959,7 +1959,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -2001,7 +2001,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2013,7 +2013,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2055,7 +2055,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2067,7 +2067,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2135,7 +2135,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2147,7 +2147,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2189,7 +2189,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -2201,7 +2201,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -2247,7 +2247,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -2259,7 +2259,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -2301,7 +2301,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2313,7 +2313,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2355,7 +2355,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2367,7 +2367,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2409,7 +2409,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2421,7 +2421,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2463,7 +2463,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -2475,7 +2475,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -2521,7 +2521,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -2533,7 +2533,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
@@ -2575,7 +2575,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2587,7 +2587,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
@@ -2629,7 +2629,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2641,7 +2641,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
@@ -2683,7 +2683,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2695,7 +2695,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
@@ -2737,7 +2737,7 @@ public class DominoGameState extends GameState {
                         return true;
                     }
                 } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
@@ -2749,7 +2749,7 @@ public class DominoGameState extends GameState {
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;

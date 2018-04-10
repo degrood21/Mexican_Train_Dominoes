@@ -302,6 +302,13 @@ public class DominoGameState extends GameState {
     public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) { //Dylan
 
         if (selectedDomino.leftSide == selectedDomino.rightSide) {
+
+            if(trainSelection == 0 && Player1Train.size() == 0){ return false; }
+            if(trainSelection == 1 && Player2Train.size() == 0){ return false; }
+            if(trainSelection == 2 && Player3Train.size() == 0){ return false; }
+            if(trainSelection == 3 && Player4Train.size() == 0){ return false; }
+            if(trainSelection == 4 && PublicTrain.size() == 0){ return false; }
+
             if (doublePlay(playerID, selectedDomino, trainSelection)) {
 
                 playerTurn--;
@@ -719,7 +726,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
-                        Player4Train.add(selectedDomino);
+                        Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player2Hand.size(); i++) {
                             if (Player2Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player2Hand.remove(i);
@@ -1343,7 +1350,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
-                        Player4Train.add(selectedDomino);
+                        Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player4Hand.size(); i++) {
                             if (Player4Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player4Hand.remove(i);
@@ -1989,7 +1996,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
-                        Player4Train.add(playedDouble);
+                        Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
                         for (int i = 0; i < Player2Hand.size(); i++) {
@@ -2563,7 +2570,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
-                        Player4Train.add(playedDouble);
+                        Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
                         for (int i = 0; i < Player4Hand.size(); i++) {
@@ -2926,6 +2933,21 @@ public class DominoGameState extends GameState {
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;
             } else if (currentTrain.size() == 0) {
+                returnCheck = false;
+            } else if (selectedDomino.rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                    || selectedDomino.rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                returnCheck = true;
+            } else if (selectedDomino.leftSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                    || selectedDomino.leftSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                returnCheck = true;
+
+            }
+        }
+        else if ((trainSelection == 4) || (id == playerTurn && trainSelection == 4)) {
+            if (currentTrain.size() == 1 && (selectedDomino.rightSide == round
+                    || selectedDomino.leftSide == round)) {
+                returnCheck = true;
+            } else if (currentTrain.size() == 1) {
                 returnCheck = false;
             } else if (selectedDomino.rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
                     || selectedDomino.rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {

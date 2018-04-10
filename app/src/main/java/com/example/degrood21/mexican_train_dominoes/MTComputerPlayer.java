@@ -214,7 +214,6 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                 mtState.player4Public = false;
                                 mtState.playerTurn = 0;
                             } else {
-                                mtState.player4Public = true;
                                 mtState.playerTurn = 0;
                             }
                         }

@@ -532,7 +532,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == 0) {
                     if (state.doublePlay) {
                         doubleHelper();
-                    } else if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
+                    }
+                    else if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 
                         if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 

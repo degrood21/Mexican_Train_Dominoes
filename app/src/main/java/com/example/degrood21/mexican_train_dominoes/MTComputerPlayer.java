@@ -81,17 +81,28 @@ public class MTComputerPlayer extends GameComputerPlayer {
                     //if dominoes
                     for (int i = 0; i < mtState.Player2Hand.size(); i++) {
                         if (mtState.playableTrains(1,mtState.Player2Hand.get(i), 4)
-                                || mtState.playableTrains(1,mtState.Player2Hand.get(i), 1)) {
+                                || mtState.playableTrains(1,mtState.Player2Hand.get(i), 1)
+                                || mtState.playableTrains(1,mtState.Player2Hand.get(i), 0)
+                                || mtState.playableTrains(1,mtState.Player2Hand.get(i), 2)
+                                || mtState.playableTrains(1,mtState.Player2Hand.get(i), 3)) {
 
-                            if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 1)){
-                                mtState.player2Public = false;
+                            if(mtState.doublePlay){
+                                if(mtState.placeDomino(1, mtState.Player2Hand.get(i), mtState.doublePlayTrain)){
+                                    mtState.doublePlay = false;
+                                    mtState.playerTurn++;
+                                }
                             }
-                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 4)){}
+                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 1)){
+                                mtState.player2Public = false;
+                                mtState.playerTurn++;
+                            }
+                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 2)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 3)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 4)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 0)){mtState.playerTurn++;}
 
                             if (mtState.playerTurn >= 3) {
                                 mtState.playerTurn = 0;
-                            } else {
-                                mtState.playerTurn++;
                             }
                             break;
                         }
@@ -99,12 +110,17 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
                     if (mtState.playerTurn == 1) {
 
-                        mtState.drawAction(1);
-                        if (mtState.playableTrains(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1)) {
-                            mtState.placeDomino(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1);
-                            mtState.player2Public = false;
-                            mtState.playerTurn++;
-                        } else {
+                        if(mtState.drawAction(1)) {
+                            if (mtState.playableTrains(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1)) {
+                                mtState.placeDomino(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1);
+                                mtState.player2Public = false;
+                                mtState.playerTurn++;
+                            } else {
+                                mtState.playerTurn++;
+                            }
+                        }
+                        else{
+                            mtState.player2Public = true;
                             mtState.playerTurn++;
                         }
 
@@ -116,30 +132,43 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
                     for (int i = 0; i < mtState.Player3Hand.size(); i++) {
                         if (mtState.playableTrains(2,mtState.Player3Hand.get(i), 4)
-                                || mtState.playableTrains(2,mtState.Player3Hand.get(i), 2)) {
+                                || mtState.playableTrains(2,mtState.Player3Hand.get(i), 2)
+                                || mtState.playableTrains(2,mtState.Player3Hand.get(i), 0)
+                                || mtState.playableTrains(2,mtState.Player3Hand.get(i), 3)
+                                || mtState.playableTrains(2,mtState.Player3Hand.get(i), 1)) {
 
-                            if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 2)){
-                                mtState.player3Public = false;
+                            if(mtState.doublePlay){
+                                if(mtState.placeDomino(2, mtState.Player3Hand.get(i), mtState.doublePlayTrain)){
+                                    mtState.doublePlay = false;
+                                    mtState.playerTurn++;
+                                }
                             }
-                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 4)){}
-
-                            if (mtState.playerTurn >= 3) {
-                                mtState.playerTurn = 0;
-                            } else {
+                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 2)){
+                                mtState.player3Public = false;
                                 mtState.playerTurn++;
                             }
+                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 4)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 3)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 1)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 0)){mtState.playerTurn++;}
+
                             break;
                         }
                     }
 
                     if (mtState.playerTurn == 2) {
 
-                        mtState.drawAction(2);
-                        if (mtState.playableTrains(2, mtState.Player3Hand.get(mtState.Player3Hand.size() - 1), 2)) {
-                            mtState.placeDomino(2, mtState.Player3Hand.get(mtState.Player3Hand.size() - 1), 2);
-                            mtState.player3Public = false;
-                            mtState.playerTurn++;
-                        } else {
+                        if(mtState.drawAction(2)) {
+                            if (mtState.playableTrains(2, mtState.Player3Hand.get(mtState.Player3Hand.size() - 1), 2)) {
+                                mtState.placeDomino(2, mtState.Player3Hand.get(mtState.Player3Hand.size() - 1), 2);
+                                mtState.player3Public = false;
+                                mtState.playerTurn++;
+                            } else {
+                                mtState.playerTurn++;
+                            }
+                        }
+                        else{
+                            mtState.player3Public = true;
                             mtState.playerTurn++;
                         }
 
@@ -150,29 +179,47 @@ public class MTComputerPlayer extends GameComputerPlayer {
                 if (mtState.Player4Hand.size() > 0 && playerNum == 3) {
                     for (int i = 0; i < mtState.Player4Hand.size(); i++) {
                         if (mtState.playableTrains(3,mtState.Player4Hand.get(i), 4)
-                                || mtState.playableTrains(3,mtState.Player4Hand.get(i), 3)) {
+                                || mtState.playableTrains(3,mtState.Player4Hand.get(i), 3)
+                                || mtState.playableTrains(3,mtState.Player4Hand.get(i), 0)
+                                || mtState.playableTrains(3,mtState.Player4Hand.get(i), 2)
+                                || mtState.playableTrains(3,mtState.Player4Hand.get(i), 1)) {
 
-                            if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 3)){
-                                mtState.player4Public = false;
+                            if(mtState.doublePlay){
+                                if(mtState.placeDomino(3, mtState.Player4Hand.get(i), mtState.doublePlayTrain)){
+                                    mtState.doublePlay = false;
+                                    mtState.playerTurn++;
+                                }
                             }
-                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 4)){}
+                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 3)){
+                                mtState.player4Public = false;
+                                mtState.playerTurn++;
+                            }
+                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 4)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 1)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 2)){mtState.playerTurn++;}
+                            else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 0)){mtState.playerTurn++;}
 
                             if (mtState.playerTurn >= 3) {
                                 mtState.playerTurn = 0;
-                            } else {
-                                mtState.playerTurn++;
                             }
+
                             break;
                         }
                     }
                     if (mtState.playerTurn == 3) {
 
-                        mtState.drawAction(3);
-                        if (mtState.playableTrains(3, mtState.Player4Hand.get(mtState.Player4Hand.size() - 1), 3)) {
-                            mtState.placeDomino(3, mtState.Player4Hand.get(mtState.Player4Hand.size() - 1), 3);
-                            mtState.player4Public = false;
-                            mtState.playerTurn = 0;
-                        } else {
+                        if(mtState.drawAction(3)) {
+                            if (mtState.playableTrains(3, mtState.Player4Hand.get(mtState.Player4Hand.size() - 1), 3)) {
+                                mtState.placeDomino(3, mtState.Player4Hand.get(mtState.Player4Hand.size() - 1), 3);
+                                mtState.player4Public = false;
+                                mtState.playerTurn = 0;
+                            } else {
+                                mtState.player4Public = true;
+                                mtState.playerTurn = 0;
+                            }
+                        }
+                        else{
+                            mtState.player4Public = true;
                             mtState.playerTurn = 0;
                         }
 

@@ -30,6 +30,57 @@ public class MTLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         //If the round is not the last, then decide who won the round and reset.
+        if(state.PileofDominoes.size() == 0){
+
+            if(!state.checkPlayable(0,0) && !state.checkPlayable(1,0)
+                    && !state.checkPlayable(2,0) && !state.checkPlayable(3,0)){
+                for(int i = 0; i < state.Player1Hand.size(); i++){
+                    state.player1Score += state.Player1Hand.get(i).rightSide + state.Player1Hand.get(i).leftSide;
+                }
+                for(int i = 0; i < state.Player2Hand.size(); i++){
+                    state.player2Score += state.Player2Hand.get(i).rightSide + state.Player2Hand.get(i).leftSide;
+                }
+                for(int i = 0; i < state.Player3Hand.size(); i++){
+                    state.player3Score += state.Player3Hand.get(i).rightSide + state.Player3Hand.get(i).leftSide;
+                }
+                for(int i = 0; i < state.Player4Hand.size(); i++){
+                    state.player4Score += state.Player4Hand.get(i).rightSide + state.Player4Hand.get(i).leftSide;
+                }
+
+                int less1, less2;
+                if(state.player1Score < state.player2Score){
+                    less1 = state.player1Score;
+                }
+                else{
+                    less1 = state.player2Score;
+                }
+
+                if(state.player3Score < state.player4Score){
+                    less2 = state.player3Score;
+                }
+                else{
+                    less2 = state.player4Score;
+                }
+
+                if(less1 < less2){
+                    if(less1 == state.player1Score){
+                        return "Player 1" +" won the Round";
+                    }
+                    else{
+                        return "Player 2" +" won the Round";
+                    }
+                }
+                else{
+                    if(less2 == state.player3Score){
+                        return "Player 3" +" won the Round";
+                    }
+                    else{
+                        return "Player 4" +" won the Round";
+                    }
+                }
+            }
+
+        }
         if(state.round > 0) {
             //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
             //in their hand and won the round.

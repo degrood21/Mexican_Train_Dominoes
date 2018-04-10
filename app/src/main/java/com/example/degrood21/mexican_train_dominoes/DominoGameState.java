@@ -304,6 +304,7 @@ public class DominoGameState extends GameState {
         if (selectedDomino.leftSide == selectedDomino.rightSide) {
             if (doublePlay(playerID, selectedDomino, trainSelection)) {
 
+                playerTurn--;
                 return true;
 
             } else {
@@ -406,7 +407,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
-                        Player4Train.add(selectedDomino);
+                        Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player1Hand.size(); i++) {
                             if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player1Hand.remove(i);
@@ -1030,7 +1031,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
-                        Player4Train.add(selectedDomino);
+                        Player2Train.add(selectedDomino);
                         for (int i = 0; i < Player3Hand.size(); i++) {
                             if (Player3Hand.get(i).pictureID == selectedDomino.pictureID) {
                                 Player3Hand.remove(i);
@@ -1662,7 +1663,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
-                        Player4Train.add(playedDouble);
+                        Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
                         for (int i = 0; i < Player1Hand.size(); i++) {
@@ -2288,7 +2289,7 @@ public class DominoGameState extends GameState {
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
                         playedDouble.leftSide = -1;
-                        Player4Train.add(playedDouble);
+                        Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
                         for (int i = 0; i < Player3Hand.size(); i++) {

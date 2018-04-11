@@ -122,6 +122,9 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                     mtState.doublePlay = false;
                                     mtState.playerTurn++;
                                 }
+                                else{
+                                    mtState.player2Public = true;
+                                }
                             }
                             else if(mtState.placeDomino(1, mtState.Player2Hand.get(i), 1)){
                                 mtState.player2Public = false;
@@ -173,6 +176,9 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                     mtState.doublePlay = false;
                                     mtState.playerTurn++;
                                 }
+                                else{
+                                    mtState.player3Public = true;
+                                }
                             }
                             else if(mtState.placeDomino(2, mtState.Player3Hand.get(i), 2)){
                                 mtState.player3Public = false;
@@ -219,6 +225,9 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                 if(mtState.placeDomino(3, mtState.Player4Hand.get(i), mtState.doublePlayTrain)){
                                     mtState.doublePlay = false;
                                     mtState.playerTurn++;
+                                }
+                                else{
+                                    mtState.player4Public = true;
                                 }
                             }
                             else if(mtState.placeDomino(3, mtState.Player4Hand.get(i), 3)){

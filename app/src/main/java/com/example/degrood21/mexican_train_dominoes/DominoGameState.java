@@ -2886,7 +2886,7 @@ public class DominoGameState extends GameState {
         }
 
 
-        if ((player1Public == true && trainSelection == 0) || (id == playerTurn && trainSelection == 0)) {
+        if ((player1Public == true && trainSelection == 0) || (id == 0 && trainSelection == 0)) {
             if (currentTrain.size() == 0 && (selectedDomino.rightSide == round
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;
@@ -2900,7 +2900,7 @@ public class DominoGameState extends GameState {
                 returnCheck = true;
 
             }
-        } else if ((player2Public == true && trainSelection == 1) || (id == playerTurn && trainSelection == 1)) {
+        } else if ((player2Public == true && trainSelection == 1) || (id == 1 && trainSelection == 1)) {
             if (currentTrain.size() == 0 && (selectedDomino.rightSide == round
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;
@@ -2914,7 +2914,7 @@ public class DominoGameState extends GameState {
                 returnCheck = true;
 
             }
-        } else if ((player3Public == true && trainSelection == 2) || (id == playerTurn && trainSelection == 2)) {
+        } else if ((player3Public == true && trainSelection == 2) || (id == 2 && trainSelection == 2)) {
             if (currentTrain.size() == 0 && (selectedDomino.rightSide == round
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;
@@ -2928,7 +2928,7 @@ public class DominoGameState extends GameState {
                 returnCheck = true;
 
             }
-        } else if ((player4Public == true && trainSelection == 3) || (id == playerTurn && trainSelection == 3)) {
+        } else if ((player4Public == true && trainSelection == 3) || (id == 3 && trainSelection == 3)) {
             if (currentTrain.size() == 0 && (selectedDomino.rightSide == round
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;
@@ -2943,7 +2943,7 @@ public class DominoGameState extends GameState {
 
             }
         }
-        else if ((trainSelection == 4) || (id == playerTurn && trainSelection == 4)) {
+        else if ((trainSelection == 4)) {
             if (currentTrain.size() == 1 && (selectedDomino.rightSide == round
                     || selectedDomino.leftSide == round)) {
                 returnCheck = true;

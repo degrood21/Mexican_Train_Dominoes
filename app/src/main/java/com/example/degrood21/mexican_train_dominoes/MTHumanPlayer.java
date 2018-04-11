@@ -190,11 +190,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
 
 
-        for (
-                int i = PublicTrainIVs.size() - 2;
-                i >= 0; i--)
-
-        {
+        for (int i = PublicTrainIVs.size() - 2; i >= 0; i--) {
 
             PublicTrainIVs.get(i).setImageResource(R.color.green_playboard);
             PublicTrainIVs.get(i).getLayoutParams().width = 200;
@@ -532,8 +528,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == 0) {
                     if (state.doublePlay) {
                         doubleHelper();
-                    }
-                    else if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
+                    } else if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 
                         if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 4)) {
 
@@ -550,80 +545,80 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 sendInfo(state);
 
             }
-    });
+        });
 
-    //which domino in hand is selected
+        //which domino in hand is selected
 
-        for(
-    int i = 0; i<HandIVs.size();i++)
-
-    {
-        HandIVs.get(i).setOnClickListener(new View.OnClickListener()
+        for (
+                int i = 0; i < HandIVs.size(); i++)
 
         {
-            @Override
-            public void onClick(View v) {
+            HandIVs.get(i).setOnClickListener(new View.OnClickListener()
 
-                for (int i = 0; i < HandIVs.size(); i++) {
+            {
+                @Override
+                public void onClick(View v) {
 
-                    HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
+                    for (int i = 0; i < HandIVs.size(); i++) {
 
-                }
+                        HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
 
-                Player1TrainIVs.get(5).setImageResource(R.color.green_playboard);
-                Player2TrainIVs.get(5).setImageResource(R.color.green_playboard);
-                Player3TrainIVs.get(5).setImageResource(R.color.green_playboard);
-                Player4TrainIVs.get(5).setImageResource(R.color.green_playboard);
-                PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    }
 
-
-                for (int i = 0; i < HandIVs.size(); i++) {
-
-                    if (v == HandIVs.get(i)) {
-
-                        selectedDomino = i;
-
-                        HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
+                    Player1TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player2TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player3TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    Player4TrainIVs.get(5).setImageResource(R.color.green_playboard);
+                    PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
 
 
-                        if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)) {
-                            Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                            Player1TrainIVs.get(5).getLayoutParams().height = 50;
-                            //Player1TrainIVs.get(4).getLayoutParams().height = 200;
-                            //Player1TrainIVs.get(4).getLayoutParams().width = 200;
-                        }
-                        if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)) {
-                            Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                            Player2TrainIVs.get(5).getLayoutParams().height = 50;
-                            //Player2TrainIVs.get(4).getLayoutParams().height = 200;
-                            //Player2TrainIVs.get(4).getLayoutParams().width= 200;
-                        }
-                        if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)) {
-                            Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                            Player3TrainIVs.get(5).getLayoutParams().height = 50;
-                        }
-                        if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 3)) {
-                            Player4TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                            Player4TrainIVs.get(5).getLayoutParams().height = 50;
-                        }
-                        if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)) {
-                            PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                            PublicTrainIVs.get(5).getLayoutParams().height = 50;
-                            //PublicTrainIVs.get(4).getLayoutParams().height= 200;
-                            //PublicTrainIVs.get(4).getLayoutParams().width= 200;
+                    for (int i = 0; i < HandIVs.size(); i++) {
+
+                        if (v == HandIVs.get(i)) {
+
+                            selectedDomino = i;
+
+                            HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
+
+
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)) {
+                                Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player1TrainIVs.get(5).getLayoutParams().height = 50;
+                                //Player1TrainIVs.get(4).getLayoutParams().height = 200;
+                                //Player1TrainIVs.get(4).getLayoutParams().width = 200;
+                            }
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)) {
+                                Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player2TrainIVs.get(5).getLayoutParams().height = 50;
+                                //Player2TrainIVs.get(4).getLayoutParams().height = 200;
+                                //Player2TrainIVs.get(4).getLayoutParams().width= 200;
+                            }
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)) {
+                                Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player3TrainIVs.get(5).getLayoutParams().height = 50;
+                            }
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 3)) {
+                                Player4TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                Player4TrainIVs.get(5).getLayoutParams().height = 50;
+                            }
+                            if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)) {
+                                PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                PublicTrainIVs.get(5).getLayoutParams().height = 50;
+                                //PublicTrainIVs.get(4).getLayoutParams().height= 200;
+                                //PublicTrainIVs.get(4).getLayoutParams().width= 200;
+
+                            }
 
                         }
 
                     }
 
                 }
+            });
 
-            }
-        });
+        }
 
     }
-
-}
 
     public void doubleHelper() {
 

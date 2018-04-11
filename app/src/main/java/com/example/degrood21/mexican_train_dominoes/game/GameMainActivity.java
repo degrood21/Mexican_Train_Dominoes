@@ -111,7 +111,7 @@ View.OnClickListener {
 	 * @return a new, com.example.degrood21.mexican_train_dominoes.game-specific instance of a sub-class of the LocalGame
 	 *         class.
 	 */
-	public abstract LocalGame createLocalGame();
+	public abstract LocalGame createLocalGame(int numberOfPlayers);
 
 	/**
 	 * Creates a "proxy" com.example.degrood21.mexican_train_dominoes.game that acts as an intermediary between a local
@@ -264,7 +264,7 @@ View.OnClickListener {
 		// until further down so that we do not attempt to make the
 		// network connection until other errors are checked)
 		if (config.isLocal()) { // local com.example.degrood21.mexican_train_dominoes.game
-			game = createLocalGame();
+			game = createLocalGame(config.getNumPlayers());
 			// verify we have a com.example.degrood21.mexican_train_dominoes.game
 			if (game == null) {
 				return "Game creation failed.";

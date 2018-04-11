@@ -28,6 +28,7 @@ public class DominoGameState extends GameState {
     ArrayList<Domino> PublicTrain = new ArrayList<>();
     ArrayList<Domino> currentHand = new ArrayList<Domino>();
     ArrayList<Domino> currentTrain = new ArrayList<Domino>();
+    private int numPlayers;
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
     boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
@@ -36,8 +37,8 @@ public class DominoGameState extends GameState {
      * Default cstor
      * Sets all instance variables above accordingly
      */
-    public DominoGameState() {
-
+    public DominoGameState(int numberOfPlayers) {
+        numPlayers = numberOfPlayers;//used to determine how many players are playing
         ArrayList<Domino> allDominoes = new ArrayList<Domino>();
         DominoPile pile = new DominoPile();
         allDominoes = pile.setOfDominoes;
@@ -82,7 +83,8 @@ public class DominoGameState extends GameState {
      * @param newstateInstance newstateInstance is the state being passed in to copy
      */
     public DominoGameState(DominoGameState newstateInstance) {
-
+        //set the number of players in the game
+        numPlayers = newstateInstance.numPlayers;
         PileofDominoes = new ArrayList<>();
         for (int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
             int pID = newstateInstance.PileofDominoes.get(i).getPictureID();

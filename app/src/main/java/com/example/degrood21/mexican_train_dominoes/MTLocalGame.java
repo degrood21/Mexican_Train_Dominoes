@@ -12,12 +12,17 @@ import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
  */
 
 public class MTLocalGame extends LocalGame {
-
+    //Instance Variables
+    //Instance variable for the state of the game
     DominoGameState state;
 
-    public MTLocalGame() {
+    /**
+     * Constructor for the MTLocalGame
+     * @param numberOfPlayers
+     */
+    public MTLocalGame(int numberOfPlayers) {
 
-        state = new DominoGameState();
+        state = new DominoGameState(numberOfPlayers);
 
     }
 
@@ -119,7 +124,7 @@ public class MTLocalGame extends LocalGame {
                 return null;
             }
         }
-        return null;
+        return "continue game";
     }
 
     /**

@@ -60,8 +60,8 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
     }
 
     @Override
-    public LocalGame createLocalGame() {
-        return new MTLocalGame();
+    public LocalGame createLocalGame(int numberOfPlayers) {
+        return new MTLocalGame(numberOfPlayers);
     }
 
 }

@@ -104,6 +104,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     } else {
                         Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
                         Player1TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player1TrainIVs.get(i).setRotation(0);
                         j--;
                     }
                 }
@@ -118,7 +119,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
         if (state.Player2Train.size() != 0) {
-            int j = state.Player2Train.size() - 1;
+            int j = state.Player2Train.size() - 1;//if size = 8 = 7
             for (int i = Player2TrainIVs.size() - 2; i >= 0; i--) {
 
                 if (j >= 0) {
@@ -130,6 +131,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     } else {
                         Player2TrainIVs.get(i).setImageResource(state.Player2Train.get(j).pictureID);
                         Player2TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player2TrainIVs.get(i).setRotation(0);
                         j--;
                     }
                 }
@@ -156,6 +158,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     } else {
                         Player3TrainIVs.get(i).setImageResource(state.Player3Train.get(j).pictureID);
                         Player3TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player3TrainIVs.get(i).setRotation(0);
                         j--;
                     }
                 }
@@ -182,6 +185,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     } else {
                         Player4TrainIVs.get(i).setImageResource(state.Player4Train.get(j).pictureID);
                         Player4TrainIVs.get(i).getLayoutParams().width = 200;
+                        Player4TrainIVs.get(i).setRotation(0);
                         j--;
                     }
                 }
@@ -211,6 +215,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     } else {
                         PublicTrainIVs.get(i).setImageResource(state.PublicTrain.get(j).pictureID);
                         PublicTrainIVs.get(i).getLayoutParams().width = 200;
+                        PublicTrainIVs.get(i).setRotation(0);
                         j--;
                     }
                 }

@@ -50,7 +50,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
         }
         //update our variable
         mtState = (DominoGameState) info;
-        int playerNum = this.playerNum;
+        int playerNum = mtState.playerTurn;
 
         //If it's my turn to play a domino,
         //delay for one and a half seconds(1500); then play
@@ -59,7 +59,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
         if (!comDifficulty) {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
-            if (mtState.Player1Hand.size() > 0 && playerNum == 0) {
+           /* if (mtState.Player1Hand.size() > 0 && playerNum == 0) {
                 for (int i = 0; i < mtState.Player1Hand.size(); i++) {
                     if (mtState.playableTrains(0, mtState.Player1Hand.get(i), 4)
                             || mtState.playableTrains(0, mtState.Player1Hand.get(i), 0)
@@ -108,7 +108,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                     }
                 }
             }
-            else if (playerNum == 1) {
+            else */if (playerNum == 1) {
                 if (mtState.Player2Hand.size() > 0 && playerNum == 1) {
                     for (int i = 0; i < mtState.Player2Hand.size(); i++) {
                         if (mtState.playableTrains(1,mtState.Player2Hand.get(i), 4)

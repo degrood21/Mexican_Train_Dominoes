@@ -68,6 +68,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         this.state = (DominoGameState) info;
 
+        MTSelectAction SA = new MTSelectAction(this);
+        game.sendAction(SA);
+
         /**
          * Tests of how to draw the dominoes into the ImageViews
          *
@@ -554,8 +557,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         //which domino in hand is selected
 
-        for (
-                int i = 0; i < HandIVs.size(); i++)
+        for (int i = 0; i < HandIVs.size(); i++)
 
         {
             HandIVs.get(i).setOnClickListener(new View.OnClickListener()

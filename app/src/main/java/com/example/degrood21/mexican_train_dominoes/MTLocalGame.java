@@ -35,9 +35,9 @@ public class MTLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         //If the round is not the last, then decide who won the round and reset.
         if (state.PileofDominoes.size() == 0) {
-            if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
+            if (/*(!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))
-                    || (state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public)) {
+                    || */(state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public) || state.PileofDominoes.size() == 0) {
                 for (int i = 0; i < state.Player1Hand.size(); i++) {
                     state.player1Score += state.Player1Hand.get(i).rightSide + state.Player1Hand.get(i).leftSide;
                 }
@@ -66,15 +66,15 @@ public class MTLocalGame extends LocalGame {
 
                 if (less1 < less2) {
                     if (less1 == state.player1Score) {
-                        return "Player 1" + " won the Round";
+                        return "Player 1" + " won the Round." + " Score: " + state.player1Score;
                     } else {
-                        return "Player 2" + " won the Round";
+                        return "Player 2" + " won the Round." + " Score: " + state.player2Score;
                     }
                 } else {
                     if (less2 == state.player3Score) {
-                        return "Player 3" + " won the Round";
+                        return "Player 3" + " won the Round." + " Score: " + state.player3Score;
                     } else {
-                        return "Player 4" + " won the Round";
+                        return "Player 4" + " won the Round." + " Score: " + state.player4Score;
                     }
                 }
             }
@@ -124,7 +124,7 @@ public class MTLocalGame extends LocalGame {
                 return null;
             }
         }
-        return "continue game";
+        return null;
     }
 
     /**
@@ -169,6 +169,9 @@ public class MTLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        return false;
+        if(checkIfGameOver() == null){
+            return false;
+        }
+        return true;
     }
 }

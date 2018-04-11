@@ -635,7 +635,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Player1: 10 Pips"
+            android:text="Player1: 0 Pips"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
@@ -643,7 +643,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Player2: 13 Pips"
+            android:text="Player2: 0 Pips"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
@@ -651,7 +651,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Player3: 20 Pips"
+            android:text="Player3: 0 Pips"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView
@@ -659,7 +659,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Player4: 5 Pips"
+            android:text="Player4: 0 Pips"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
         <TextView

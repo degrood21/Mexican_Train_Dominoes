@@ -1,6 +1,7 @@
 package com.example.degrood21.mexican_train_dominoes;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -404,28 +405,25 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
 
         // On Click Listeners to listen to Buttons and last ImageView of each train in order to place a domino
-        quitButton.setOnClickListener(new View.OnClickListener()
-
-        {
-
+        quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                myActivity.finish();//quits program
+            }
+        });
+
+        restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //restarts game when button is pushed
+                Intent intent = myActivity.getIntent();
+                myActivity.finish();
+                myActivity.startActivity(intent);
 
             }
         });
 
-        restartButton.setOnClickListener(new View.OnClickListener()
-
-        {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        helpButton.setOnClickListener(new View.OnClickListener()
-
-        {
+        helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -668,7 +666,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     /**
      * Helps to determine whether to draw when in Double Play
-     *
+     * <p>
      * Meaning that the Human player after playing a double, must play a matching domino or must draw if they cannot
      */
     public void doubleHelper() {

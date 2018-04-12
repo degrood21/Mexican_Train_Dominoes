@@ -2857,21 +2857,19 @@ public class DominoGameState extends GameState {
                 if(currentHand.get(i).rightSide == round || currentHand.get(i).leftSide == round){
                     return true;
                 }
-                else{
-                    return false;
+
+            }
+            else{//Train size greater than 0
+                if (currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                        || currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                    return true;
+                } else if (currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                        || currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                    return true;
                 }
             }
-            if (currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
-                    || currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
-                return true;
-            } else if (currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).rightSide
-                    || currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
-                return true;
-            }
-
         }
-        return checkPlayable(id, trainSelection++);
-
+        return checkPlayable(id, ++trainSelection);
     }
 
     /**

@@ -437,13 +437,15 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
-                state.drawAction(0);
-                if (state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0)) {
-                    state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0);
-                    state.player1Public = false;
-                    state.playerTurn++;
-                } else {
-                    state.playerTurn++;
+                if(!state.checkPlayable(0, 0)) {
+                    state.drawAction(0);
+                    if (state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0)) {
+                        state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0);
+                        state.player1Public = false;
+                        state.playerTurn++;
+                    } else {
+                        state.playerTurn++;
+                    }
                 }
 
                 sendInfo(state);

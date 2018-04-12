@@ -84,13 +84,13 @@ public class MTLocalGame extends LocalGame {
             //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
             //in their hand and won the round.
             if (state.Player1Hand.size() == 0) {
-                return this.playerNames[0] + " won the Round"; //player one ran out of dominoes and won the round.
+                return "Player 1" + " won the Round." + " Score: " + state.player1Score; //player one ran out of dominoes and won the round.
             } else if (state.Player2Hand.size() == 0) {
-                return this.playerNames[1] + " won the Round"; //player two ran out of dominoes and won the round.
+                return "Player 2" + " won the Round." + " Score: " + state.player2Score;//player two ran out of dominoes and won the round.
             } else if (state.Player3Hand.size() == 0) {
-                return this.playerNames[2] + " won the Round"; //player three ran out of dominoes and won the round.
+                return "Player 3" + " won the Round." + " Score: " + state.player3Score;//player three ran out of dominoes and won the round.
             } else if (state.Player4Hand.size() == 0) {
-                return this.playerNames[3] + " won the Round"; //player four ran out of dominoes and won the round.
+                return "Player 4" + " won the Round." + " Score: " + state.player4Score; //player four ran out of dominoes and won the round.
             } else {
                 //All players still have dominoes in their hands, the game goes on.
                 return null;

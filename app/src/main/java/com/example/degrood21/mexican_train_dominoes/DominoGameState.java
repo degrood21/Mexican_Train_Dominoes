@@ -16,6 +16,7 @@ import java.util.Random;
 
 public class DominoGameState extends GameState {
 
+    //Initiates all ArrayLists that correspond to hands, trains, and pile
     ArrayList<Domino> PileofDominoes = new ArrayList<>();
     ArrayList<Domino> Player1Hand = new ArrayList<>();
     ArrayList<Domino> Player2Hand = new ArrayList<>();
@@ -26,9 +27,9 @@ public class DominoGameState extends GameState {
     ArrayList<Domino> Player3Train = new ArrayList<>();
     ArrayList<Domino> Player4Train = new ArrayList<>();
     ArrayList<Domino> PublicTrain = new ArrayList<>();
-    ArrayList<Domino> currentHand = new ArrayList<Domino>();
-    ArrayList<Domino> currentTrain = new ArrayList<Domino>();
-    private int numPlayers;
+    ArrayList<Domino> currentHand = new ArrayList<Domino>(); //helper ArrayList for checkPlayable method
+    ArrayList<Domino> currentTrain = new ArrayList<Domino>(); //helper ArrayList for checkPlayable method
+    private int numPlayers; //contains number of players for game
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
     boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
@@ -292,7 +293,7 @@ public class DominoGameState extends GameState {
     }
 
     /**
-     * placeDomino method
+     * placeDomino method (NEEDS TO BE SIMPLIFIED)
      * <p>
      * places the selected domino passed in correctly and accordingly
      *
@@ -1573,7 +1574,7 @@ public class DominoGameState extends GameState {
     }
 
     /**
-     * doublePlay method
+     * doublePlay method (ALSO NEEDS TO BE SIMPLIFIED)
      * <p>
      * if doublePlay is called due to double domino
      * the double domino will be placed accordingly and
@@ -2814,11 +2815,13 @@ public class DominoGameState extends GameState {
     }
 
     /**
+     * checkPlayable -- checks to see if a player can at least play one domino in hand
+     *
      * Only to be used for start of every turn and for draw action
      *
-     * @param id
-     * @param trainSelection
-     * @return
+     * @param id player ID that is being checked
+     * @param trainSelection most always will be 0 since recursion checks all trains
+     * @return true if player can play at least on domino
      */
     public boolean checkPlayable(int id, int trainSelection) {
         if (trainSelection >= 5) {
@@ -2871,6 +2874,14 @@ public class DominoGameState extends GameState {
 
     }
 
+    /**
+     * playableTrains -- Checks to see if a player's domino can be played on a specific train
+     *
+     * @param id current player
+     * @param selectedDomino domino that wants to be played by player
+     * @param trainSelection specific train to check if domino can be played here
+     * @return true if that domino can be played on that train
+     */
     public boolean playableTrains(int id, Domino selectedDomino, int trainSelection) {
 
         boolean returnCheck = false;
@@ -2978,7 +2989,7 @@ public class DominoGameState extends GameState {
     }
 
     /**
-     * toString method
+     * toString method (NOT NEEDED ANYMORE)
      * <p>
      * creates string to be printed out with all variables discussed above
      *

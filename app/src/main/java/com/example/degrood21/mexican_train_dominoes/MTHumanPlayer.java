@@ -21,18 +21,18 @@ import java.util.ArrayList;
 
 public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListener {
 
-    protected DominoGameState state;
+    protected DominoGameState state; //current state of the game
 
-    private Activity myActivity;
+    private Activity myActivity; //reference to the main activity for calling ImageViews etc.
 
-    private int selectedDomino;
+    private int selectedDomino; // helper variable for currently selected domino
 
-    private ArrayList<ImageView> HandIVs = new ArrayList<ImageView>();
-    private ArrayList<ImageView> PublicTrainIVs = new ArrayList<ImageView>();
-    private ArrayList<ImageView> Player1TrainIVs = new ArrayList<ImageView>();
-    private ArrayList<ImageView> Player2TrainIVs = new ArrayList<ImageView>();
-    private ArrayList<ImageView> Player3TrainIVs = new ArrayList<ImageView>();
-    private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>();
+    private ArrayList<ImageView> HandIVs = new ArrayList<ImageView>(); //All ImageViews in Players Hand (max 20)
+    private ArrayList<ImageView> PublicTrainIVs = new ArrayList<ImageView>(); //All ImageViews in Public Train (max 6)
+    private ArrayList<ImageView> Player1TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 1 Train (max 6)
+    private ArrayList<ImageView> Player2TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 2 Train (max 6)
+    private ArrayList<ImageView> Player3TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 3 Train (max 6)
+    private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 4 Train (max 6)
 
 
     private Button quitButton, restartButton, helpButton, drawButton;
@@ -46,17 +46,31 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             handFourteen, handFifteen, handSixteen, handSeventeen, handEighteen, handNineteen,
             handTwenty;
 
+    // cstor for Human Player
     public MTHumanPlayer(String name) {
 
         super(name);
 
     }
 
+    /**
+     * getTopView returns the top view of surface
+     * <p>
+     * (We do not use a surface or animation surface so
+     * no need to send a top view)
+     *
+     * @return View of top view
+     */
     @Override
     public View getTopView() {
         return null;
     }
 
+    /**
+     * receiveInfo receives the game state and updates GUI accordingly with changes
+     *
+     * @param info might not always be instanceof DominoGameState
+     */
     @Override
     public void receiveInfo(GameInfo info) {
 
@@ -66,13 +80,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
 
-        this.state = (DominoGameState) info;
+        this.state = (DominoGameState) info; //gets reference to state
 
+        /**
+         * Action Classes are not implemented yet so
+         * this was the only way to call checkIfGameOver();
+         *
+         * sends an empty Action that currently does nothing
+         */
         MTSelectAction SA = new MTSelectAction(this);
         game.sendAction(SA);
 
         /**
-         * Tests of how to draw the dominoes into the ImageViews
+         * All for loops and if statements until next comment
+         * are used to draw and update all ImageViews in hand
+         * and all players trains and also the public train
          *
          */
         for (int i = 0; i < 20; i++) {
@@ -99,15 +121,15 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             for (int i = Player1TrainIVs.size() - 2; i >= 0; i--) {//i=3
 
                 if (j >= 0) {
-                    if (state.Player1Train.get(j).rightSide == -1) {
+                    if (state.Player1Train.get(j).rightSide == -1) {// -1 indicates already matched side
                         Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
                         Player1TrainIVs.get(i).getLayoutParams().width = 200;
-                        Player1TrainIVs.get(i).setRotation(180);
+                        Player1TrainIVs.get(i).setRotation(180); // rotates based on -1 indicator
                         j--;
                     } else {
                         Player1TrainIVs.get(i).setImageResource(state.Player1Train.get(j).pictureID);
                         Player1TrainIVs.get(i).getLayoutParams().width = 200;
-                        Player1TrainIVs.get(i).setRotation(0);
+                        Player1TrainIVs.get(i).setRotation(0); // locks rotation if rightside is not -1
                         j--;
                     }
                 }
@@ -226,9 +248,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         }
 
-        if (state.player1Public)
-
-        {
+        /**
+         * All if statements till next comment sets a trainMarker in front of train
+         * depending on if that train is public at the moment
+         *
+         * using turnMarkers to display whether or not a player train is public
+         */
+        if (state.player1Public) {
             turnMarker1.setImageResource(R.drawable.trainmarker);
             turnMarker1.getLayoutParams().width = 40;
         } else
@@ -271,15 +297,24 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             turnMarker4.getLayoutParams().width = 40;
         }
 
+        //Sets the round image according to what round it is
         roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
         roundDom.getLayoutParams().width = 150;
 
+        //Displays to player in words what round it is
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
 
+        //resend the state to keep the state updating as play moves on
         sendInfo(state);
 
     }
 
+    /**
+     * setAsGui -- ultimately connects the GUI to the GameState to update GUI to see
+     * all changes
+     *
+     * @param activity MainActivity to reference Buttons, ImageViews, etc.
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
 
@@ -368,6 +403,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         HandIVs.add(handTwenty = (ImageView) myActivity.findViewById(R.id.handIVtwenty));
 
 
+        // On Click Listeners to listen to Buttons and last ImageView of each train in order to place a domino
         quitButton.setOnClickListener(new View.OnClickListener()
 
         {
@@ -402,6 +438,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
+                // When clicked, draws a domino using Player 1 ID (Human Player)
                 state.drawAction(0);
                 if (state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0)) {
                     state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0);
@@ -416,13 +453,17 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
+        /**
+         * All Sixth ImageView in each train is listening for a click in order to place domino within that train
+         *
+         */
         p1Sixth.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
             public void onClick(View v) {
                 if (state.doublePlay) {
-                    doubleHelper();
+                    doubleHelper(); //
                 } else if (state.playableTrains(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)) {
 
                     if (state.placeDomino(state.playerTurn, state.Player1Hand.get(selectedDomino), 0)) {
@@ -555,7 +596,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
-        //which domino in hand is selected
+        //Goes through each Hand ImageView to see which one is selected
 
         for (int i = 0; i < HandIVs.size(); i++)
 
@@ -579,6 +620,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                     PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
 
 
+                    // Depending on what domino is currently selected in Hand
+                    // Will display on last ImageView of each train, whether that domino can be played there
+                    //
+                    // This is based on player turn, if trains are public, and if domino last played matched selected
                     for (int i = 0; i < HandIVs.size(); i++) {
 
                         if (v == HandIVs.get(i)) {
@@ -591,14 +636,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 0)) {
                                 Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
                                 Player1TrainIVs.get(5).getLayoutParams().height = 50;
-                                //Player1TrainIVs.get(4).getLayoutParams().height = 200;
-                                //Player1TrainIVs.get(4).getLayoutParams().width = 200;
                             }
                             if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 1)) {
                                 Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
                                 Player2TrainIVs.get(5).getLayoutParams().height = 50;
-                                //Player2TrainIVs.get(4).getLayoutParams().height = 200;
-                                //Player2TrainIVs.get(4).getLayoutParams().width= 200;
                             }
                             if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 2)) {
                                 Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
@@ -611,8 +652,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             if (state.playableTrains(state.playerTurn, state.Player1Hand.get(i), 4)) {
                                 PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
                                 PublicTrainIVs.get(5).getLayoutParams().height = 50;
-                                //PublicTrainIVs.get(4).getLayoutParams().height= 200;
-                                //PublicTrainIVs.get(4).getLayoutParams().width= 200;
 
                             }
 
@@ -627,6 +666,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     }
 
+    /**
+     * Helps to determine whether to draw when in Double Play
+     *
+     * Meaning that the Human player after playing a double, must play a matching domino or must draw if they cannot
+     */
     public void doubleHelper() {
 
         if (state.placeDomino(0, state.Player1Hand.get(selectedDomino), state.doublePlayTrain)) {

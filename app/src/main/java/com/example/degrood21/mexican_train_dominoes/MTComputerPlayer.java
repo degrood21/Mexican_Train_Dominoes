@@ -40,7 +40,12 @@ public class MTComputerPlayer extends GameComputerPlayer {
     }
 
     /**
-     * @param info
+     * receiveInfo receives the info from the game state and has computer player play accordingly
+     *
+     * Computer Player (Basic) just plays on next available train to be played
+     * on using the first playable domino in hand
+     *
+     * @param info not always an instance of DominoGameState
      */
     @Override
     protected void receiveInfo(GameInfo info) {
@@ -59,6 +64,9 @@ public class MTComputerPlayer extends GameComputerPlayer {
         if (!comDifficulty) {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
+            /**
+             * all upcoming commented code will be implemented once array of players is fixed
+             */
            /* if (mtState.Player1Hand.size() > 0 && playerNum == 0) {
                 for (int i = 0; i < mtState.Player1Hand.size(); i++) {
                     if (mtState.playableTrains(0, mtState.Player1Hand.get(i), 4)

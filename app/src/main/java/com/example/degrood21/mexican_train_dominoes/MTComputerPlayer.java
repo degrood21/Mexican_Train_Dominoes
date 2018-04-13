@@ -55,7 +55,8 @@ public class MTComputerPlayer extends GameComputerPlayer {
         }
         //update our variable
         mtState = (DominoGameState) info;
-        int playerNum = mtState.playerTurn;
+        //int playerNum = mtState.playerTurn;
+        int playerNum = this.playerNum;
 
         //If it's my turn to play a domino,
         //delay for one and a half seconds(1500); then play
@@ -64,59 +65,30 @@ public class MTComputerPlayer extends GameComputerPlayer {
         if (!comDifficulty) {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
-            /**
-             * all upcoming commented code will be implemented once array of players is fixed
-             */
-           /* if (mtState.Player1Hand.size() > 0 && playerNum == 0) {
-                for (int i = 0; i < mtState.Player1Hand.size(); i++) {
-                    if (mtState.playableTrains(0, mtState.Player1Hand.get(i), 4)
-                            || mtState.playableTrains(0, mtState.Player1Hand.get(i), 0)
-                            || mtState.playableTrains(0, mtState.Player1Hand.get(i), 1)
-                            || mtState.playableTrains(0, mtState.Player1Hand.get(i), 2)
-                            || mtState.playableTrains(0, mtState.Player1Hand.get(i), 3)) {
-
-                        if (mtState.doublePlay) {
-                            if (mtState.placeDomino(0, mtState.Player1Hand.get(i), mtState.doublePlayTrain)) {
-                                mtState.doublePlay = false;
-                                mtState.playerTurn++;
+            /*if(mtState.playerTurn == playerNum) {
+                if(mtState.hand.get(playerNum).size() > 0) {
+                    for(int i = 0; i < mtState.hand.get(playerNum).size(); i++) {
+                        if(mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 0)
+                                || mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 1)
+                                || mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 2)
+                                || mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 3)
+                                || mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 4)) {
+                            if(mtState.doublePlay) {
+                                if(mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(i), mtState.doublePlayTrain)) {
+                                    mtState.doublePlay = false;
+                                    mtState.playerTurn++;
+                                }
+                                else {
+                                    mtState.playerPublic.set(playerNum, true);
+                                }
                             }
-                        } else if (mtState.placeDomino(0, mtState.Player1Hand.get(i), 0)) {
-                            mtState.player1Public = false;
-                            mtState.playerTurn++;
-                        } else if (mtState.placeDomino(0, mtState.Player1Hand.get(i), 1)) {
-                            mtState.playerTurn++;
-                        } else if (mtState.placeDomino(0, mtState.Player1Hand.get(i), 2)) {
-                            mtState.playerTurn++;
-                        } else if (mtState.placeDomino(0, mtState.Player1Hand.get(i), 3)) {
-                            mtState.playerTurn++;
-                        } else if (mtState.placeDomino(0, mtState.Player1Hand.get(i), 4)) {
-                            mtState.playerTurn++;
+                            else if(mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(i), ))
                         }
-
-                        if (mtState.playerTurn >= 3) {
-                            mtState.playerTurn = 0;
-                        }
-                        break;
                     }
                 }
-                if (mtState.playerTurn == 0) {
+            }*/
 
-                    if(mtState.drawAction(0)) {
-                        if (mtState.playableTrains(0, mtState.Player1Hand.get(mtState.Player1Hand.size() - 1), 0)) {
-                            mtState.placeDomino(0, mtState.Player1Hand.get(mtState.Player1Hand.size() - 1), 0);
-                            mtState.player1Public = false;
-                            mtState.playerTurn++;
-                        } else {
-                            mtState.playerTurn++;
-                        }
-                    }
-                    else{
-                        mtState.player1Public = true;
-                        mtState.playerTurn++;
-                    }
-                }
-            }
-            else */if (playerNum == 1) {
+            if (playerNum == 1) {
                 if (mtState.Player2Hand.size() > 0 && playerNum == 1) {
                     for (int i = 0; i < mtState.Player2Hand.size(); i++) {
                         if (mtState.playableTrains(1,mtState.Player2Hand.get(i), 4)

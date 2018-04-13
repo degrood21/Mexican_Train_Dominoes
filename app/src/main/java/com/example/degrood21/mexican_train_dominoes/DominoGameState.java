@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameState;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -17,6 +18,7 @@ import java.util.Random;
 public class DominoGameState extends GameState {
 
     //Initiates all ArrayLists that correspond to hands, trains, and pile
+    ArrayList<ArrayList<Domino>> hand = new ArrayList<>();
     ArrayList<Domino> PileofDominoes = new ArrayList<>();
     ArrayList<Domino> Player1Hand = new ArrayList<>();
     ArrayList<Domino> Player2Hand = new ArrayList<>();
@@ -32,7 +34,8 @@ public class DominoGameState extends GameState {
     private int numPlayers; //contains number of players for game
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
-    boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
+    Boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
+    ArrayList<Boolean> playerPublic = new ArrayList<>();
 
     /**
      * Default cstor
@@ -61,7 +64,14 @@ public class DominoGameState extends GameState {
             }
         }
 
+        //shuffle and deal out dominoes into respectable hands.
         dealAction();
+
+        //add each individual hand into the arraylist of hand.
+        hand.add(Player1Hand);
+        hand.add(Player2Hand);
+        hand.add(Player3Hand);
+        hand.add(Player4Hand);
 
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
@@ -72,6 +82,11 @@ public class DominoGameState extends GameState {
         player2Public = false;
         player3Public = false;
         player4Public = false;
+        //add the boolean of each player's train to the arraylist of playerPublic
+        playerPublic.add(player1Public);
+        playerPublic.add(player2Public);
+        playerPublic.add(player3Public);
+        playerPublic.add(player4Public);
 
     }
 

@@ -63,7 +63,6 @@ public class DominoGameState extends GameState {
 
         dealAction();
 
-
         playerTurn = 0; // 0 means it is player 1's turn
         player1Score = 0;
         player2Score = 0;
@@ -84,6 +83,7 @@ public class DominoGameState extends GameState {
      */
     public DominoGameState(DominoGameState newstateInstance) {//for Deep Copy, saves for later
         //set the number of players in the game
+
         numPlayers = newstateInstance.numPlayers;
         PileofDominoes = new ArrayList<>();
         for (int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {

@@ -152,15 +152,16 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
                     if (mtState.playerTurn == 1) {
 
-                        if(mtState.drawAction(1)) {
-                            if (mtState.playableTrains(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1)) {
-                                mtState.placeDomino(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1);
-                                mtState.player2Public = false;
-                                mtState.playerTurn++;
-                            } else {
-                                mtState.playerTurn++;
+                            if (mtState.drawAction(1)) {
+                                if (mtState.playableTrains(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1)) {
+                                    mtState.placeDomino(1, mtState.Player2Hand.get(mtState.Player2Hand.size() - 1), 1);
+                                    mtState.player2Public = false;
+                                    mtState.playerTurn++;
+                                } else {
+                                    mtState.playerTurn++;
+                                }
                             }
-                        }
+
                         else{
                             mtState.player2Public = true;
                             mtState.playerTurn++;

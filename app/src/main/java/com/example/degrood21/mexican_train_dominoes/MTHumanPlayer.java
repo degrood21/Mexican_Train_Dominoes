@@ -447,9 +447,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                         state.playerTurn++;
                     }
                 }
-
                 sendInfo(state);
-
             }
         });
 

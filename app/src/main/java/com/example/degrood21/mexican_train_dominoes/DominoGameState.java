@@ -2838,13 +2838,13 @@ public class DominoGameState extends GameState {
             currentHand = Player4Hand;
         }
 
-        if (trainSelection == 0) {
+        if (trainSelection == 0 && player1Public || trainSelection == playerTurn) {
             currentTrain = Player1Train;
-        } else if (trainSelection == 1) {
+        } else if (trainSelection == 1 && player2Public || trainSelection == playerTurn) {
             currentTrain = Player2Train;
-        } else if (trainSelection == 2) {
+        } else if (trainSelection == 2 && player3Public || trainSelection == playerTurn) {
             currentTrain = Player3Train;
-        } else if (trainSelection == 3) {
+        } else if (trainSelection == 3 && player4Public || trainSelection == playerTurn) {
             currentTrain = Player4Train;
         } else if (trainSelection == 4) {
             currentTrain = PublicTrain;
@@ -2858,6 +2858,12 @@ public class DominoGameState extends GameState {
                     return true;
                 }
 
+            }
+            else if(doublePlay){
+                if (currentHand.get(i).rightSide == doublePlayDomino
+                        || currentHand.get(i).leftSide == doublePlayDomino) {
+                    return true;
+                }
             }
             else{//Train size greater than 0
                 if (currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).rightSide

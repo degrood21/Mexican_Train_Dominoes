@@ -41,13 +41,14 @@ public class DominoGameState extends GameState {
      * Default cstor
      * Sets all instance variables above accordingly
      */
-    public DominoGameState(int numberOfPlayers) {
+    public DominoGameState(int numberOfPlayers, int currentRound) {
         numPlayers = numberOfPlayers;//used to determine how many players are playing
         ArrayList<Domino> allDominoes = new ArrayList<Domino>();
         DominoPile pile = new DominoPile();
         allDominoes = pile.setOfDominoes;
+        PileofDominoes = new ArrayList<>();
 
-        round = 12;
+        round = currentRound;
         for (int i = 0; i < allDominoes.size(); i++) {
             int pID = allDominoes.get(i).getPictureID();
             int rSide = allDominoes.get(i).getRightSide();
@@ -56,16 +57,31 @@ public class DominoGameState extends GameState {
             PileofDominoes.add(i, copy);
 
         }
+
+        PublicTrain = new ArrayList<>();
+
         for (int i = 0; i < allDominoes.size() - 1; i++) {
-            if (PileofDominoes.get(i).leftSide == 12 && PileofDominoes.get(i).rightSide == 12) {
+            if (PileofDominoes.get(i).leftSide == round && PileofDominoes.get(i).rightSide == round) {
                 allDominoes.get(i).leftSide = -1;
                 PublicTrain.add(0, allDominoes.get(i));
                 PileofDominoes.remove(i);
             }
         }
 
+        Player1Train = new ArrayList<>();
+        Player2Train = new ArrayList<>();
+        Player3Train = new ArrayList<>();
+        Player4Train = new ArrayList<>();
+
+        Player1Hand = new ArrayList<>();
+        Player2Hand = new ArrayList<>();
+        Player3Hand = new ArrayList<>();
+        Player4Hand = new ArrayList<>();
+
         //shuffle and deal out dominoes into respectable hands.
         dealAction();
+
+        roundOver = false;
 
         //add each individual hand into the arraylist of hand.
         hand.add(Player1Hand);
@@ -74,14 +90,17 @@ public class DominoGameState extends GameState {
         hand.add(Player4Hand);
 
         playerTurn = 0; // 0 means it is player 1's turn
-        player1Score = 0;
-        player2Score = 0;
-        player3Score = 0;
-        player4Score = 0;
-        player1Public = false;
-        player2Public = false;
-        player3Public = false;
-        player4Public = false;
+
+        if(round == 12) {
+            player1Score = 0;
+            player2Score = 0;
+            player3Score = 0;
+            player4Score = 0;
+        }
+            player1Public = false;
+            player2Public = false;
+            player3Public = false;
+            player4Public = false;
         //add the boolean of each player's train to the arraylist of playerPublic
         playerPublic.add(player1Public);
         playerPublic.add(player2Public);
@@ -2849,18 +2868,22 @@ public class DominoGameState extends GameState {
      *
      * @param id             current player
      * @param selectedDomino domino that wants to be played by player
-     * @param trainSelection specific train to check if domino can be played here
+     * @param train specific train to check if domino can be played here
      * @return true if that domino can be played on that train
      */
-    public boolean playableTrains(int id, Domino selectedDomino, int trainSelection) {
+    public boolean playableTrains(int id, Domino selectedDomino, int train) {
 
         boolean returnCheck = false;//sets a boolean which will be returned in the end
-
+        int trainSelection;
+        trainSelection = train; //if Double Play is true then set trainSelection to doublePlayTrain otherwise set it to train
 
         /*
         sets the current trains to the respective players train
          */
-        if (trainSelection == 0) {
+        if(doublePlay){
+            trainSelection = doublePlayTrain;
+        }
+        else if (trainSelection == 0) {
             currentTrain = Player1Train;
         } else if (trainSelection == 1) {
             currentTrain = Player2Train;

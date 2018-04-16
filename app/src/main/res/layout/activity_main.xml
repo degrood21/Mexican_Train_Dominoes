@@ -8,6 +8,7 @@
     tools:context="com.example.degrood21.mexican_train_dominoes.MainActivity">
 
     <LinearLayout
+        android:id="@+id/ScreenLayout"
         android:layout_width="839dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -16,6 +17,7 @@
         tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
+            android:id="@+id/ButtonLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"

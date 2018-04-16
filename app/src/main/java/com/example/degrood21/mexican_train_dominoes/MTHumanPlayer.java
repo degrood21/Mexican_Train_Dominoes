@@ -2,10 +2,13 @@ package com.example.degrood21.mexican_train_dominoes;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.degrood21.mexican_train_dominoes.game.GameHumanPlayer;
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
@@ -34,7 +37,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private ArrayList<ImageView> Player2TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 2 Train (max 6)
     private ArrayList<ImageView> Player3TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 3 Train (max 6)
     private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 4 Train (max 6)
-
 
     private Button quitButton, restartButton, helpButton, drawButton;
     private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV;
@@ -82,6 +84,33 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
 
         this.state = (DominoGameState) info; //gets reference to state
+
+        if (state.roundOver){
+
+            DominoGameState newRound = new DominoGameState(4, state.round);
+            newRound.player1Score = state.player1Score;
+            newRound.player2Score = state.player2Score;
+            newRound.player3Score = state.player3Score;
+            newRound.player4Score = state.player4Score;
+            this.state = newRound;
+
+        }
+
+        /*LinearLayout lView = (LinearLayout)myActivity.findViewById(R.id.ButtonLayout);
+
+        TextView myText = (TextView) new TextView(myActivity);
+        myText.setText("My Text");
+        myText.setTextSize(20);
+
+        lView.addView(myText);*/
+
+        /*if(state.doublePlay) {
+            Toast.makeText(myActivity, "Double Domino Has Been Played", Toast.LENGTH_SHORT); //NEVER STOPS DISPLAYING
+            //https://stackoverflow.com/questions/6525916/dynamically-display-string-text-on-android-screen
+            //^^Citation for Toast message
+        }*/
+
+        state.doubleEndOfTrain(0);
 
         /**
          * Action Classes are not implemented yet so
@@ -437,7 +466,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
-                if(!state.checkPlayable(0, 0)) {
+                if(state.PileofDominoes.size() == 0 && !state.checkPlayable(0,0)){
+                    state.player1Public = true;
+                    state.playerTurn++;
+                }
+                else if(!state.checkPlayable(0, 0)) {
                     state.drawAction(0);
                     if (state.playableTrains(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0)) {
                         state.placeDomino(0, state.Player1Hand.get(state.Player1Hand.size() - 1), 0);

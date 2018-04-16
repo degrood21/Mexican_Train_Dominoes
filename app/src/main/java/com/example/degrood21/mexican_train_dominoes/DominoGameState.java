@@ -34,6 +34,7 @@ public class DominoGameState extends GameState {
     private int numPlayers; //contains number of players for game
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
+    boolean roundOver;
     Boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
     ArrayList<Boolean> playerPublic = new ArrayList<>();
 

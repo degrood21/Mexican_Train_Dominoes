@@ -48,7 +48,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
             }});
 
         // Create a game configuration class for MexicanTrain:
-        GameConfig defaultConfig = new GameConfig(playerTypes, 1, 4, "MexicanTrain", PORT_NUMBER);
+        GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player 1: a human player
         defaultConfig.addPlayer("Smart Computer", 2);
         defaultConfig.addPlayer("Computer", 1); // player 2: a computer player

@@ -2817,15 +2817,7 @@ public class DominoGameState extends GameState {
         }
 
         //sets current hand to the players hand
-        if (id == 0) {
-            currentHand = Player1Hand;
-        } else if (id == 1) {
-            currentHand = Player2Hand;
-        } else if (id == 2) {
-            currentHand = Player3Hand;
-        } else if (id == 3) {
-            currentHand = Player4Hand;
-        }
+        currentHand = hand.get(id);
 
         //sets the train to current train, then checks if it's public to see if you can play on it, also restricts playing on private trains
         if (trainSelection == 0 && player1Public || trainSelection == playerTurn) {
@@ -2990,17 +2982,7 @@ public class DominoGameState extends GameState {
             //the force doubleplay
 
             //sets current hand equal to the players/pile's hand array
-            if (id == 0) {
-                currentHand = Player1Hand;
-            } else if (id == 1) {
-                currentHand = Player2Hand;
-            } else if (id == 2) {
-                currentHand = Player3Hand;
-            } else if (id == 3) {
-                currentHand = Player4Hand;
-            } else if (id == 4) {
-                currentHand = PileofDominoes;
-            }
+            currentHand = hand.get(id);
 
             for (int i = 0; i < currentHand.size(); i++) {
                 if (currentHand.get(i).rightSide == doublePlayDomino//can play right side on the double domino

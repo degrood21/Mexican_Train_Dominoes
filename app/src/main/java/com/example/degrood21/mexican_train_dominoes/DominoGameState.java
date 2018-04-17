@@ -34,8 +34,8 @@ public class DominoGameState extends GameState {
     private int numPlayers; //contains number of players for game
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
-    boolean roundOver;
-    Boolean player1Public, player2Public, player3Public, player4Public, doublePlay;
+    boolean roundOver, doublePlay;
+    Boolean player1Public, player2Public, player3Public, player4Public;
     ArrayList<Boolean> playerPublic = new ArrayList<>();
 
     /**
@@ -79,16 +79,16 @@ public class DominoGameState extends GameState {
         Player3Hand = new ArrayList<>();
         Player4Hand = new ArrayList<>();
 
-        //shuffle and deal out dominoes into respectable hands.
-        dealAction();
-
-        roundOver = false;
-
         //add each individual hand into the arraylist of hand.
         hand.add(Player1Hand);
         hand.add(Player2Hand);
         hand.add(Player3Hand);
         hand.add(Player4Hand);
+
+        //shuffle and deal out dominoes into respectable hands.
+        dealAction();
+
+        roundOver = false;
 
         playerTurn = 0; // 0 means it is player 1's turn
 
@@ -244,22 +244,22 @@ public class DominoGameState extends GameState {
 
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
-            Player1Hand.add(PileofDominoes.get(dom));
+            hand.get(0).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
-            Player2Hand.add(PileofDominoes.get(dom));
+            hand.get(1).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
-            Player3Hand.add(PileofDominoes.get(dom));
+            hand.get(2).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
-            Player4Hand.add(PileofDominoes.get(dom));
+            hand.get(3).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
         return true;
@@ -304,15 +304,15 @@ public class DominoGameState extends GameState {
             } else {
                 return false;
             }
-        } else if (playerID == 0) { // If Player 1
+        } else if (playerTurn == playerID) { // If Player 1
             if (trainSelection == 0) { // Player 1 Train
                 if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         // does not need to return false in for loop since we check playable in humanPlayer
@@ -320,9 +320,9 @@ public class DominoGameState extends GameState {
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -331,18 +331,18 @@ public class DominoGameState extends GameState {
                     if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -351,18 +351,18 @@ public class DominoGameState extends GameState {
                     if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player1Train.get(Player1Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player1Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -373,18 +373,18 @@ public class DominoGameState extends GameState {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -393,18 +393,18 @@ public class DominoGameState extends GameState {
                     if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -413,18 +413,18 @@ public class DominoGameState extends GameState {
                     if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player2Train.get(Player2Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player2Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -435,18 +435,18 @@ public class DominoGameState extends GameState {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -455,18 +455,18 @@ public class DominoGameState extends GameState {
                     if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player3Train.get(Player3Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -475,18 +475,18 @@ public class DominoGameState extends GameState {
                     if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player3Train.get(Player3Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player3Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -497,18 +497,18 @@ public class DominoGameState extends GameState {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -517,18 +517,18 @@ public class DominoGameState extends GameState {
                     if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player4Train.get(Player4Train.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -537,18 +537,18 @@ public class DominoGameState extends GameState {
                     if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (Player4Train.get(Player4Train.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         Player4Train.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -559,18 +559,18 @@ public class DominoGameState extends GameState {
                     if (selectedDomino.leftSide == round) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (selectedDomino.rightSide == round) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -579,18 +579,18 @@ public class DominoGameState extends GameState {
                     if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
@@ -599,25 +599,25 @@ public class DominoGameState extends GameState {
                     if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.rightSide) {
                         selectedDomino.rightSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == selectedDomino.leftSide) {
                         selectedDomino.leftSide = -1;
                         PublicTrain.add(selectedDomino);
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == selectedDomino.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                            if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
+                                hand.get(playerID).remove(i);
                             }
                         }
                         return true;
                     }
                 }
             }
-        } else if (playerID == 1) { // If Player 2
+        } /*else if (playerID == 1) { // If Player 2
             if (player1Public == true && trainSelection == 0) { // Player 1 Train
                 if (Player1Train.size() == 0) {
                     if (selectedDomino.leftSide == round) {
@@ -1553,7 +1553,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             }
-        }
+        }*/
         return false;
     }
 
@@ -1572,7 +1572,7 @@ public class DominoGameState extends GameState {
      * @return returns true if double was placed succesfully
      */
     public boolean doublePlay(int id, Domino playedDouble, int trainSelection) {
-        if (id == 0) { // If Player 1
+        if (playerTurn == id) { // If Player 1
             if (trainSelection == 0) { // Player 1 Train
                 if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
                     if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
@@ -1580,9 +1580,9 @@ public class DominoGameState extends GameState {
                         Player1Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1592,9 +1592,9 @@ public class DominoGameState extends GameState {
                         Player1Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1606,9 +1606,9 @@ public class DominoGameState extends GameState {
                         Player1Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1618,9 +1618,9 @@ public class DominoGameState extends GameState {
                         Player1Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1634,9 +1634,9 @@ public class DominoGameState extends GameState {
                         Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1648,9 +1648,9 @@ public class DominoGameState extends GameState {
                         Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1660,9 +1660,9 @@ public class DominoGameState extends GameState {
                         Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1674,9 +1674,9 @@ public class DominoGameState extends GameState {
                         Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1686,9 +1686,9 @@ public class DominoGameState extends GameState {
                         Player2Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1702,9 +1702,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1714,9 +1714,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1728,9 +1728,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1740,9 +1740,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1754,9 +1754,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1766,9 +1766,9 @@ public class DominoGameState extends GameState {
                         Player3Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1782,9 +1782,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1794,9 +1794,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1808,9 +1808,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1820,9 +1820,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1834,9 +1834,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1846,9 +1846,9 @@ public class DominoGameState extends GameState {
                         Player4Train.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1862,9 +1862,9 @@ public class DominoGameState extends GameState {
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1874,9 +1874,9 @@ public class DominoGameState extends GameState {
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1888,9 +1888,9 @@ public class DominoGameState extends GameState {
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.leftSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1900,9 +1900,9 @@ public class DominoGameState extends GameState {
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
                         doublePlayDomino = playedDouble.rightSide;
-                        for (int i = 0; i < Player1Hand.size(); i++) {
-                            if (Player1Hand.get(i).pictureID == playedDouble.pictureID) {
-                                Player1Hand.remove(i);
+                        for (int i = 0; i < hand.get(id).size(); i++) {
+                            if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
+                                hand.get(id).remove(i);
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -1910,7 +1910,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             }
-        } else if (id == 1)
+        } /*else if (id == 1)
 
         { // If Player 2
             if (player1Public == true && trainSelection == 0) { // Player 1 Train
@@ -2758,7 +2758,7 @@ public class DominoGameState extends GameState {
                     }
                 }
             }
-        }
+        }*/
         return false;
     }
 

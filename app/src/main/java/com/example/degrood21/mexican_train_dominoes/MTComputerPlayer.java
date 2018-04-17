@@ -60,7 +60,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
         //If it's my turn to play a domino,
         //delay for one and a half seconds(1500); then play
-        sleep(500);
+        sleep(750);
 
         if (!comDifficulty) {
             //simple implementation of computer player

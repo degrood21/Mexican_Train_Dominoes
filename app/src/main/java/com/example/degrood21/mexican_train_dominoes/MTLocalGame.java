@@ -38,8 +38,8 @@ public class MTLocalGame extends LocalGame {
         if (state.round == 0) {
             //check if any of the players' hands have ran out of dominoes, ending the final round of the game
             //resulting in the end of the game.
-            if (state.Player1Hand.size() == 0 || state.Player2Hand.size() == 0 || state.Player3Hand.size() == 0
-                    || state.Player4Hand.size() == 0) {
+            if (state.hand.get(0).size() == 0 || state.hand.get(1).size() == 0 || state.hand.get(2).size() == 0
+                    || state.hand.get(4).size() == 0) {
                 //if player one's score is higher than the others...
                 if (state.player1Score > state.player2Score && state.player1Score > state.player3Score
                         && state.player1Score > state.player4Score) {
@@ -122,18 +122,8 @@ public class MTLocalGame extends LocalGame {
             if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))
                   /*(state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public) || state.PileofDominoes.size() == 0*/) {
-                for (int i = 0; i < state.Player1Hand.size(); i++) {
-                    state.player1Score += state.Player1Hand.get(i).rightSide + state.Player1Hand.get(i).leftSide;
-                }
-                for (int i = 0; i < state.Player2Hand.size(); i++) {
-                    state.player2Score += state.Player2Hand.get(i).rightSide + state.Player2Hand.get(i).leftSide;
-                }
-                for (int i = 0; i < state.Player3Hand.size(); i++) {
-                    state.player3Score += state.Player3Hand.get(i).rightSide + state.Player3Hand.get(i).leftSide;
-                }
-                for (int i = 0; i < state.Player4Hand.size(); i++) {
-                    state.player4Score += state.Player4Hand.get(i).rightSide + state.Player4Hand.get(i).leftSide;
-                }
+
+                countScores();
 
                 int less1, less2;
                 if (state.player1Score < state.player2Score) {
@@ -174,19 +164,23 @@ public class MTLocalGame extends LocalGame {
         } else if (state.round > 0) {
             //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
             //in their hand and won the round.
-            if (state.Player1Hand.size() == 0) {
+            if (state.hand.get(0).size() == 0) {
+                countScores();
                 state.round--;
                 state.roundOver = true;
                 return "Player 1" + " won the Round." + " Score: " + state.player1Score; //player one ran out of dominoes and won the round.
-            } else if (state.Player2Hand.size() == 0) {
+            } else if (state.hand.get(1).size() == 0) {
+                countScores();
                 state.round--;
                 state.roundOver = true;
                 return "Player 2" + " won the Round." + " Score: " + state.player2Score;//player two ran out of dominoes and won the round.
-            } else if (state.Player3Hand.size() == 0) {
+            } else if (state.hand.get(2).size() == 0) {
+                countScores();
                 state.round--;
                 state.roundOver = true;
                 return "Player 3" + " won the Round." + " Score: " + state.player3Score;//player three ran out of dominoes and won the round.
-            } else if (state.Player4Hand.size() == 0) {
+            } else if (state.hand.get(3).size() == 0) {
+                countScores();
                 state.round--;
                 state.roundOver = true;
                 return "Player 4" + " won the Round." + " Score: " + state.player4Score; //player four ran out of dominoes and won the round.
@@ -197,4 +191,22 @@ public class MTLocalGame extends LocalGame {
         }
         return null;
     }
+
+    private void countScores(){
+
+        for (int i = 0; i < state.hand.get(0).size(); i++) {
+            state.player1Score += state.hand.get(0).get(i).rightSide + state.hand.get(0).get(i).leftSide;
+        }
+        for (int i = 0; i < state.hand.get(1).size(); i++) {
+            state.player2Score += state.hand.get(1).get(i).rightSide + state.hand.get(1).get(i).leftSide;
+        }
+        for (int i = 0; i < state.hand.get(2).size(); i++) {
+            state.player3Score += state.hand.get(2).get(i).rightSide + state.hand.get(2).get(i).leftSide;
+        }
+        for (int i = 0; i < state.hand.get(3).size(); i++) {
+            state.player4Score += state.hand.get(3).get(i).rightSide + state.hand.get(3).get(i).leftSide;
+        }
+
+    }
+
 }

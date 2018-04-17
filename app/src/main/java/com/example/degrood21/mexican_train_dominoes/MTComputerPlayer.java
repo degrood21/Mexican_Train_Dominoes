@@ -58,10 +58,6 @@ public class MTComputerPlayer extends GameComputerPlayer {
         //int playerNum = mtState.playerTurn;
         int playerNum = this.playerNum;
 
-        //If it's my turn to play a domino,
-        //delay for one and a half seconds(1500); then play
-        sleep(750);
-
         if (!comDifficulty) {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
@@ -93,7 +89,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                             else if(mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(i), 3)){mtState.playerTurn++;}
                             else if(mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(i), 4)){mtState.playerTurn++;}
 
-                            if (mtState.playerTurn >= 3) {
+                            if (mtState.playerTurn > 3) {
                                 mtState.playerTurn = 0;
                             }
                             break;
@@ -105,17 +101,30 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                 mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), playerNum);
                                 mtState.playerPublic.set(playerNum, false);
                                 mtState.playerTurn++;
+                                if (mtState.playerTurn > 3) {
+                                    mtState.playerTurn = 0;
+                                }
                             } else {
+                                mtState.playerPublic.set(playerNum, true);
                                 mtState.playerTurn++;
+                                if (mtState.playerTurn > 3) {
+                                    mtState.playerTurn = 0;
+                                }
                             }
                         }
                         else {
                             mtState.playerPublic.set(playerNum, true);
                             mtState.playerTurn++;
+                            if (mtState.playerTurn > 3) {
+                                mtState.playerTurn = 0;
+                            }
                         }
                     }
                 }
             }
+            //If it's my turn to play a domino,
+            //delay for one and a half seconds(1500); then play
+            sleep(1500);
             sendInfo(mtState);
         }
         else {

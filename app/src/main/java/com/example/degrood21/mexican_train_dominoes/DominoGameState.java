@@ -1217,6 +1217,88 @@ public class DominoGameState extends GameState {
     }
 
     /**
+     * Smart AI class that will attempt to create a link list of all possible links of dominoes in your hand you could play
+     * by making an arraylist of arraylist's
+     * @param id
+     * @param trainSelection always starts as 0
+     * @return
+     */
+    public ArrayList<Domino> smartAI(int id, int trainSelection){
+
+        ArrayList<ArrayList<Domino>> smartAI = new ArrayList<>();
+        for(int i = 0; i < (currentHand.size()); ++i){//left side
+            for(int j = 0; j < 2; ++j){//right side of each domino
+                currentHand = hand.get(id);//reset hand array each time you can the function
+
+                //loops through all possible link lists of arrays, start with 0-0 so first left side of a domino
+                //then set that to -1, check it's alternate side, count how many other dominoes in hand match
+                //that other side, create an array list for each, then set that to -1, continue this for all arraylists
+                //based on 0-0, then compare all those against each other so you'll get 1 arraylist for the 0-0 position
+                //do the same for 0-1 all the way to hand.last left and hand.last right. Then compare all of those arraylists,
+                //then return the domino with the longest array attached to it. Do this for every train and every domino option,
+                //compare the longest arraylist from each train, if their own train is private play on the longest possible
+                //if their train is public play the longest that can play on their own train
+
+                //find longest train on your own then check any other playable dominoes on public trains and try to get rid
+                //of them so that you can play all yours in a row
+
+                //int i =left
+                //int j = right
+                if(playableTrains(id, currentHand.get(i), 0)){
+                    //if you can play current domino on any public or your own train, if not we don't need a arraylist
+                    if( j == 0){
+                        int currentSide = currentHand.get(i).leftSide;//0-0, left side first domino
+                        int oppositeSide = currentHand.get(i).rightSide;//0-1 right side
+
+                        currentHand.get(i).leftSide = -1;//sets left to -1 so it cant be fuond in recursion
+                        currentHand.get(i).rightSide = -1;//sets right to -1 so it cant be found in recursion
+
+                        smartAIRecursion(currentSide, currentHand, oppositeSide);//calls the recursive function that will build on the train
+                        //add to arraylist
+
+                    }else if(j == 1){
+                        int currentSide = currentHand.get(i).rightSide;//0-1, right side first domino
+                        int oppositeSide = currentHand.get(i).leftSide;//0-0 left side
+                        j=0;//goes back to the left side for the next domino
+                    }
+                }
+
+
+            }
+        }
+        return currentHand;//change to an array
+        //TODO wrong return NOT DONE
+
+    }
+    public int smartAIRecursion(int previousValue, ArrayList currentArray, int matchingValue){
+        //look through hand again with new left
+        for(int i = 0; i < currentHand.size(); i++){
+            if(matchingValue == currentHand.get(i).getLeftSide()){
+                //add it to arraylist
+                int currentSide = currentHand.get(i).leftSide;
+                int oppositeSide = currentHand.get(i).rightSide;
+                currentHand.get(i).leftSide = -1;//sets left to -1 so it cant be fuond in recursion
+                currentHand.get(i).rightSide = -1;//sets right to -1 so it cant be found in recursion
+
+                return smartAIRecursion( currentSide, currentHand , oppositeSide);
+
+            }else if( matchingValue == currentHand.get(i).getRightSide()){
+                //add it to array
+                int oppositeSide = currentHand.get(i).leftSide;
+                int currentSide = currentHand.get(i).rightSide;
+                currentHand.get(i).leftSide = -1;//sets left to -1 so it cant be fuond in recursion
+                currentHand.get(i).rightSide = -1;//sets right to -1 so it cant be found in recursion
+
+                return smartAIRecursion( currentSide, currentHand , oppositeSide);
+            }
+            //return the end of that arraylist
+
+        }//TODO NOT DONE
+
+        return 0;//smartAIRecursion
+    }
+
+    /**
      * randomDomino method
      * <p>
      * randomly creates an int depending on PileofDominoes size

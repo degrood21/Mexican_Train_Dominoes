@@ -128,7 +128,20 @@ public class MTComputerPlayer extends GameComputerPlayer {
             sendInfo(mtState);
         }
         else {
+            for(int i = 0; i < mtState.hand.get(playerNum).size(); i++){
+                if(mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 0)) {
+
+                }
+            }
             //intelligent implementation of computer player, for now does nothing.
+
+            //call checkplayable, if none, draw.
+            //if(doubleplay == truue) satisfy double if possible
+            //else draw
+            //
+            //calls smartAI in DominoGameState
+            //first call check playable on each domino, do in smartAI
+
 
         }
     }

@@ -39,8 +39,8 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="29dp"
-                android:layout_height="25dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:alpha="0.4"
                 android:background="@drawable/questionmark" />

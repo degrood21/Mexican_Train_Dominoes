@@ -453,9 +453,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         });
 
         helpButton.setOnClickListener(new View.OnClickListener() {
+            //displays rules when question mark button is pressed
             @Override
             public void onClick(View v) {
-
+               myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
             }
         });
 

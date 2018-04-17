@@ -27,7 +27,7 @@ public class HelpMenu extends AppCompatActivity  {
        returnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();//ends current activity
+                finish();//ends current activity and returns to game
             }
         });
     }

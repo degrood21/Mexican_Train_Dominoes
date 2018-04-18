@@ -479,16 +479,16 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
                 if (playerNum == state.playerTurn) {
-                    if (state.PileofDominoes.size() == 0 && !state.checkPlayable(0, 0)) {
+                    if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
                         state.playerPublic.set(playerNum, true);
                         state.playerTurn++;
-                    } else if (!state.checkPlayable(0, 0)) {
-                        state.drawAction(0);
+                    } else if (!state.checkPlayable(playerNum, 0)) {
+                        state.drawAction(playerNum);
                         //if its double play you can obly play that new domino on the doubleplaytrain
                         if (state.doublePlay) {
-                            if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain))
-                            {
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                            if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
+                                //place dominoes
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                                 state.playerTurn++;
                                 if (state.playerTurn > 3) {
                                     state.playerTurn = 0;
@@ -496,21 +496,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
                         }
                         //if you can now play any domino on any public train play it
-                        else if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0)
-                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1)
-                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
-                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
-                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
+                        else if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
                             //trys to play on all trains with your ned domino
-                            if (state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
+                            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
                                 state.playerPublic.set(playerNum, false);
                                 //sets your train to false since you played on your own train
                             } else {
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0);
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1);
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2);
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3);
-                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4);
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0);
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1);
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2);
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3);
+                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4);
                                 //sets your train to false since you played
                                 state.playerPublic.set(playerNum, true);
                                 state.playerTurn++;

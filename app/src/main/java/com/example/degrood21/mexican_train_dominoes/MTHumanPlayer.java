@@ -39,7 +39,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 4 Train (max 6)
 
     private Button quitButton, restartButton, helpButton, drawButton;
-    private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV;
+    private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
     private ImageView turnMarker1, turnMarker2, turnMarker3, turnMarker4, roundDom, p1First, p1Second,
             p1Third, p1Fourth, p1Fifth, p1Sixth, p2First, p2Second, p2Third, p2Fourth, p2Fifth,
             p2Sixth, p3First, p3Second, p3Third, p3Fourth, p3Fifth, p3Sixth, p4First, p4Second,
@@ -261,9 +261,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             PublicTrainIVs.get(i).getLayoutParams().width = 200;
 
         }
-        if (state.PublicTrain.size() != 0)
-
-        {
+        if (state.PublicTrain.size() != 0) {
             int j = state.PublicTrain.size() - 1;
             for (int i = PublicTrainIVs.size() - 2; i >= 0; i--) {
 
@@ -339,6 +337,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         //Displays to player in words what round it is
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
+        pileOfDominoCounter.setText("Dominoes in Pile: "+ state.PileofDominoes.size());
 
         //resend the state to keep the state updating as play moves on
         sendInfo(state);
@@ -376,6 +375,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
         p4ScoreTV = (TextView) myActivity.findViewById(R.id.player4Score);
         roundTV = (TextView) myActivity.findViewById(R.id.roundView);
+        pileOfDominoCounter = (TextView) myActivity.findViewById(R.id.domPileTV);
         roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
         turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
         turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
@@ -463,19 +463,17 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 /**
-                   External Citation:
-                    Date: 15 April 2018
-                    Problem: I wasn't sure how to start a new activity
-                    Resource: https://www.youtube.com/watch?v=n21mXO1ASJM&t=62s
-                    Solution: I used the code from this video.
+                 External Citation:
+                 Date: 15 April 2018
+                 Problem: I wasn't sure how to start a new activity
+                 Resource: https://www.youtube.com/watch?v=n21mXO1ASJM&t=62s
+                 Solution: I used the code from this video.
                  */
-               myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
+                myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
             }
         });
 
-        drawButton.setOnClickListener(new View.OnClickListener()
-
-        {
+        drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -537,9 +535,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
          * All Sixth ImageView in each train is listening for a click in order to place domino within that train
          *
          */
-        p1Sixth.setOnClickListener(new View.OnClickListener()
-
-        {
+        p1Sixth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (playerNum == state.playerTurn) {
@@ -564,9 +560,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
-        p2Sixth.setOnClickListener(new View.OnClickListener()
-
-        {
+        p2Sixth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -593,9 +587,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
-        p3Sixth.setOnClickListener(new View.OnClickListener()
-
-        {
+        p3Sixth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -621,9 +613,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
-        p4Sixth.setOnClickListener(new View.OnClickListener()
-
-        {
+        p4Sixth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -649,9 +639,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
-        publicSixth.setOnClickListener(new View.OnClickListener()
-
-        {
+        publicSixth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -679,12 +667,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         //Goes through each Hand ImageView to see which one is selected
 
-        for (int i = 0; i < HandIVs.size(); i++)
-
-        {
-            HandIVs.get(i).setOnClickListener(new View.OnClickListener()
-
-            {
+        for (int i = 0; i < HandIVs.size(); i++) {
+            HandIVs.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 

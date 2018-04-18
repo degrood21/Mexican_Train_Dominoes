@@ -39,8 +39,8 @@
 
             <Button
                 android:id="@+id/button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="29dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="10dp"
                 android:alpha="0.4"
                 android:background="@drawable/questionmark" />
@@ -682,6 +682,26 @@
             android:layout_marginTop="18dp"
             android:rotation="90"
             app:srcCompat="@drawable/c6_6" />
+
+        <TextView
+            android:id="@+id/domPileTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Dominoes in pile:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/domPileNumTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:text="0" />
 
         <LinearLayout
             android:layout_width="match_parent"

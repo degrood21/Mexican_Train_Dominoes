@@ -94,7 +94,18 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             newRound.player4Score = state.player4Score;
             this.state = newRound;
 
+            p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
+            p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
+            p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
+            p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
+
+
         }
+
+
+
+
+
 
         /*LinearLayout lView = (LinearLayout)myActivity.findViewById(R.id.ButtonLayout);
 
@@ -276,6 +287,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 }
 
             }
+
+
         }
 
         /**
@@ -369,6 +382,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         p2ScoreTV = (TextView) myActivity.findViewById(R.id.player2Score);
         p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
         p4ScoreTV = (TextView) myActivity.findViewById(R.id.player4Score);
+
         roundTV = (TextView) myActivity.findViewById(R.id.roundView);
         roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
         turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
@@ -456,6 +470,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             //displays rules when question mark button is pressed
             @Override
             public void onClick(View v) {
+                /**
+                   External Citation:
+                    Date: 15 April 2018
+                    Problem: I wasn't sure how to start a new activity
+                    Resource: https://www.youtube.com/watch?v=n21mXO1ASJM&t=62s
+                    Solution: I used the code from this video.
+                 */
                myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
             }
         });

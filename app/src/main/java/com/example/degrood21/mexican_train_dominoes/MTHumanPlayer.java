@@ -456,7 +456,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             //displays rules when question mark button is pressed
             @Override
             public void onClick(View v) {
-               myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
+                myActivity.startActivity(new Intent(myActivity, HelpMenu.class));
             }
         });
 
@@ -473,13 +473,46 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                         state.playerTurn++;
                     } else if (!state.checkPlayable(0, 0)) {
                         state.drawAction(0);
-                        if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
-                            state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum);
-                            state.playerPublic.set(playerNum, false);
-                            state.playerTurn++;
+                        //if its double play you can obly play that new domino on the doubleplaytrain
+                        if (state.doublePlay) {
+                            if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain))
+                            {
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                                state.playerTurn++;
+                                if (state.playerTurn > 3) {
+                                    state.playerTurn = 0;
+                                }
+                            }
+                        }
+                        //if you can now play any domino on any public train play it
+                        else if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0)
+                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1)
+                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
+                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
+                                || state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
+                            //trys to play on all trains with your ned domino
+                            if (state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
+                                state.playerPublic.set(playerNum, false);
+                                //sets your train to false since you played on your own train
+                            } else {
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0);
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1);
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2);
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3);
+                                state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4);
+                                //sets your train to false since you played
+                                state.playerPublic.set(playerNum, true);
+                                state.playerTurn++;
+                                if (state.playerTurn > 3) {
+                                    state.playerTurn = 0;
+                                }
+                            }
                         } else {
                             state.playerPublic.set(playerNum, true);
                             state.playerTurn++;
+                            if (state.playerTurn > 3) {
+                                state.playerTurn = 0;
+                            }
                         }
                     }
                 }
@@ -642,7 +675,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 @Override
                 public void onClick(View v) {
 
-                    if(playerNum == state.playerTurn) {
+                    if (playerNum == state.playerTurn) {
                         for (int i = 0; i < HandIVs.size(); i++) {
 
                             HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
@@ -710,7 +743,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
      */
     public void doubleHelper() {
 
-        if(playerNum == state.playerTurn) {
+        if (playerNum == state.playerTurn) {
             if (state.placeDomino(0, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {
                 state.doublePlay = false;
                 state.playerTurn++;

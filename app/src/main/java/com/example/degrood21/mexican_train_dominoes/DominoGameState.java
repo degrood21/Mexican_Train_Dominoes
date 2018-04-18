@@ -1213,7 +1213,7 @@ public class DominoGameState extends GameState {
             }
             return doubleEndOfTrain(++id);//recursions to check the next hand or pile for the doublePlayDomino value
         }
-        return false;//returns as if its not double play
+        return true;//returns as if its not double play
     }
 
     /**

@@ -151,7 +151,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                 if (mtState.hand.get(playerNum).size() > 0) {
                     //if this for loop happens the other doesnt
                     for (int i = 0; i < mtState.hand.get(playerNum).size(); i++) {
-                        if (true/*mtState.playerPublic == true*/) {//if your train is public//TODO fixme
+                        if (mtState.playerPublic.get(playerNum)) {//if your train is public
                             if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), playerNum)) {
                                 //if you can play on your own train
                                 if (mtState.doublePlay) {

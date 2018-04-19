@@ -1,5 +1,7 @@
 package com.example.degrood21.mexican_train_dominoes.game.infoMsg;
 
+import java.io.Serializable;
+
 /**
  * A message from the com.example.degrood21.mexican_train_dominoes.game to a player that tells the player that
  * the com.example.degrood21.mexican_train_dominoes.game is over.
@@ -7,7 +9,7 @@ package com.example.degrood21.mexican_train_dominoes.game.infoMsg;
  * @author Steven R. Vegdahl 
  * @version July 2013
  */
-public class GameOverInfo extends GameInfo {
+public class GameOverInfo extends GameInfo implements Serializable{
 	
 	// to satisfy the Serializable interface
 	private static final long serialVersionUID = -8005304466588509849L;

@@ -196,6 +196,7 @@ public class MTLocalGame extends LocalGame {
 
         for (int i = 0; i < state.hand.get(0).size(); i++) {
             state.player1Score += state.hand.get(0).get(i).rightSide + state.hand.get(0).get(i).leftSide;
+
         }
         for (int i = 0; i < state.hand.get(1).size(); i++) {
             state.player2Score += state.hand.get(1).get(i).rightSide + state.hand.get(1).get(i).leftSide;

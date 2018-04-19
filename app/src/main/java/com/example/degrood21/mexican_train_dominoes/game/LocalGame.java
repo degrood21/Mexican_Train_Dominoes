@@ -347,6 +347,8 @@ public abstract class LocalGame implements Game, Tickable {
 			p.sendInfo(new GameOverInfo(msg));
 		}
 
+		gameStage = GameStage.DURING_GAME;
+
 	}
 	
 	/**

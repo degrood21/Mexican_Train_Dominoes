@@ -86,13 +86,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         this.state = (DominoGameState) info; //gets reference to state
 
-        if (state.roundOver) {
+        /*if (state.roundOver) {
 
+            state.round++;
             DominoGameState newRound = new DominoGameState(4, state.round);
-            newRound.player1Score = state.player1Score;
-            newRound.player2Score = state.player2Score;
-            newRound.player3Score = state.player3Score;
-            newRound.player4Score = state.player4Score;
+            newRound.player1Score = state.player1Score/2;
+            newRound.player2Score = state.player2Score/2;
+            newRound.player3Score = state.player3Score/2;
+            newRound.player4Score = state.player4Score/2;
             this.state = newRound;
 
             p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
@@ -100,8 +101,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
             p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
 
+            state.roundOver = false;
 
-        }
+            sendInfo(this.state);
+
+
+        }*/
 
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!");
@@ -129,8 +134,98 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
          *
          * sends an empty Action that currently does nothing
          */
-        MTSelectAction SA = new MTSelectAction(this);
-        game.sendAction(SA);
+        //if(!state.roundOver) {
+            roundOverAction SA = new roundOverAction(this, state);
+            if(SA.checkRoundOver()) {
+
+                if (state.PileofDominoes.size() == 0) {
+                    if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
+                            && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
+
+                        SA.countScores();
+
+                        int less1, less2;
+                        if (state.player1Score < state.player2Score) {
+                            less1 = state.player1Score;
+                        } else {
+                            less1 = state.player2Score;
+                        }
+
+                        if (state.player3Score < state.player4Score) {
+                            less2 = state.player3Score;
+                        } else {
+                            less2 = state.player4Score;
+                        }
+
+                        if (less1 < less2) {
+                            if (less1 == state.player1Score) {
+                                state.round--;
+                                state.roundOver = true;
+                                myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score);
+                            } else {
+                                state.round--;
+                                state.roundOver = true;
+                                myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);
+                            }
+                        } else {
+                            if (less2 == state.player3Score) {
+                                state.round--;
+                                state.roundOver = true;
+                                myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);
+                            } else {
+                                state.round--;
+                                state.roundOver = true;
+                                myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score);
+                            }
+                        }
+                    }
+
+                } else if (state.round > 0) {
+                    //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
+                    //in their hand and won the round.
+                    if (state.hand.get(0).size() == 0) {
+                        SA.countScores();
+                        state.round--;
+                        state.roundOver = true;
+                        myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score); //player one ran out of dominoes and won the round.
+                    } else if (state.hand.get(1).size() == 0) {
+                        SA.countScores();
+                        state.round--;
+                        state.roundOver = true;
+                        myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);//player two ran out of dominoes and won the round.
+                    } else if (state.hand.get(2).size() == 0) {
+                        SA.countScores();
+                        state.round--;
+                        state.roundOver = true;
+                        myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);//player three ran out of dominoes and won the round.
+                    } else if (state.hand.get(3).size() == 0) {
+                        SA.countScores();
+                        state.round--;
+                        state.roundOver = true;
+                        myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score); //player four ran out of dominoes and won the round.
+                    } else {
+                        //All players still have dominoes in their hands, the game goes on.
+                    }
+                }
+
+                DominoGameState newRound = new DominoGameState(4, state.round);
+                newRound.player1Score = state.player1Score / 2;
+                newRound.player2Score = state.player2Score / 2;
+                newRound.player3Score = state.player3Score / 2;
+                newRound.player4Score = state.player4Score / 2;
+                this.state = newRound;
+
+                p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
+                p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
+                p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
+                p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
+
+                state.roundOver = false;
+
+                sendInfo(this.state);
+
+            }
+        //}
 
         /**
          * All for loops and if statements until next comment
@@ -337,8 +432,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
 
         //Sets the round image according to what round it is
-        roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
-        roundDom.getLayoutParams().width = 150;
+        if(!(state.PublicTrain.size() == 0)) {
+            roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
+            roundDom.getLayoutParams().width = 150;
+        }
 
         //Displays to player in words what round it is
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
@@ -510,6 +607,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             //trys to play on all trains with your ned domino
                             if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
                                 state.playerPublic.set(playerNum, false);
+                                state.playerTurn++;
+                                if (state.playerTurn > 3) {
+                                    state.playerTurn = 0;
+                                }
                                 //sets your train to false since you played on your own train
                             } else {
                                 state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0);

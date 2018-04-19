@@ -107,21 +107,21 @@ public class MTLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        if (checkIfGameOver() != null) {
+        /*if (checkIfGameOver() != null) {
             return true;
         }
         if (checkIfRoundOver() != null){
             return true;
-        }
+        }*/
         return false;
     }
 
     protected String checkIfRoundOver() {
 
-        if (state.PileofDominoes.size() == 0) {
+        /*if (state.PileofDominoes.size() == 0) {
             if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))
-                  /*(state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public) || state.PileofDominoes.size() == 0*/) {
+                  *//*(state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public) || state.PileofDominoes.size() == 0*//*) {
 
                 countScores();
 
@@ -188,7 +188,7 @@ public class MTLocalGame extends LocalGame {
                 //All players still have dominoes in their hands, the game goes on.
                 return null;
             }
-        }
+        }*/
         return null;
     }
 

@@ -92,16 +92,16 @@ public class DominoGameState extends GameState {
 
         playerTurn = 0; // 0 means it is player 1's turn
 
-        if(round == 12) {
+        if (round == 12) {
             player1Score = 0;
             player2Score = 0;
             player3Score = 0;
             player4Score = 0;
         }
-            player1Public = false;
-            player2Public = false;
-            player3Public = false;
-            player4Public = false;
+        player1Public = false;
+        player2Public = false;
+        player3Public = false;
+        player4Public = false;
         //add the boolean of each player's train to the arraylist of playerPublic
         playerPublic.add(player1Public);
         playerPublic.add(player2Public);
@@ -247,6 +247,7 @@ public class DominoGameState extends GameState {
             hand.get(0).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
+
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
             hand.get(1).add(PileofDominoes.get(dom));
@@ -1077,7 +1078,7 @@ public class DominoGameState extends GameState {
      *
      * @param id             current player
      * @param selectedDomino domino that wants to be played by player
-     * @param train specific train to check if domino can be played here
+     * @param train          specific train to check if domino can be played here
      * @return true if that domino can be played on that train
      */
     public boolean playableTrains(int id, Domino selectedDomino, int train) {
@@ -1089,10 +1090,10 @@ public class DominoGameState extends GameState {
         /*
         sets the current trains to the respective players train
          */
-        if(doublePlay){
+        if (doublePlay) {
             trainSelection = doublePlayTrain;
         }
-        else if (trainSelection == 0) {
+        if (trainSelection == 0) {
             currentTrain = Player1Train;
         } else if (trainSelection == 1) {
             currentTrain = Player2Train;
@@ -1198,11 +1199,10 @@ public class DominoGameState extends GameState {
             //the force doubleplay
 
 
-
             //sets current hand equal to the players/pile's hand array
-            if(id < 4) {
+            if (id < 4) {
                 currentHand = hand.get(id);
-            }else{
+            } else {
                 currentHand = PileofDominoes;
             }
 
@@ -1225,15 +1225,16 @@ public class DominoGameState extends GameState {
     /**
      * Smart AI class that will attempt to create a link list of all possible links of dominoes in your hand you could play
      * by making an arraylist of arraylist's
+     *
      * @param id
      * @param trainSelection always starts as 0
      * @return
      */
-    public ArrayList<Domino> smartAI(int id, int trainSelection){
+    public ArrayList<Domino> smartAI(int id, int trainSelection) {
 
         ArrayList<ArrayList<Domino>> smartAI = new ArrayList<>();
-        for(int i = 0; i < (currentHand.size()); ++i){//left side
-            for(int j = 0; j < 2; ++j){//right side of each domino
+        for (int i = 0; i < (currentHand.size()); ++i) {//left side
+            for (int j = 0; j < 2; ++j) {//right side of each domino
                 currentHand = hand.get(id);//reset hand array each time you can the function
 
                 //loops through all possible link lists of arrays, start with 0-0 so first left side of a domino
@@ -1250,9 +1251,9 @@ public class DominoGameState extends GameState {
 
                 //int i =left
                 //int j = right
-                if(playableTrains(id, currentHand.get(i), 0)){
+                if (playableTrains(id, currentHand.get(i), 0)) {
                     //if you can play current domino on any public or your own train, if not we don't need a arraylist
-                    if( j == 0){
+                    if (j == 0) {
                         int currentSide = currentHand.get(i).leftSide;//0-0, left side first domino
                         int oppositeSide = currentHand.get(i).rightSide;//0-1 right side
 
@@ -1262,10 +1263,10 @@ public class DominoGameState extends GameState {
                         smartAIRecursion(currentSide, currentHand, oppositeSide);//calls the recursive function that will build on the train
                         //add to arraylist
 
-                    }else if(j == 1){
+                    } else if (j == 1) {
                         int currentSide = currentHand.get(i).rightSide;//0-1, right side first domino
                         int oppositeSide = currentHand.get(i).leftSide;//0-0 left side
-                        j=0;//goes back to the left side for the next domino
+                        j = 0;//goes back to the left side for the next domino
                     }
                 }
 
@@ -1276,26 +1277,27 @@ public class DominoGameState extends GameState {
         //TODO wrong return NOT DONE
 
     }
-    public int smartAIRecursion(int previousValue, ArrayList currentArray, int matchingValue){
+
+    public int smartAIRecursion(int previousValue, ArrayList currentArray, int matchingValue) {
         //look through hand again with new left
-        for(int i = 0; i < currentHand.size(); i++){
-            if(matchingValue == currentHand.get(i).getLeftSide()){
+        for (int i = 0; i < currentHand.size(); i++) {
+            if (matchingValue == currentHand.get(i).getLeftSide()) {
                 //add it to arraylist
                 int currentSide = currentHand.get(i).leftSide;
                 int oppositeSide = currentHand.get(i).rightSide;
                 currentHand.get(i).leftSide = -1;//sets left to -1 so it cant be fuond in recursion
                 currentHand.get(i).rightSide = -1;//sets right to -1 so it cant be found in recursion
 
-                return smartAIRecursion( currentSide, currentHand , oppositeSide);
+                return smartAIRecursion(currentSide, currentHand, oppositeSide);
 
-            }else if( matchingValue == currentHand.get(i).getRightSide()){
+            } else if (matchingValue == currentHand.get(i).getRightSide()) {
                 //add it to array
                 int oppositeSide = currentHand.get(i).leftSide;
                 int currentSide = currentHand.get(i).rightSide;
                 currentHand.get(i).leftSide = -1;//sets left to -1 so it cant be fuond in recursion
                 currentHand.get(i).rightSide = -1;//sets right to -1 so it cant be found in recursion
 
-                return smartAIRecursion( currentSide, currentHand , oppositeSide);
+                return smartAIRecursion(currentSide, currentHand, oppositeSide);
             }
             //return the end of that arraylist
 

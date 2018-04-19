@@ -987,11 +987,11 @@ public class DominoGameState extends GameState {
 
     public boolean drawAction(int id) {
 
-        Random rand = new Random();
-
+        Random rand = new Random();//create new random instance
+        //first check if there are no dominoes in the draw pile
         if (PileofDominoes == null || PileofDominoes.size() == 0) {
             return false;
-        } else {
+        } else { //if dominoes still remain in the pile then assign a random domino to the correct player id.
             int randomIndex = rand.nextInt(PileofDominoes.size());
             if (id == 0) {
                 Player1Hand.add(PileofDominoes.get(randomIndex));

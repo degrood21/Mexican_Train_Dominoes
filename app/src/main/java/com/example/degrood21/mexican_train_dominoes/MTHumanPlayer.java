@@ -102,13 +102,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
 
-        /*LinearLayout lView = (LinearLayout)myActivity.findViewById(R.id.ButtonLayout);
+        LinearLayout lView = (LinearLayout)myActivity.findViewById(R.id.ButtonLayout);
 
         TextView myText = (TextView) new TextView(myActivity);
-        myText.setText("My Text");
+        myText.setText("DOUBLE PLAY!");
         myText.setTextSize(20);
 
-        lView.addView(myText);*/
+        lView.addView(myText);
+        if(state.doublePlay) {
+            myText.setVisibility(View.VISIBLE);
+        }
+        else {
+            myText.setVisibility(View.INVISIBLE);
+        }
 
         /*if(state.doublePlay) {
             Toast.makeText(myActivity, "Double Domino Has Been Played", Toast.LENGTH_SHORT); //NEVER STOPS DISPLAYING

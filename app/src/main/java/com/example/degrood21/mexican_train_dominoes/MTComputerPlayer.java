@@ -105,6 +105,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                             if (mtState.doublePlay) {
                                 if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), mtState.doublePlayTrain)) {
                                     mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), mtState.doublePlayTrain);
+                                    mtState.doublePlay = false;
                                 }
                                 mtState.playerTurn++;
                                 if (mtState.playerTurn > 3) {//check this

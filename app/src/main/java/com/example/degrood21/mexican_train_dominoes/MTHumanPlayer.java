@@ -492,8 +492,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                         //if its double play you can obly play that new domino on the doubleplaytrain
                         if (state.doublePlay) {
                             if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                                //place dominoes
+                                //place domino
                                 state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                                state.doublePlay = false;
                             }
                             state.playerTurn++;
                             if (state.playerTurn > 3) {

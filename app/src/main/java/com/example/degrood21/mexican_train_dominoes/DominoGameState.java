@@ -1197,8 +1197,14 @@ public class DominoGameState extends GameState {
         if (doublePlay) {//if doubleplay if true check if its the last of its number and override
             //the force doubleplay
 
+
+
             //sets current hand equal to the players/pile's hand array
-            currentHand = hand.get(id);
+            if(id < 4) {
+                currentHand = hand.get(id);
+            }else{
+                currentHand = PileofDominoes;
+            }
 
             for (int i = 0; i < currentHand.size(); i++) {
                 if (currentHand.get(i).rightSide == doublePlayDomino//can play right side on the double domino
@@ -1206,7 +1212,7 @@ public class DominoGameState extends GameState {
                     return true;//you can play on the double
                 }
             }
-            if (id >= 5) {
+            if (id >= 4) {
                 doublePlay = false;//sets double to false
                 return true;//sets double play boolean to false then should continue your turn
                 // as usual but without forcing you to play on double

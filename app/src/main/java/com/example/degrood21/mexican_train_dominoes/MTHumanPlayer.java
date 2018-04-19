@@ -2,6 +2,7 @@ package com.example.degrood21.mexican_train_dominoes;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
@@ -102,13 +103,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         }
 
-        LinearLayout lView = (LinearLayout)myActivity.findViewById(R.id.ButtonLayout);
-
-        TextView myText = (TextView) new TextView(myActivity);
+        TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!");
-        myText.setTextSize(20);
+        myText.setTextColor(Color.BLACK);
+        myText.setBackgroundColor(Color.argb(255,255,0,0));
 
-        lView.addView(myText);
         if(state.doublePlay) {
             myText.setVisibility(View.VISIBLE);
         }
@@ -343,7 +342,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         //Displays to player in words what round it is
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
-        pileOfDominoCounter.setText("Dominoes in Pile: "+ state.PileofDominoes.size());
+        pileOfDominoCounter.setText(""+ state.PileofDominoes.size());
 
         //resend the state to keep the state updating as play moves on
         sendInfo(state);
@@ -381,7 +380,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
         p4ScoreTV = (TextView) myActivity.findViewById(R.id.player4Score);
         roundTV = (TextView) myActivity.findViewById(R.id.roundView);
-        pileOfDominoCounter = (TextView) myActivity.findViewById(R.id.domPileTV);
+        pileOfDominoCounter = (TextView) myActivity.findViewById(R.id.domPileNumTV);
         roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
         turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
         turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
@@ -495,10 +494,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
                                 //place dominoes
                                 state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
-                                state.playerTurn++;
-                                if (state.playerTurn > 3) {
-                                    state.playerTurn = 0;
-                                }
+                            }
+                            state.playerTurn++;
+                            if (state.playerTurn > 3) {
+                                state.playerTurn = 0;
                             }
                         }
                         //if you can now play any domino on any public train play it
@@ -704,27 +703,35 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                                 HandIVs.get(i).setBackgroundResource(R.color.colorPrimary);
 
-
-                                if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 0)) {
-                                    Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                                    Player1TrainIVs.get(5).getLayoutParams().height = 50;
+                                if (state.doublePlayTrain == 0 && state.doublePlay || !state.doublePlay) {
+                                    if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 0)) {
+                                        Player1TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                        Player1TrainIVs.get(5).getLayoutParams().height = 50;
+                                    }
                                 }
-                                if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 1)) {
-                                    Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                                    Player2TrainIVs.get(5).getLayoutParams().height = 50;
+                                if (state.doublePlayTrain == 1 && state.doublePlay || !state.doublePlay) {
+                                    if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 1)) {
+                                        Player2TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                        Player2TrainIVs.get(5).getLayoutParams().height = 50;
+                                    }
                                 }
-                                if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 2)) {
-                                    Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                                    Player3TrainIVs.get(5).getLayoutParams().height = 50;
+                                if (state.doublePlayTrain == 2 && state.doublePlay || !state.doublePlay) {
+                                    if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 2)) {
+                                        Player3TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                        Player3TrainIVs.get(5).getLayoutParams().height = 50;
+                                    }
                                 }
-                                if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 3)) {
-                                    Player4TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                                    Player4TrainIVs.get(5).getLayoutParams().height = 50;
+                                if (state.doublePlayTrain == 3 && state.doublePlay || !state.doublePlay) {
+                                    if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 3)) {
+                                        Player4TrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                        Player4TrainIVs.get(5).getLayoutParams().height = 50;
+                                    }
                                 }
-                                if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 4)) {
-                                    PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
-                                    PublicTrainIVs.get(5).getLayoutParams().height = 50;
-
+                                if (state.doublePlayTrain == 4 && state.doublePlay || !state.doublePlay) {
+                                    if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(i), 4)) {
+                                        PublicTrainIVs.get(5).setImageResource(R.drawable.purple_delete_button);
+                                        PublicTrainIVs.get(5).getLayoutParams().height = 50;
+                                    }
                                 }
 
                             }

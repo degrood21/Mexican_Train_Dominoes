@@ -704,11 +704,22 @@
             android:text="0" />
 
         <LinearLayout
+            android:id="@+id/drawButtonLayout"
             android:layout_width="match_parent"
-            android:layout_height="362dp"
+            android:layout_height="315dp"
             android:background="@color/green_playboard"
             android:gravity="bottom"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/doublePlayTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="100dp"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:text="TextView"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/drawButton"

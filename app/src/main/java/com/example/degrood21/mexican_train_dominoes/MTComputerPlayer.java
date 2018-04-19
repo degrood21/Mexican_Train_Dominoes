@@ -53,6 +53,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
         if (!(info instanceof DominoGameState)) {
             return;
         }
+        sleep(750);//delay for one and a half seconds(1500); then play
         //update our variable
         mtState = (DominoGameState) info;
         //int playerNum = mtState.playerTurn;
@@ -76,6 +77,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                     mtState.playerTurn++;//increment turn
                                 } else {
                                     mtState.playerPublic.set(playerNum, true);
+                                    //mtState.playerTurn++;
                                 }
                             } else if (mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(i), playerNum)) {//places on own train
                                 mtState.playerPublic.set(playerNum, false);
@@ -103,10 +105,10 @@ public class MTComputerPlayer extends GameComputerPlayer {
                             if (mtState.doublePlay) {
                                 if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), mtState.doublePlayTrain)) {
                                     mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), mtState.doublePlayTrain);
-                                    mtState.playerTurn++;
-                                    if (mtState.playerTurn > 3) {//check this
-                                        mtState.playerTurn = 0;
-                                    }
+                                }
+                                mtState.playerTurn++;
+                                if (mtState.playerTurn > 3) {//check this
+                                    mtState.playerTurn = 0;
                                 }
                             }
                             //if you can now play any domino on any public train play it
@@ -118,6 +120,10 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                 //trys to play on all trains with your ned domino
                                 if (mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), playerNum)) {
                                     mtState.playerPublic.set(playerNum, false);
+                                    mtState.playerTurn++;
+                                    if (mtState.playerTurn > 3) {
+                                        mtState.playerTurn = 0;
+                                    }
                                     //sets your train to false since you played on your own train
                                 } else {
                                     mtState.placeDomino(playerNum, mtState.hand.get(playerNum).get(mtState.hand.get(playerNum).size() - 1), 0);
@@ -133,6 +139,13 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                     }
                                 }
                             }
+                            else if(playerNum == mtState.playerTurn){
+                                mtState.playerPublic.set(playerNum, true);
+                                mtState.playerTurn++;
+                                if (mtState.playerTurn > 3) {
+                                    mtState.playerTurn = 0;
+                                }
+                            }
                         } else {//if you can't draw at all
                             mtState.playerPublic.set(playerNum, true);
                             mtState.playerTurn++;
@@ -144,7 +157,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
                 }
             }
-            sleep(1500);//delay for one and a half seconds(1500); then play
+            sleep(750);//delay for one and a half seconds(1500); then play
             sendInfo(mtState);//redraws the state
         } else {
             //for(int i = 0; i < mtState.hand.get(playerNum).size(); i++){

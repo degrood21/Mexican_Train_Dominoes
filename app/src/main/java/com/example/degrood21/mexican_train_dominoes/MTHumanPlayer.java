@@ -144,9 +144,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             HandIVs.get(i).getLayoutParams().width = 200;
 
         }
-        for (int i = 0; i < state.hand.get(0).size(); i++) {
+        for (int i = 0; i < state.hand.get(playerNum).size(); i++) {
 
-            HandIVs.get(i).setImageResource(state.hand.get(0).get(i).pictureID);
+            HandIVs.get(i).setImageResource(state.hand.get(playerNum).get(i).pictureID);
             HandIVs.get(i).getLayoutParams().width = 200;
 
         }
@@ -558,10 +558,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                         if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 0)) {
 
                             state.playerPublic.set(playerNum, false);
+                            state.playerTurn++;
                             if (state.playerTurn >= 3) {
                                 state.playerTurn = 0;
-                            } else {
-                                state.playerTurn++;
                             }
 
                         }
@@ -576,17 +575,16 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if (state.playerTurn == 0) {
+                if (state.playerTurn == playerNum) {
                     if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 1)) {
 
                         if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 1)) {
 
+                            state.playerTurn++;
                             if (state.playerTurn >= 3) {
                                 state.playerTurn = 0;
-                            } else {
-                                state.playerTurn++;
                             }
 
                         }
@@ -603,17 +601,15 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if (state.playerTurn == 0) {
+                if (state.playerTurn == playerNum) {
                     if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 2)) {
 
                         if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 2)) {
-
+                            state.playerTurn++;
                             if (state.playerTurn >= 3) {
                                 state.playerTurn = 0;
-                            } else {
-                                state.playerTurn++;
                             }
 
                         }
@@ -629,17 +625,16 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if (state.playerTurn == 0) {
+                if (state.playerTurn == playerNum) {
                     if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 3)) {
 
                         if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 3)) {
 
+                            state.playerTurn++;
                             if (state.playerTurn >= 3) {
                                 state.playerTurn = 0;
-                            } else {
-                                state.playerTurn++;
                             }
 
                         }
@@ -655,17 +650,16 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
 
-                if (state.playerTurn == 0) {
+                if (state.playerTurn == playerNum) {
                     if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 4)) {
 
                         if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 4)) {
 
+                            state.playerTurn++;
                             if (state.playerTurn >= 3) {
                                 state.playerTurn = 0;
-                            } else {
-                                state.playerTurn++;
                             }
 
                         }
@@ -761,13 +755,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     public void doubleHelper() {
 
         if (playerNum == state.playerTurn) {
-            if (state.placeDomino(0, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {
+            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {
                 state.doublePlay = false;
                 state.playerTurn++;
             } else {
-                state.drawAction(0);
-                if (state.playableTrains(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                    state.placeDomino(0, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                state.drawAction(playerNum);
+                if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
+                    state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                     state.playerPublic.set(playerNum, false);
                     state.playerTurn++;
                 } else {

@@ -40,7 +40,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 4 Train (max 6)
 
     private Button quitButton, restartButton, helpButton, drawButton;
-    private TextView p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
+    private TextView player1TrainTV, player2TrainTV, player3TrainTV, player4TrainTV,p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
     private ImageView turnMarker1, turnMarker2, turnMarker3, turnMarker4, roundDom, p1First, p1Second,
             p1Third, p1Fourth, p1Fifth, p1Sixth, p2First, p2Second, p2Third, p2Fourth, p2Fifth,
             p2Sixth, p3First, p3Second, p3Third, p3Fourth, p3Fifth, p3Sixth, p4First, p4Second,
@@ -381,6 +381,30 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
             }
         }
+        if(state.playerTurn == 0 ){
+            player1TrainTV.setBackgroundResource(R.color.colorAccent);
+            player2TrainTV.setBackgroundResource(R.color.green_playboard);
+            player3TrainTV.setBackgroundResource(R.color.green_playboard);
+            player4TrainTV.setBackgroundResource(R.color.green_playboard);
+        }
+        else if(state.playerTurn == 1){
+            player1TrainTV.setBackgroundResource(R.color.green_playboard);
+            player2TrainTV.setBackgroundResource(R.color.colorAccent);
+            player3TrainTV.setBackgroundResource(R.color.green_playboard);
+            player4TrainTV.setBackgroundResource(R.color.green_playboard);
+        }
+        else if(state.playerTurn == 2){
+            player1TrainTV.setBackgroundResource(R.color.green_playboard);
+            player2TrainTV.setBackgroundResource(R.color.green_playboard);
+            player3TrainTV.setBackgroundResource(R.color.colorAccent);
+            player4TrainTV.setBackgroundResource(R.color.green_playboard);
+        }
+        else if(state.playerTurn == 3){
+            player1TrainTV.setBackgroundResource(R.color.green_playboard);
+            player2TrainTV.setBackgroundResource(R.color.green_playboard);
+            player3TrainTV.setBackgroundResource(R.color.green_playboard);
+            player4TrainTV.setBackgroundResource(R.color.colorAccent);
+        }
 
         /**
          * All if statements till next comment sets a trainMarker in front of train
@@ -483,6 +507,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
         turnMarker3 = (ImageView) myActivity.findViewById(R.id.turnMarker3);
         turnMarker4 = (ImageView) myActivity.findViewById(R.id.turnMarker4);
+
+        player1TrainTV = (TextView) myActivity.findViewById(R.id.player1Train);
+        player2TrainTV = (TextView) myActivity.findViewById(R.id.player2Train);
+        player3TrainTV = (TextView) myActivity.findViewById(R.id.player3Train);
+        player4TrainTV = (TextView) myActivity.findViewById(R.id.player4train);
 
         Player1TrainIVs.add(p1First = (ImageView) myActivity.findViewById(R.id.p1IVone));
         Player1TrainIVs.add(p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo));

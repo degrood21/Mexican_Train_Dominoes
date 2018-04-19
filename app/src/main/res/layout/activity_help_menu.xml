@@ -26,7 +26,7 @@
             android:id="@+id/rules1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12sp"
+            android:layout_marginTop="3dp"
             android:gravity="center_horizontal"
             android:text="The objective of the game is to play all dominos or have the least number of pips."
             android:textSize="24sp" />
@@ -64,8 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12sp"
             android:gravity="center_horizontal"
-            android:text="If a player plays a double domino, the next player must place a domino which matches on at least one side.
-If they don't, every player after must either play a matching domino on that train or draw a domino until someone places a matching domino."
+            android:text="If a player plays a double domino, the player must place a domino which matches on at least one side.
+If they don't, that player must draw thus moving the turn focing every player after to either play a matching domino on that train or draw a domino until someone places a matching domino."
             android:textSize="24sp" />
 
         <TextView
@@ -74,7 +74,7 @@ If they don't, every player after must either play a matching domino on that tra
             android:layout_height="wrap_content"
             android:layout_marginTop="12sp"
             android:gravity="center_horizontal"
-            android:text="The game ends when either a player has played all of the dominoes in their hand, or the draw pile is empty and no one can make any more moves."
+            android:text="The round ends when either a player has played all of the dominoes in their hand, or the draw pile is empty and no one can make any more moves."
             android:textSize="24sp" />
 
         <TextView

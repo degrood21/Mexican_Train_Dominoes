@@ -281,12 +281,6 @@ public abstract class LocalGame implements Game, Tickable {
 		// The move was a legal one, so presumably the state of the com.example.degrood21.mexican_train_dominoes.game was
 		// changed. Send all players the updated state. 
 		sendAllUpdatedState();
-
-		// determine whether there is a winner; if so, finish up the round
-		String roundOverMsg = checkIfRoundOver();
-		if (roundOverMsg != null){
-			finishUpRound(roundOverMsg);
-		}
 		
 		// determine whether there is a winner; if so, finish up the com.example.degrood21.mexican_train_dominoes.game
 		String overMsg = checkIfGameOver();

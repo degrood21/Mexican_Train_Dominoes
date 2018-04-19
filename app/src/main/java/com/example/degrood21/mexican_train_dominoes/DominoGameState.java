@@ -36,7 +36,8 @@ public class DominoGameState extends GameState {
     private int numPlayers; //contains number of players for game
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain, doublePlayDomino;
-    boolean roundOver, doublePlay;
+    boolean roundOver;
+    boolean doublePlay;
     Boolean player1Public, player2Public, player3Public, player4Public;
     ArrayList<Boolean> playerPublic = new ArrayList<>();
 
@@ -251,12 +252,11 @@ public class DominoGameState extends GameState {
      * @return if dealt correctly return true
      */
     public boolean dealAction() {//deals to each player at the beginning of the round
-        if (round != 12 && round != 11 && round != 10) {
-            for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
-                int dom = randomDomino();
-                hand.get(0).add(PileofDominoes.get(dom));
-                PileofDominoes.remove(dom);//removes them from the pile
-            }
+
+        for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
+            int dom = randomDomino();
+            hand.get(0).add(PileofDominoes.get(dom));
+            PileofDominoes.remove(dom);//removes them from the pile
         }
 
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
@@ -309,10 +309,8 @@ public class DominoGameState extends GameState {
             }
 
             if (doublePlay(playerID, selectedDomino, trainSelection)) {
-
                 playerTurn--;
                 return true;
-
             } else {
                 return false;
             }

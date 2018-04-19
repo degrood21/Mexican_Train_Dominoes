@@ -46,8 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12sp"
             android:gravity="center_horizontal"
-            android:text="If a player has no playable dominoes, they must draw a domino and make their train public,
-            meaning that other players can place a domino on their train."
+            android:text="If a player has no playable dominoes, they must draw a domino and make their train public, meaning that other players can place a domino on their train. If the player draws a domino that will match, then that domino will be forced played and their train remains private."
             android:textSize="24sp" />
 
         <TextView

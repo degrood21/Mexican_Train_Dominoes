@@ -16,7 +16,7 @@ import java.util.Random;
  * @authors Dylan DeGrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
-public class DominoGameState extends GameState{
+public class DominoGameState extends GameState {
     private static final long serialVersionUID = -41820181234569681L;
 
     //Initiates all ArrayLists that correspond to hands, trains, and pile
@@ -119,8 +119,8 @@ public class DominoGameState extends GameState{
      * @param newstateInstance newstateInstance is the state being passed in to copy
      */
     public DominoGameState(DominoGameState newstateInstance) {//for Deep Copy, saves for later
-        //set the number of players in the game
 
+        //set the number of players in the game
         numPlayers = newstateInstance.numPlayers;
         PileofDominoes = new ArrayList<>();
         for (int i = 0; i < newstateInstance.PileofDominoes.size(); i++) {
@@ -177,10 +177,10 @@ public class DominoGameState extends GameState{
 
         }
         //checks if trains are public and sets them accordinglly
-        player1Public = newstateInstance.player1Public;
-        player2Public = newstateInstance.player2Public;
-        player3Public = newstateInstance.player3Public;
-        player4Public = newstateInstance.player4Public;
+        playerPublic.add(0, newstateInstance.playerPublic.get(0));
+        playerPublic.add(1, newstateInstance.playerPublic.get(1));
+        playerPublic.add(2, newstateInstance.playerPublic.get(2));
+        playerPublic.add(3, newstateInstance.playerPublic.get(3));
 
         //checks the scores and sets them at the end of each round
         player1Score = newstateInstance.player1Score;
@@ -190,49 +190,57 @@ public class DominoGameState extends GameState{
 
         round = newstateInstance.round;
 
+        doublePlay = newstateInstance.doublePlay;
+        doublePlayTrain = newstateInstance.doublePlayTrain;
+        doublePlayDomino = newstateInstance.doublePlayDomino;
+
         // Depending on which players com.example.degrood21.mexican_train_dominoes.game state instance is being sent in
         // it will deep copy accordingly
-        if (newstateInstance.playerTurn == 0) { // player 1
+        //if (newstateInstance.playerTurn == 0) { // player 1
 
-            Player1Hand = new ArrayList<>();
-            for (int i = 0; i < newstateInstance.Player1Hand.size(); i++) {
+        Player1Hand = new ArrayList<>();
+        for (int i = 0; i < newstateInstance.hand.get(0).size(); i++) {
 
-                Player1Hand.add(i, newstateInstance.Player1Hand.get(i));//adds the dominoes to the players hand
-
-            }
-            playerTurn = newstateInstance.playerTurn;
-
-        } else if (newstateInstance.playerTurn == 1) { // player 2
-
-            Player2Hand = new ArrayList<>();
-            for (int i = 0; i < newstateInstance.Player2Hand.size(); i++) {
-
-                Player2Hand.add(i, newstateInstance.Player2Hand.get(i));//adds the dominoes to the players hand
-
-            }
-            playerTurn = newstateInstance.playerTurn;
-
-        } else if (newstateInstance.playerTurn == 2) { // player 3
-
-            Player3Hand = new ArrayList<>();
-            for (int i = 0; i < newstateInstance.Player3Hand.size(); i++) {
-
-                Player3Hand.add(i, newstateInstance.Player3Hand.get(i));//adds the dominoes to the players hand
-
-            }
-            playerTurn = newstateInstance.playerTurn;
-
-        } else if (newstateInstance.playerTurn == 3) { // player 4
-
-            Player4Hand = new ArrayList<>();
-            for (int i = 0; i < newstateInstance.Player4Hand.size(); i++) {
-
-                Player4Hand.add(i, newstateInstance.Player4Hand.get(i));//adds the dominoes to the players hand
-
-            }
-            playerTurn = newstateInstance.playerTurn;
+            Player1Hand.add(i, newstateInstance.hand.get(0).get(i));//adds the dominoes to the players hand
 
         }
+        hand.add(0, Player1Hand);
+        playerTurn = newstateInstance.playerTurn;
+
+        //} else if (newstateInstance.playerTurn == 1) { // player 2
+
+        Player2Hand = new ArrayList<>();
+        for (int i = 0; i < newstateInstance.hand.get(1).size(); i++) {
+
+            Player2Hand.add(i, newstateInstance.hand.get(1).get(i));//adds the dominoes to the players hand
+
+        }
+        hand.add(1, Player2Hand);
+        playerTurn = newstateInstance.playerTurn;
+
+        //} else if (newstateInstance.playerTurn == 2) { // player 3
+
+        Player3Hand = new ArrayList<>();
+        for (int i = 0; i < newstateInstance.hand.get(2).size(); i++) {
+
+            Player3Hand.add(i, newstateInstance.hand.get(2).get(i));//adds the dominoes to the players hand
+
+        }
+        hand.add(2, Player3Hand);
+        playerTurn = newstateInstance.playerTurn;
+
+        //} else if (newstateInstance.playerTurn == 3) { // player 4
+
+        Player4Hand = new ArrayList<>();
+        for (int i = 0; i < newstateInstance.hand.get(3).size(); i++) {
+
+            Player4Hand.add(i, newstateInstance.hand.get(3).get(i));//adds the dominoes to the players hand
+
+        }
+        hand.add(3, Player4Hand);
+        playerTurn = newstateInstance.playerTurn;
+
+        //}
     }
 
     /**
@@ -243,11 +251,12 @@ public class DominoGameState extends GameState{
      * @return if dealt correctly return true
      */
     public boolean dealAction() {//deals to each player at the beginning of the round
-
-        for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
-            int dom = randomDomino();
-            hand.get(0).add(PileofDominoes.get(dom));
-            PileofDominoes.remove(dom);//removes them from the pile
+        if (round != 12 && round != 11 && round != 10) {
+            for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
+                int dom = randomDomino();
+                hand.get(0).add(PileofDominoes.get(dom));
+                PileofDominoes.remove(dom);//removes them from the pile
+            }
         }
 
         for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
@@ -640,7 +649,7 @@ public class DominoGameState extends GameState{
      */
     public boolean doublePlay(int id, Domino playedDouble, int trainSelection) {
         if (playerTurn == id) { // If Player 1
-            if (trainSelection == 0) { // Player 1 Train
+            if ((playerPublic.get(0) == true && trainSelection == 0) || (id == 0 && trainSelection == 0)) { // Player 1 Train
                 if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
                     if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
                         playedDouble.rightSide = -1;
@@ -694,7 +703,7 @@ public class DominoGameState extends GameState{
                         return true;
                     }
                 }
-            } else if (playerPublic.get(1) == true && trainSelection == 1) { // Player 2 Train
+            } else if ((playerPublic.get(1) == true && trainSelection == 1) || (id == 1 && trainSelection == 1)) { // Player 2 Train
                 if (Player2Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
@@ -762,7 +771,7 @@ public class DominoGameState extends GameState{
                         return true;
                     }
                 }
-            } else if (playerPublic.get(2) == true && trainSelection == 2) { // Player 3 Train
+            } else if ((playerPublic.get(2) == true && trainSelection == 2) || (id == 2 && trainSelection == 2)) { // Player 3 Train
                 if (Player3Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
@@ -842,7 +851,7 @@ public class DominoGameState extends GameState{
                         return true;
                     }
                 }
-            } else if (playerPublic.get(3) == true && trainSelection == 3) { // Player 4 Train
+            } else if ((playerPublic.get(3) == true && trainSelection == 3) || (id == 3 && trainSelection == 3)) { // Player 4 Train
                 if (Player4Train.size() == 0) {
                     if (playedDouble.leftSide == round) {
                         playedDouble.leftSide = -1;
@@ -1039,36 +1048,40 @@ public class DominoGameState extends GameState{
         currentHand = hand.get(id);
 
         //sets the train to current train, then checks if it's public to see if you can play on it, also restricts playing on private trains
-        if (trainSelection == 0 && playerPublic.get(0) || trainSelection == playerTurn) {
+        if (trainSelection == 0 && playerPublic.get(0) || (trainSelection == id && id == 0)) {
             currentTrain = Player1Train;
-        } else if (trainSelection == 1 && playerPublic.get(1) || trainSelection == playerTurn) {
+        } else if (trainSelection == 1 && playerPublic.get(1) || (trainSelection == id && id == 1)) {
             currentTrain = Player2Train;
-        } else if (trainSelection == 2 && playerPublic.get(2) || trainSelection == playerTurn) {
+        } else if (trainSelection == 2 && playerPublic.get(2) || (trainSelection == id && id == 2)) {
             currentTrain = Player3Train;
-        } else if (trainSelection == 3 && playerPublic.get(3) || trainSelection == playerTurn) {
+        } else if (trainSelection == 3 && playerPublic.get(3) || (trainSelection == id && id == 3)) {
             currentTrain = Player4Train;
         } else if (trainSelection == 4) {
             currentTrain = PublicTrain;
+        } else {
+            currentTrain = null;
         }
 
-        for (int i = 0; i < currentHand.size(); i++) {//loops through each players hand based on size
-            if (currentTrain.size() == 0) {//if train hasnt been started
-                if (currentHand.get(i).rightSide == round || currentHand.get(i).leftSide == round) {
-                    return true;//trys to play on round
-                }
+        if (currentTrain != null) {
+            for (int i = 0; i < currentHand.size(); i++) {//loops through each players hand based on size
+                if (currentTrain.size() == 0) {//if train hasnt been started
+                    if (currentHand.get(i).rightSide == round || currentHand.get(i).leftSide == round) {
+                        return true;//trys to play on round
+                    }
 
-            } else if (doublePlay) {//checks if double play is true to restrict you from checking trains that don't satisfy the double
-                if (currentHand.get(i).rightSide == doublePlayDomino
-                        || currentHand.get(i).leftSide == doublePlayDomino) {
-                    return true;//you can play on that double
-                }
-            } else {//Train size greater than 0
-                if (currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
-                        || currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
-                    return true;//checks right side of domino against the end of a train and returns as possible
-                } else if (currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).rightSide
-                        || currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
-                    return true;//checks left side of domino against the end of a train and returns if possible
+                } else if (doublePlay) {//checks if double play is true to restrict you from checking trains that don't satisfy the double
+                    if (currentHand.get(i).rightSide == doublePlayDomino
+                            || currentHand.get(i).leftSide == doublePlayDomino) {
+                        return true;//you can play on that double
+                    }
+                } else {//Train size greater than 0
+                    if (currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                            || currentHand.get(i).rightSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                        return true;//checks right side of domino against the end of a train and returns as possible
+                    } else if (currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).rightSide
+                            || currentHand.get(i).leftSide == currentTrain.get(currentTrain.size() - 1).leftSide) {
+                        return true;//checks left side of domino against the end of a train and returns if possible
+                    }
                 }
             }
         }

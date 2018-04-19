@@ -53,17 +53,18 @@ public class MTComputerPlayer extends GameComputerPlayer {
         if (!(info instanceof DominoGameState)) {
             return;
         }
-        sleep(750);//delay for one and a half seconds(1500); then play
+
         //update our variable
         mtState = (DominoGameState) info;
         //int playerNum = mtState.playerTurn;
         int playerNum = this.playerNum;
 
+
         if (!comDifficulty) {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
             if (mtState.playerTurn == playerNum) {//if its your turn
-                if (mtState.hand.get(playerNum).size() > 0) {//if you have a domino in hand
+                /*if (mtState.hand.get(playerNum).size() > 0) {//if you have a domino in hand
                     for (int i = 0; i < mtState.hand.get(playerNum).size(); i++) {//loops through hand
                         if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 0)//looks to see if you can play on any train
                                 || mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 1)
@@ -97,8 +98,10 @@ public class MTComputerPlayer extends GameComputerPlayer {
                             if (mtState.playerTurn > 3) {//checks turn value for next player
                                 mtState.playerTurn = 0;
                             }
+                            //game.sendAction(new MTSelectAction(this));
                             break;
                         }
+
                     }
                     if (mtState.playerTurn == playerNum) {//if its still your turn then you couldnt play
                         if (mtState.drawAction(playerNum)) {//draws
@@ -154,12 +157,17 @@ public class MTComputerPlayer extends GameComputerPlayer {
                                 mtState.playerTurn = 0;
                             }
                         }
+                        //game.sendAction(new MTDrawAction(this));
                     }
 
-                }
+                }*/
+                //game.sendAction(new MTSelectAction(this));
+                sleep(1000);//delay for one and a half seconds(1500); then play
+                game.sendAction(new MTComputerPlayAction(this));
             }
-            sleep(750);//delay for one and a half seconds(1500); then play
-            sendInfo(mtState);//redraws the state
+
+            //game.sendAction(new MTSelectAction(this));
+            //sendInfo(mtState);//redraws the state
         } else {
             //for(int i = 0; i < mtState.hand.get(playerNum).size(); i++){
             //    if(mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), 0)) {
@@ -172,7 +180,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
             //calls smartAI in DominoGameState
             //first call check playable on each domino, do in smartAI
 
-            for (int i = 0; i < mtState.hand.get(playerNum).size(); i++) {
+            /*for (int i = 0; i < mtState.hand.get(playerNum).size(); i++) {
                 if (mtState.playerPublic.get(playerNum)) {//if your train is public
                     if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), playerNum)) {
                         //if you can play on your own train
@@ -189,7 +197,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                         }
                     }
                 }
-            }
+            }*/
 
             //BETA computer below here
             //see above comments, code is very similar
@@ -197,7 +205,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
             if (mtState.playerTurn == playerNum) {//if its your turn
-                if (mtState.hand.get(playerNum).size() > 0) {
+                /*if (mtState.hand.get(playerNum).size() > 0) {
                     for (int i = 0; i < mtState.hand.get(playerNum).size(); i++) {
                         if (mtState.playerPublic.get(playerNum)) {//if your train is public
                             if (mtState.playableTrains(playerNum, mtState.hand.get(playerNum).get(i), playerNum)) {
@@ -249,6 +257,7 @@ public class MTComputerPlayer extends GameComputerPlayer {
                             if (mtState.playerTurn > 3) {//checks turn value for next player
                                 mtState.playerTurn = 0;
                             }
+                            //game.sendAction(new MTSelectAction(this));
                             break;
                         }
                     }
@@ -308,10 +317,13 @@ public class MTComputerPlayer extends GameComputerPlayer {
                         }
                     }
 
-                }
+                }*/
+                sleep(1000);
+                game.sendAction(new MTSmartPlayAction(this));
             }
-            sleep(750);//delay for one and a half seconds(1500); then play
-            sendInfo(mtState);
+            //sleep(500);//delay for one and a half seconds(1500); then play
+            //game.sendAction(new MTSelectAction(this));
+            //sendInfo(mtState);
         }
     }
 }//end of MTComputerPlayer class

@@ -40,7 +40,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private ArrayList<ImageView> Player4TrainIVs = new ArrayList<ImageView>(); //All ImageViews in Player 4 Train (max 6)
 
     private Button quitButton, restartButton, helpButton, drawButton;
-    private TextView player1TrainTV, player2TrainTV, player3TrainTV, player4TrainTV,p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
+    private TextView player1TrainTV, player2TrainTV, player3TrainTV, player4TrainTV, p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
     private ImageView turnMarker1, turnMarker2, turnMarker3, turnMarker4, roundDom, p1First, p1Second,
             p1Third, p1Fourth, p1Fifth, p1Sixth, p2First, p2Second, p2Third, p2Fourth, p2Fifth,
             p2Sixth, p3First, p3Second, p3Third, p3Fourth, p3Fifth, p3Sixth, p4First, p4Second,
@@ -49,6 +49,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             handSix, handSeven, handEight, handNine, handTen, handEleven, handTwelve, handThirteen,
             handFourteen, handFifteen, handSixteen, handSeventeen, handEighteen, handNineteen,
             handTwenty;
+
+    private boolean actionCaused = false;
 
     // cstor for Human Player
     public MTHumanPlayer(String name) {
@@ -111,12 +113,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!");
         myText.setTextColor(Color.BLACK);
-        myText.setBackgroundColor(Color.argb(255,255,0,0));
+        myText.setBackgroundColor(Color.argb(255, 255, 0, 0));
 
-        if(state.doublePlay) {
+        if (state.doublePlay) {
             myText.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             myText.setVisibility(View.INVISIBLE);
         }
 
@@ -135,97 +136,105 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
          * sends an empty Action that currently does nothing
          */
         //if(!state.roundOver) {
-            roundOverAction SA = new roundOverAction(this, state);
-            if(SA.checkRoundOver()) {
+        /*roundOverAction SA = new roundOverAction(this, state);
+        if (SA.checkRoundOver()) {
 
-                if (state.PileofDominoes.size() == 0) {
-                    if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
-                            && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
+            if (state.PileofDominoes.size() == 0) {
+                if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
+                        && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
 
-                        SA.countScores();
+                    SA.countScores();
 
-                        int less1, less2;
-                        if (state.player1Score < state.player2Score) {
-                            less1 = state.player1Score;
-                        } else {
-                            less1 = state.player2Score;
-                        }
-
-                        if (state.player3Score < state.player4Score) {
-                            less2 = state.player3Score;
-                        } else {
-                            less2 = state.player4Score;
-                        }
-
-                        if (less1 < less2) {
-                            if (less1 == state.player1Score) {
-                                state.round--;
-                                state.roundOver = true;
-                                myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score);
-                            } else {
-                                state.round--;
-                                state.roundOver = true;
-                                myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);
-                            }
-                        } else {
-                            if (less2 == state.player3Score) {
-                                state.round--;
-                                state.roundOver = true;
-                                myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);
-                            } else {
-                                state.round--;
-                                state.roundOver = true;
-                                myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score);
-                            }
-                        }
+                    int less1, less2;
+                    if (state.player1Score < state.player2Score) {
+                        less1 = state.player1Score;
+                    } else {
+                        less1 = state.player2Score;
                     }
 
-                } else if (state.round > 0) {
-                    //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
-                    //in their hand and won the round.
-                    if (state.hand.get(0).size() == 0) {
-                        SA.countScores();
-                        state.round--;
-                        state.roundOver = true;
-                        myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score); //player one ran out of dominoes and won the round.
-                    } else if (state.hand.get(1).size() == 0) {
-                        SA.countScores();
-                        state.round--;
-                        state.roundOver = true;
-                        myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);//player two ran out of dominoes and won the round.
-                    } else if (state.hand.get(2).size() == 0) {
-                        SA.countScores();
-                        state.round--;
-                        state.roundOver = true;
-                        myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);//player three ran out of dominoes and won the round.
-                    } else if (state.hand.get(3).size() == 0) {
-                        SA.countScores();
-                        state.round--;
-                        state.roundOver = true;
-                        myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score); //player four ran out of dominoes and won the round.
+                    if (state.player3Score < state.player4Score) {
+                        less2 = state.player3Score;
                     } else {
-                        //All players still have dominoes in their hands, the game goes on.
+                        less2 = state.player4Score;
+                    }
+
+                    if (less1 < less2) {
+                        if (less1 == state.player1Score) {
+                            state.round--;
+                            state.roundOver = true;
+                            myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score);
+                        } else {
+                            state.round--;
+                            state.roundOver = true;
+                            myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);
+                        }
+                    } else {
+                        if (less2 == state.player3Score) {
+                            state.round--;
+                            state.roundOver = true;
+                            myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);
+                        } else {
+                            state.round--;
+                            state.roundOver = true;
+                            myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score);
+                        }
                     }
                 }
 
-                DominoGameState newRound = new DominoGameState(4, state.round);
-                newRound.player1Score = state.player1Score / 2;
-                newRound.player2Score = state.player2Score / 2;
-                newRound.player3Score = state.player3Score / 2;
-                newRound.player4Score = state.player4Score / 2;
-                this.state = newRound;
-
-                p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
-                p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
-                p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
-                p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
-
-                state.roundOver = false;
-
-                sendInfo(this.state);
-
+            } else if (state.round > 0) {
+                //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
+                //in their hand and won the round.
+                if (state.hand.get(0).size() == 0) {
+                    SA.countScores();
+                    state.round--;
+                    state.roundOver = true;
+                    myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score); //player one ran out of dominoes and won the round.
+                } else if (state.hand.get(1).size() == 0) {
+                    SA.countScores();
+                    state.round--;
+                    state.roundOver = true;
+                    myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);//player two ran out of dominoes and won the round.
+                } else if (state.hand.get(2).size() == 0) {
+                    SA.countScores();
+                    state.round--;
+                    state.roundOver = true;
+                    myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);//player three ran out of dominoes and won the round.
+                } else if (state.hand.get(3).size() == 0) {
+                    SA.countScores();
+                    state.round--;
+                    state.roundOver = true;
+                    myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score); //player four ran out of dominoes and won the round.
+                } else {
+                    //All players still have dominoes in their hands, the game goes on.
+                }
             }
+
+            DominoGameState newRound = new DominoGameState(4, state.round);
+            newRound.player1Score = state.player1Score / 2;
+            newRound.player2Score = state.player2Score / 2;
+            newRound.player3Score = state.player3Score / 2;
+            newRound.player4Score = state.player4Score / 2;
+            this.state = newRound;
+
+            p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
+            p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
+            p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
+            p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
+
+            state.roundOver = false;
+
+            //sendInfo(this.state);
+
+        }*/
         //}
+
+        game.sendAction(new roundOverAction(this, state));
+
+        p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
+        p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
+        p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
+        p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
+
 
         /**
          * All for loops and if statements until next comment
@@ -381,25 +390,22 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
             }
         }
-        if(state.playerTurn == 0 ){
+        if (state.playerTurn == 0) {
             player1TrainTV.setBackgroundResource(R.color.colorAccent);
             player2TrainTV.setBackgroundResource(R.color.green_playboard);
             player3TrainTV.setBackgroundResource(R.color.green_playboard);
             player4TrainTV.setBackgroundResource(R.color.green_playboard);
-        }
-        else if(state.playerTurn == 1){
+        } else if (state.playerTurn == 1) {
             player1TrainTV.setBackgroundResource(R.color.green_playboard);
             player2TrainTV.setBackgroundResource(R.color.colorAccent);
             player3TrainTV.setBackgroundResource(R.color.green_playboard);
             player4TrainTV.setBackgroundResource(R.color.green_playboard);
-        }
-        else if(state.playerTurn == 2){
+        } else if (state.playerTurn == 2) {
             player1TrainTV.setBackgroundResource(R.color.green_playboard);
             player2TrainTV.setBackgroundResource(R.color.green_playboard);
             player3TrainTV.setBackgroundResource(R.color.colorAccent);
             player4TrainTV.setBackgroundResource(R.color.green_playboard);
-        }
-        else if(state.playerTurn == 3){
+        } else if (state.playerTurn == 3) {
             player1TrainTV.setBackgroundResource(R.color.green_playboard);
             player2TrainTV.setBackgroundResource(R.color.green_playboard);
             player3TrainTV.setBackgroundResource(R.color.green_playboard);
@@ -456,17 +462,22 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
 
         //Sets the round image according to what round it is
-        if(!(state.PublicTrain.size() == 0)) {
+        if (!(state.PublicTrain.size() == 0)) {
             roundDom.setImageResource(state.PublicTrain.get(0).pictureID);
             roundDom.getLayoutParams().width = 150;
         }
 
         //Displays to player in words what round it is
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
-        pileOfDominoCounter.setText(""+ state.PileofDominoes.size());
+        pileOfDominoCounter.setText("" + state.PileofDominoes.size());
 
         //resend the state to keep the state updating as play moves on
-        sendInfo(state);
+        /*if (actionCaused) {
+            actionCaused = false;
+            game.sendAction(new MTSelectAction(this));
+        }*/
+        //game.sendAction(new MTSelectAction(this));
+        //sendInfo(state);
 
     }
 
@@ -610,7 +621,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
                 if (playerNum == state.playerTurn) {
-                    if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
+                    /*if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
                         state.playerPublic.set(playerNum, true);
                         state.playerTurn++;
                     } else if (!state.checkPlayable(playerNum, 0) && state.hand.get(playerNum).size() <= 20) {
@@ -662,14 +673,18 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
                         }
                     }
-                    if(state.hand.get(playerNum).size() == 20){
+                    if (state.hand.get(playerNum).size() == 20) {
                         state.playerTurn++;
                         if (state.playerTurn > 3) {
                             state.playerTurn = 0;
                         }
-                    }
+                    }*/
+                    sendDrawAction();
                 }
-                sendInfo(state);
+                /*if (state != null) {
+                    receiveInfo(state);
+                }*/
+                //sendInfo(state);
             }
         });
 
@@ -681,7 +696,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 if (playerNum == state.playerTurn) {
-                    if (state.doublePlay) {
+                   /* if (state.doublePlay) {
                         doubleHelper(); //
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 0)) {
 
@@ -694,8 +709,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
 
                         }
-                    }
-                    sendInfo(state);
+                    }*/
+                    /*if (state != null) {
+                        receiveInfo(state);
+                    }*/
+                    sendPlaceAction(0);
+                    //sendInfo(state);
                 }
 
             }
@@ -706,7 +725,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    if (state.doublePlay) {
+                    /*if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 1)) {
 
@@ -718,8 +737,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
 
                         }
-                    }
-                    sendInfo(state);
+                    }*/
+                    /*if (state != null) {
+                        receiveInfo(state);
+                    }*/
+                    sendPlaceAction(1);
+                    //sendInfo(state);
 
                 }
 
@@ -732,7 +755,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    if (state.doublePlay) {
+                    /*if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 2)) {
 
@@ -743,8 +766,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
 
                         }
-                    }
-                    sendInfo(state);
+                    }*/
+                   /* if (state != null) {
+                        receiveInfo(state);
+                    }*/
+                    sendPlaceAction(2);
+                    //sendInfo(state);
 
                 }
 
@@ -756,7 +783,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    if (state.doublePlay) {
+                    /*if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 3)) {
 
@@ -768,8 +795,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
 
                         }
-                    }
-                    sendInfo(state);
+                    }*/
+                   /* if (state != null) {
+                        receiveInfo(state);
+                    }*/
+                    sendPlaceAction(3);
+                    //sendInfo(state);
 
                 }
 
@@ -781,7 +812,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    if (state.doublePlay) {
+                    /*if (state.doublePlay) {
                         doubleHelper();
                     } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 4)) {
 
@@ -793,10 +824,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                             }
 
                         }
-                    }
+                    }*/
+                    sendPlaceAction(4);
                 }
 
-                sendInfo(state);
+                /*if (state != null) {
+                    receiveInfo(state);
+                }*/
+                //sendInfo(state);
 
             }
         });
@@ -874,7 +909,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             });
 
         }
-
+        if (state != null) {
+            receiveInfo(state);
+        }
     }
 
     /**
@@ -907,7 +944,19 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
+    }
+
+    public void sendPlaceAction(int trainNum){
+
+        game.sendAction(new MTPlaceAction(this, trainNum, selectedDomino));
 
     }
+
+    public void sendDrawAction(){
+
+        game.sendAction(new MTDrawAction(this));
+
+    }
+
 }
 

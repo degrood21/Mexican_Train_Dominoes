@@ -46,6 +46,10 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
             public GamePlayer createPlayer(String name) {
                 return new MTComputerPlayer(name);
             }});
+        playerTypes.add(new GamePlayerType("Smart Computer Player") {
+            public GamePlayer createPlayer(String name) {
+                return new MTComputerPlayer(name);
+            }});
 
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);

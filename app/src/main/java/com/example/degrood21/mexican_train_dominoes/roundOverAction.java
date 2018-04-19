@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by dylandegrood on 4/18/18.
  */
 
-public class roundOverAction extends GameAction implements Serializable{
+public class roundOverAction extends GameAction {
     private static final long serialVersionUID = -4182018123456439L;
 
     DominoGameState state;

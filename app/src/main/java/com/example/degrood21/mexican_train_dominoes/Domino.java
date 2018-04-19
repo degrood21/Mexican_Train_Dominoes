@@ -1,5 +1,7 @@
 package com.example.degrood21.mexican_train_dominoes;
 
+import java.io.Serializable;
+
 /**
  * Domino Class
  * <p>
@@ -8,7 +10,8 @@ package com.example.degrood21.mexican_train_dominoes;
  * @authors Devin Smith, Dylan DeGrood, Callum Morham, Logan Crawford
  */
 
-public class Domino {
+public class Domino implements Serializable {
+    private static final long serialVersionUID = -4182018123456789L;
 
     int pictureID;
     int rightSide;

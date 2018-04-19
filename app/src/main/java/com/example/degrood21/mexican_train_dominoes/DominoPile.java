@@ -1,12 +1,14 @@
 package com.example.degrood21.mexican_train_dominoes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * @authors Devin Smith, Dylan DeGrood, Callum Morham, Logan Crawford
  */
 
-public class DominoPile {
+public class DominoPile implements Serializable{
+    private static final long serialVersionUID = -4182018123456719L;
 
     public ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();
 

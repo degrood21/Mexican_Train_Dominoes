@@ -862,7 +862,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             } else {
                 state.drawAction(playerNum);
                 if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                    state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                    state.placeDomino(playerNum
+
+
+                            , state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                     state.playerPublic.set(playerNum, false);
                     state.playerTurn++;
                 } else {

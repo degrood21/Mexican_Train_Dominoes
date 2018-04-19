@@ -5,6 +5,7 @@ import android.widget.EditText;
 
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameState;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
@@ -15,7 +16,8 @@ import java.util.Random;
  * @authors Dylan DeGrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
-public class DominoGameState extends GameState {
+public class DominoGameState extends GameState{
+    private static final long serialVersionUID = -41820181234569681L;
 
     //Initiates all ArrayLists that correspond to hands, trains, and pile
     ArrayList<ArrayList<Domino>> hand = new ArrayList<>();

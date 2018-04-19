@@ -40,15 +40,18 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // MexicanTrain has two player types:  human and computer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
+                if(name.length() > 15) name = name.substring(0, 15);
                 return new MTHumanPlayer(name);
             }});
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
+                if(name.length() > 15) name = name.substring(0, 15);
                 return new MTComputerPlayer(name);
             }});
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
-                return new MTComputerPlayer(name);
+                if(name.length() > 15) name = name.substring(0, 15);
+                return new MTComputerPlayer(name, true);
             }});
 
         // Create a game configuration class for MexicanTrain:

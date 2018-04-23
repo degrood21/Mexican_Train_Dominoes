@@ -4,7 +4,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by dylandegrood on 4/19/18.
+ * Computer play action
+ *
+ * @authors Dylan DeGrood, Callum Morham, Logan Crawford, Devin Smith
  */
 
 public class MTComputerPlayAction extends GameAction {

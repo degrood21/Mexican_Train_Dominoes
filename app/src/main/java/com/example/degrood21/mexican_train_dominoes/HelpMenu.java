@@ -24,7 +24,7 @@ public class HelpMenu extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_help_menu);
-        returnButton = (Button)findViewById(R.id.exitButton);
+        returnButton = (Button)findViewById(R.id.exitButton);//casts it to a button
 
 
        returnButton.setOnClickListener(new View.OnClickListener() {

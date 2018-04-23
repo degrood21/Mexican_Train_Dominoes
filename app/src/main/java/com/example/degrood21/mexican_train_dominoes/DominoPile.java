@@ -10,9 +10,9 @@ import java.util.ArrayList;
 public class DominoPile implements Serializable{
     private static final long serialVersionUID = -4182018123456719L;
 
-    public ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();
+    public ArrayList<Domino> setOfDominoes = new ArrayList<Domino>();//creates an arraylist for the dominoes
 
-    Domino d0_0 = new Domino(R.drawable.c0_0, 0, 0);
+    Domino d0_0 = new Domino(R.drawable.c0_0, 0, 0);//creating the domino and setting its sides to values
     Domino d1_1 = new Domino(R.drawable.c1_1, 1, 1);
     Domino d2_2 = new Domino(R.drawable.c2_2, 2, 2);
     Domino d3_3 = new Domino(R.drawable.c3_3, 3, 3);
@@ -117,7 +117,7 @@ public class DominoPile implements Serializable{
     Domino d11_12 = new Domino(R.drawable.d11_12, 11, 12);
 
 
-    public DominoPile() {
+    public DominoPile() {//adding all the dominoes to the arraylist
 
         setOfDominoes.add(d0_0);
         setOfDominoes.add(d1_1);

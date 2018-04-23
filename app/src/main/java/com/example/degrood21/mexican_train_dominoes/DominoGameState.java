@@ -197,51 +197,33 @@ public class DominoGameState extends GameState {
 
         // Depending on which players com.example.degrood21.mexican_train_dominoes.game state instance is being sent in
         // it will deep copy accordingly
-        //if (newstateInstance.playerTurn == 0) { // player 1
-
         Player1Hand = new ArrayList<>();
         for (int i = 0; i < newstateInstance.hand.get(0).size(); i++) {
-
             Player1Hand.add(i, newstateInstance.hand.get(0).get(i));//adds the dominoes to the players hand
-
         }
         hand.add(0, Player1Hand);
         playerTurn = newstateInstance.playerTurn;
 
-        //} else if (newstateInstance.playerTurn == 1) { // player 2
-
         Player2Hand = new ArrayList<>();
         for (int i = 0; i < newstateInstance.hand.get(1).size(); i++) {
-
             Player2Hand.add(i, newstateInstance.hand.get(1).get(i));//adds the dominoes to the players hand
-
         }
         hand.add(1, Player2Hand);
         playerTurn = newstateInstance.playerTurn;
 
-        //} else if (newstateInstance.playerTurn == 2) { // player 3
-
         Player3Hand = new ArrayList<>();
         for (int i = 0; i < newstateInstance.hand.get(2).size(); i++) {
-
             Player3Hand.add(i, newstateInstance.hand.get(2).get(i));//adds the dominoes to the players hand
-
         }
         hand.add(2, Player3Hand);
         playerTurn = newstateInstance.playerTurn;
 
-        //} else if (newstateInstance.playerTurn == 3) { // player 4
-
         Player4Hand = new ArrayList<>();
         for (int i = 0; i < newstateInstance.hand.get(3).size(); i++) {
-
             Player4Hand.add(i, newstateInstance.hand.get(3).get(i));//adds the dominoes to the players hand
-
         }
         hand.add(3, Player4Hand);
         playerTurn = newstateInstance.playerTurn;
-
-        //}
     }
 
     /**
@@ -288,10 +270,11 @@ public class DominoGameState extends GameState {
      * @param trainSelection the train that the domino is trying to be placed on
      * @return returns true if the domino was succesfully placed on corresponding train
      */
-    public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) { //Dylan
+    public boolean placeDomino(int playerID, Domino selectedDomino, int trainSelection) {
 
-        if (selectedDomino.leftSide == selectedDomino.rightSide) {
+        if (selectedDomino.leftSide == selectedDomino.rightSide) {//Checks for a double
 
+            //checks if the size is 0 in which case you can't play a double on it
             if (trainSelection == 0 && Player1Train.size() == 0) {
                 return false;
             }
@@ -304,7 +287,7 @@ public class DominoGameState extends GameState {
             if (trainSelection == 3 && Player4Train.size() == 0) {
                 return false;
             }
-            if (trainSelection == 4 && PublicTrain.size() == 0) {
+            if (trainSelection == 4 && PublicTrain.size() == 0) {//TODO maybe this should be 1?
                 return false;
             }
 
@@ -316,31 +299,33 @@ public class DominoGameState extends GameState {
             }
         } else if (playerTurn == playerID) { // If Player 1
             if ((playerPublic.get(0) == true && trainSelection == 0) || (playerID == 0 && trainSelection == 0)) { // Player 1 Train
-                if (Player1Train.size() == 0) {
+                if (Player1Train.size() == 0) {//if the size is 0 so the value is round
                     if (selectedDomino.leftSide == round) {
-                        selectedDomino.leftSide = -1;
-                        Player1Train.add(selectedDomino);
-                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                        selectedDomino.leftSide = -1;//sets the side that matches to -1
+                        Player1Train.add(selectedDomino);//adds the domino to the train
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {//loops through the hand searching for the domino
                             if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
-                                hand.get(playerID).remove(i);
+                                hand.get(playerID).remove(i);//removes the domino from the hand
                             }
                         }
                         // does not need to return false in for loop since we check playable in humanPlayer
                         return true;
-                    } else if (selectedDomino.rightSide == round) {
-                        selectedDomino.rightSide = -1;
-                        Player1Train.add(selectedDomino);
-                        for (int i = 0; i < hand.get(playerID).size(); i++) {
+                    } else if (selectedDomino.rightSide == round) {//if its the first domino of the train
+                        selectedDomino.rightSide = -1;//sets right side to -1 to match it with last domino in train
+                        Player1Train.add(selectedDomino);//adds the domino to the train
+                        for (int i = 0; i < hand.get(playerID).size(); i++) {//loops through hand searching for the domino
                             if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
-                                hand.get(playerID).remove(i);
+                                hand.get(playerID).remove(i);//removes the domino
                             }
                         }
-                        return true;
+                        return true;//returns true if the domino was placed
                     }
-                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {
-                        selectedDomino.rightSide = -1;
+                } else if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {//if size != 0 we check for it equalling
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == selectedDomino.rightSide) {//the last domino in train
+                        selectedDomino.rightSide = -1;//sets to -1
                         Player1Train.add(selectedDomino);
+                        //All code in this method after this simply repeats but for each individual players hand and train, the comments
+                        //would be the same throughout
                         for (int i = 0; i < hand.get(playerID).size(); i++) {
                             if (hand.get(playerID).get(i).pictureID == selectedDomino.pictureID) {
                                 hand.get(playerID).remove(i);
@@ -628,7 +613,7 @@ public class DominoGameState extends GameState {
                 }
             }
         }
-        return false;
+        return false;//domino was not placed
     }
 
     /**

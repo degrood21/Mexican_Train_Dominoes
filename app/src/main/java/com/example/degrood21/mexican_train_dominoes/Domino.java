@@ -26,23 +26,21 @@ public class Domino implements Serializable {
      * @param rSide right side value of domino
      * @param lSide left side value of domino
      */
-    public Domino(int pID, int rSide, int lSide) {
-
+    public Domino(int pID, int rSide, int lSide) {//sets the dominoes Id, left and right side
         this.pictureID = pID;
         this.rightSide = rSide;
         this.leftSide = lSide;
-
     }
 
-    public int getPictureID() {
+    public int getPictureID() {//simple getter method for the Picture ID of a domino
         return this.pictureID;
     }
 
-    public int getRightSide() {
+    public int getRightSide() {//gets the value of the right side of a domino
         return this.rightSide;
     }
 
-    public int getLeftSide() {
+    public int getLeftSide() {//gets the value of the left side of a domino
         return this.leftSide;
     }
 }

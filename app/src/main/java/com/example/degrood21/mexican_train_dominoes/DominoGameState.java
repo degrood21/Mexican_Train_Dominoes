@@ -1,12 +1,7 @@
 package com.example.degrood21.mexican_train_dominoes;
 
-import android.graphics.drawable.Drawable;
-import android.widget.EditText;
-
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameState;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -1,15 +1,6 @@
 package com.example.degrood21.mexican_train_dominoes;
 
-import android.graphics.drawable.Drawable;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
 import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
@@ -40,17 +31,17 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // MexicanTrain has two player types:  human and computer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 15) name = name.substring(0, 15);
+                if(name.length() > 8) name = name.substring(0, 8);
                 return new MTHumanPlayer(name);
             }});
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 15) name = name.substring(0, 15);
+                if(name.length() > 8) name = name.substring(0, 8);
                 return new MTComputerPlayer(name);
             }});
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 15) name = name.substring(0, 15);
+                if(name.length() > 8) name = name.substring(0, 8);
                 return new MTComputerPlayer(name, true);
             }});
 

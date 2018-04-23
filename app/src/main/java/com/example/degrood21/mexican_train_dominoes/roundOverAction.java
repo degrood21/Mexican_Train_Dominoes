@@ -3,8 +3,6 @@ package com.example.degrood21.mexican_train_dominoes;
 import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
-import java.io.Serializable;
-
 /**
  * Created by dylandegrood on 4/18/18.
  */

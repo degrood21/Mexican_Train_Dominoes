@@ -3,13 +3,10 @@ package com.example.degrood21.mexican_train_dominoes;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.degrood21.mexican_train_dominoes.game.GameHumanPlayer;
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
@@ -88,28 +85,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         this.state = (DominoGameState) info; //gets reference to state
 
-        /*if (state.roundOver) {
-
-            state.round++;
-            DominoGameState newRound = new DominoGameState(4, state.round);
-            newRound.player1Score = state.player1Score/2;
-            newRound.player2Score = state.player2Score/2;
-            newRound.player3Score = state.player3Score/2;
-            newRound.player4Score = state.player4Score/2;
-            this.state = newRound;
-
-            p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
-            p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
-            p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
-            p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
-
-            state.roundOver = false;
-
-            sendInfo(this.state);
-
-
-        }*/
-
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!");
         myText.setTextColor(Color.BLACK);
@@ -121,112 +96,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             myText.setVisibility(View.INVISIBLE);
         }
 
-        /*if(state.doublePlay) {
-            Toast.makeText(myActivity, "Double Domino Has Been Played", Toast.LENGTH_SHORT); //NEVER STOPS DISPLAYING
-            //https://stackoverflow.com/questions/6525916/dynamically-display-string-text-on-android-screen
-            //^^Citation for Toast message
-        }*/
-
         state.doubleEndOfTrain(0);
-
-        /**
-         * Action Classes are not implemented yet so
-         * this was the only way to call checkIfGameOver();
-         *
-         * sends an empty Action that currently does nothing
-         */
-        //if(!state.roundOver) {
-        /*roundOverAction SA = new roundOverAction(this, state);
-        if (SA.checkRoundOver()) {
-
-            if (state.PileofDominoes.size() == 0) {
-                if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
-                        && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
-
-                    SA.countScores();
-
-                    int less1, less2;
-                    if (state.player1Score < state.player2Score) {
-                        less1 = state.player1Score;
-                    } else {
-                        less1 = state.player2Score;
-                    }
-
-                    if (state.player3Score < state.player4Score) {
-                        less2 = state.player3Score;
-                    } else {
-                        less2 = state.player4Score;
-                    }
-
-                    if (less1 < less2) {
-                        if (less1 == state.player1Score) {
-                            state.round--;
-                            state.roundOver = true;
-                            myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score);
-                        } else {
-                            state.round--;
-                            state.roundOver = true;
-                            myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);
-                        }
-                    } else {
-                        if (less2 == state.player3Score) {
-                            state.round--;
-                            state.roundOver = true;
-                            myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);
-                        } else {
-                            state.round--;
-                            state.roundOver = true;
-                            myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score);
-                        }
-                    }
-                }
-
-            } else if (state.round > 0) {
-                //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
-                //in their hand and won the round.
-                if (state.hand.get(0).size() == 0) {
-                    SA.countScores();
-                    state.round--;
-                    state.roundOver = true;
-                    myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score); //player one ran out of dominoes and won the round.
-                } else if (state.hand.get(1).size() == 0) {
-                    SA.countScores();
-                    state.round--;
-                    state.roundOver = true;
-                    myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);//player two ran out of dominoes and won the round.
-                } else if (state.hand.get(2).size() == 0) {
-                    SA.countScores();
-                    state.round--;
-                    state.roundOver = true;
-                    myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);//player three ran out of dominoes and won the round.
-                } else if (state.hand.get(3).size() == 0) {
-                    SA.countScores();
-                    state.round--;
-                    state.roundOver = true;
-                    myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score); //player four ran out of dominoes and won the round.
-                } else {
-                    //All players still have dominoes in their hands, the game goes on.
-                }
-            }
-
-            DominoGameState newRound = new DominoGameState(4, state.round);
-            newRound.player1Score = state.player1Score / 2;
-            newRound.player2Score = state.player2Score / 2;
-            newRound.player3Score = state.player3Score / 2;
-            newRound.player4Score = state.player4Score / 2;
-            this.state = newRound;
-
-            p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
-            p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
-            p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
-            p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
-
-            state.roundOver = false;
-
-            //sendInfo(this.state);
-
-        }*/
-        //}
 
         game.sendAction(new roundOverAction(this, state));
 
@@ -471,13 +341,11 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         roundTV.setText("Round: Double " + state.PublicTrain.get(0).rightSide);
         pileOfDominoCounter.setText("" + state.PileofDominoes.size());
 
-        //resend the state to keep the state updating as play moves on
-        /*if (actionCaused) {
-            actionCaused = false;
-            game.sendAction(new MTSelectAction(this));
-        }*/
-        //game.sendAction(new MTSelectAction(this));
-        //sendInfo(state);
+        //Displays the names for players in front of their train
+        player1TrainTV.setText(allPlayerNames[0]);
+        player2TrainTV.setText(allPlayerNames[1]);
+        player3TrainTV.setText(allPlayerNames[2]);
+        player4TrainTV.setText(allPlayerNames[3]);
 
     }
 
@@ -621,70 +489,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
                 if (playerNum == state.playerTurn) {
-                    /*if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
-                        state.playerPublic.set(playerNum, true);
-                        state.playerTurn++;
-                    } else if (!state.checkPlayable(playerNum, 0) && state.hand.get(playerNum).size() <= 20) {
-                        state.drawAction(playerNum);
-                        //if its double play you can obly play that new domino on the doubleplaytrain
-                        if (state.doublePlay) {
-                            if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                                //place domino
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
-                                state.doublePlay = false;
-                            }
-                            state.playerTurn++;
-                            if (state.playerTurn > 3) {
-                                state.playerTurn = 0;
-                            }
-                        }
-                        //if you can now play any domino on any public train play it
-                        else if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0)
-                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1)
-                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
-                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
-                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
-                            //trys to play on all trains with your ned domino
-                            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
-                                state.playerPublic.set(playerNum, false);
-                                state.playerTurn++;
-                                if (state.playerTurn > 3) {
-                                    state.playerTurn = 0;
-                                }
-                                //sets your train to false since you played on your own train
-                            } else {
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 0);
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 1);
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2);
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3);
-                                state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4);
-                                //sets your train to false since you played
-                                state.playerPublic.set(playerNum, true);
-                                state.playerTurn++;
-                                if (state.playerTurn > 3) {
-                                    state.playerTurn = 0;
-                                }
-                            }
-                        } else {
-                            state.playerPublic.set(playerNum, true);
-                            state.playerTurn++;
-                            if (state.playerTurn > 3) {
-                                state.playerTurn = 0;
-                            }
-                        }
-                    }
-                    if (state.hand.get(playerNum).size() == 20) {
-                        state.playerTurn++;
-                        if (state.playerTurn > 3) {
-                            state.playerTurn = 0;
-                        }
-                    }*/
                     sendDrawAction();
                 }
-                /*if (state != null) {
-                    receiveInfo(state);
-                }*/
-                //sendInfo(state);
+
             }
         });
 
@@ -696,25 +503,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             @Override
             public void onClick(View v) {
                 if (playerNum == state.playerTurn) {
-                   /* if (state.doublePlay) {
-                        doubleHelper(); //
-                    } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 0)) {
 
-                        if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 0)) {
-
-                            state.playerPublic.set(playerNum, false);
-                            state.playerTurn++;
-                            if (state.playerTurn >= 3) {
-                                state.playerTurn = 0;
-                            }
-
-                        }
-                    }*/
-                    /*if (state != null) {
-                        receiveInfo(state);
-                    }*/
                     sendPlaceAction(0);
-                    //sendInfo(state);
+
                 }
 
             }
@@ -725,24 +516,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    /*if (state.doublePlay) {
-                        doubleHelper();
-                    } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 1)) {
 
-                        if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 1)) {
-
-                            state.playerTurn++;
-                            if (state.playerTurn >= 3) {
-                                state.playerTurn = 0;
-                            }
-
-                        }
-                    }*/
-                    /*if (state != null) {
-                        receiveInfo(state);
-                    }*/
                     sendPlaceAction(1);
-                    //sendInfo(state);
 
                 }
 
@@ -755,23 +530,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    /*if (state.doublePlay) {
-                        doubleHelper();
-                    } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 2)) {
 
-                        if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 2)) {
-                            state.playerTurn++;
-                            if (state.playerTurn >= 3) {
-                                state.playerTurn = 0;
-                            }
-
-                        }
-                    }*/
-                   /* if (state != null) {
-                        receiveInfo(state);
-                    }*/
                     sendPlaceAction(2);
-                    //sendInfo(state);
 
                 }
 
@@ -783,24 +543,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    /*if (state.doublePlay) {
-                        doubleHelper();
-                    } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 3)) {
 
-                        if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 3)) {
-
-                            state.playerTurn++;
-                            if (state.playerTurn >= 3) {
-                                state.playerTurn = 0;
-                            }
-
-                        }
-                    }*/
-                   /* if (state != null) {
-                        receiveInfo(state);
-                    }*/
                     sendPlaceAction(3);
-                    //sendInfo(state);
 
                 }
 
@@ -812,26 +556,10 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             public void onClick(View v) {
 
                 if (state.playerTurn == playerNum) {
-                    /*if (state.doublePlay) {
-                        doubleHelper();
-                    } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 4)) {
 
-                        if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), 4)) {
-
-                            state.playerTurn++;
-                            if (state.playerTurn >= 3) {
-                                state.playerTurn = 0;
-                            }
-
-                        }
-                    }*/
                     sendPlaceAction(4);
-                }
 
-                /*if (state != null) {
-                    receiveInfo(state);
-                }*/
-                //sendInfo(state);
+                }
 
             }
         });
@@ -949,12 +677,35 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     public void sendPlaceAction(int trainNum){
 
         game.sendAction(new MTPlaceAction(this, trainNum, selectedDomino));
+        resetPlaceHelpers();
 
     }
 
     public void sendDrawAction(){
 
         game.sendAction(new MTDrawAction(this));
+        resetPlaceHelpers();
+
+    }
+
+    public void resetPlaceHelpers(){
+
+        selectedDomino = 0;
+        //After every place action reset all purple x views
+        Player1TrainIVs.get(5).setImageResource(R.color.green_playboard);
+        Player1TrainIVs.get(5).getLayoutParams().height = 50;
+        Player2TrainIVs.get(5).setImageResource(R.color.green_playboard);
+        Player2TrainIVs.get(5).getLayoutParams().height = 50;
+        Player3TrainIVs.get(5).setImageResource(R.color.green_playboard);
+        Player3TrainIVs.get(5).getLayoutParams().height = 50;
+        Player4TrainIVs.get(5).setImageResource(R.color.green_playboard);
+        Player4TrainIVs.get(5).getLayoutParams().height = 50;
+        PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
+        PublicTrainIVs.get(5).getLayoutParams().height = 50;
+
+        for(int i = 0; i < HandIVs.size(); i++){
+            HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
+        }
 
     }
 

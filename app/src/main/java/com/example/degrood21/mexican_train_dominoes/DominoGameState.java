@@ -628,53 +628,53 @@ public class DominoGameState extends GameState {
     public boolean doublePlay(int id, Domino playedDouble, int trainSelection) {
         if (playerTurn == id) { // If Player 1
             if ((playerPublic.get(0) == true && trainSelection == 0) || (id == 0 && trainSelection == 0)) { // Player 1 Train
-                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) { //check rightSide of domino
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) { //check end of train
                     if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {//if played double matches right side of train
-                        playedDouble.rightSide = -1;//set value to -1 as to not be accessed further on.
+                        playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide; //
+                        doublePlayDomino = playedDouble.leftSide; //set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.leftSide) {//check left side of double
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {
+                } else if (Player1Train.get(Player1Train.size() - 1).leftSide != -1) {//check end of train
+                    if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.rightSide) {//check right side of double
                         playedDouble.rightSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {
+                    } else if (Player1Train.get(Player1Train.size() - 1).leftSide == playedDouble.leftSide) {//check left side of double
                         playedDouble.leftSide = -1;
                         Player1Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -682,67 +682,67 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if ((playerPublic.get(1) == true && trainSelection == 1) || (id == 1 && trainSelection == 1)) { // Player 2 Train
-                if (Player2Train.size() == 0) {
-                    if (playedDouble.leftSide == round) {
+                if (Player2Train.size() == 0) {//check if train is empty
+                    if (playedDouble.leftSide == round) {//does our domino match that of the round to start the train
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {
+                } else if (Player2Train.get(Player2Train.size() - 1).rightSide != -1) {//check end of train
+                    if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.rightSide) {//check if our domino matches the train
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).rightSide == playedDouble.leftSide) {//check end of train
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {
-                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {
+                } else if (Player2Train.get(Player2Train.size() - 1).leftSide != -1) {//check end of train
+                    if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.rightSide) {//check if our domino matches the train
                         playedDouble.rightSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {
+                    } else if (Player2Train.get(Player2Train.size() - 1).leftSide == playedDouble.leftSide) {//check end of train
                         playedDouble.leftSide = -1;
                         Player2Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -750,79 +750,79 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if ((playerPublic.get(2) == true && trainSelection == 2) || (id == 2 && trainSelection == 2)) { // Player 3 Train
-                if (Player3Train.size() == 0) {
-                    if (playedDouble.leftSide == round) {
+                if (Player3Train.size() == 0) {//check if train is empty
+                    if (playedDouble.leftSide == round) {//does our domino match that of the round to start a new train?
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (playedDouble.rightSide == round) {
+                    } else if (playedDouble.rightSide == round) {//check the rightside of our domino to see if it matches the round to start a new train
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {
+                } else if (Player3Train.get(Player3Train.size() - 1).rightSide != -1) {//check end of train
+                    if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.rightSide) {//compare the rightside of our domino with the end of the selected train
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).rightSide == playedDouble.leftSide) {//compare the leftside of our domino with the end of train
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {
-                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {
+                } else if (Player3Train.get(Player3Train.size() - 1).leftSide != -1) {//check end of train
+                    if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.rightSide) {//compare rightside of domino with end of train
                         playedDouble.rightSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {
+                    } else if (Player3Train.get(Player3Train.size() - 1).leftSide == playedDouble.leftSide) {//compare leftside of domino with end of train
                         playedDouble.leftSide = -1;
                         Player3Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -830,79 +830,79 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if ((playerPublic.get(3) == true && trainSelection == 3) || (id == 3 && trainSelection == 3)) { // Player 4 Train
-                if (Player4Train.size() == 0) {
-                    if (playedDouble.leftSide == round) {
+                if (Player4Train.size() == 0) {//check if train is empty
+                    if (playedDouble.leftSide == round) {//does leftside of domino match the value of the round
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (playedDouble.rightSide == round) {
+                    } else if (playedDouble.rightSide == round) {//does rightside of domino match the value of the round
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {
+                } else if (Player4Train.get(Player4Train.size() - 1).rightSide != -1) {//check end of train
+                    if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.rightSide) {//does rightside of domino match end of train
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaymethod to the value of played domino
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).rightSide == playedDouble.leftSide) {//does leftside of domino match end of train
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {
-                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {
+                } else if (Player4Train.get(Player4Train.size() - 1).leftSide != -1) {//check end of train
+                    if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.rightSide) {//compare rightside of domino to end of train
                         playedDouble.rightSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {
+                    } else if (Player4Train.get(Player4Train.size() - 1).leftSide == playedDouble.leftSide) {//compare leftside of domino to end of train
                         playedDouble.leftSide = -1;
                         Player4Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
@@ -910,53 +910,53 @@ public class DominoGameState extends GameState {
                     }
                 }
             } else if (trainSelection == 4) { // Public Train
-                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {
+                if (PublicTrain.get(PublicTrain.size() - 1).rightSide != -1) {//check end of train
+                    if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.rightSide) {//compare rightside of domino to end of train
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).rightSide == playedDouble.leftSide) {//compare leftside of domino to end of train
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
                     }
-                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {
-                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {
+                } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide != -1) {//check end of train
+                    if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.rightSide) {//compare rightside of domino to end of train
                         playedDouble.rightSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;
                         return true;
-                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {
+                    } else if (PublicTrain.get(PublicTrain.size() - 1).leftSide == playedDouble.leftSide) {//compare leftside of domino to end of train
                         playedDouble.leftSide = -1;
                         PublicTrain.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.rightSide;
+                        doublePlayDomino = playedDouble.rightSide;//set doubleplaydomino to the value of played double
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
-                                hand.get(id).remove(i);
+                                hand.get(id).remove(i);//remove played domino from player's hand
                             }
                         }
                         doublePlayTrain = trainSelection;

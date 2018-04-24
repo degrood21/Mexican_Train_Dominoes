@@ -455,7 +455,7 @@ public class MTLocalGame extends LocalGame {
                     }
 
                 }
-                if (state.playerTurn == playerNum) {//if its still your turn then you couldnt play
+                if (state.playerTurn == playerNum) {//if its still your turn then you couldn't play
                     if (state.drawAction(playerNum)) {//draws
                         if (state.doublePlay) {
                             if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
@@ -508,7 +508,6 @@ public class MTLocalGame extends LocalGame {
                             state.playerTurn = 0;
                         }
                     }
-                    //game.sendAction(new MTDrawAction(this));
                 }
                 return true;
             }

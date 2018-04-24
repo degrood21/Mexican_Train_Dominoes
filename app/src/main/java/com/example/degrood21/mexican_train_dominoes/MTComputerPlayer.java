@@ -63,15 +63,18 @@ public class MTComputerPlayer extends GameComputerPlayer {
             //simple implementation of computer player
             //check if this player's Hand still contains dominoes and if this player is player one
             if (mtState.playerTurn == playerNum) {//if its your turn
-                sleep(1000);//delay for one second(1000), then play
+                sleep(500);//delay for one second(1000), then play
                 game.sendAction(new MTComputerPlayAction(this));
+                sleep(500);
             }
         } else {
             //Smart AI
             if (mtState.playerTurn == playerNum) {//if its your turn
-                sleep(1000);//delay for one second(1000), then play
+                sleep(500);//delay for one second(1000), then play
                 game.sendAction(new MTSmartPlayAction(this));
+                sleep(500);
             }
+
         }
     }
 }//end of MTComputerPlayer class

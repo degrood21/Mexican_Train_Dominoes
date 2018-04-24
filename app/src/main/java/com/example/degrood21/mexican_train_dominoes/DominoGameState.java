@@ -1188,7 +1188,7 @@ public class DominoGameState extends GameState {
      * @return doesnt matter, players always continue as normally
      */
     public boolean doubleEndOfTrain(int id) {//always send in ID 0
-        if (doublePlay) {//if doubleplay if true check if its the last of its number and override
+        if (this.doublePlay) {//if doubleplay if true check if its the last of its number and override
             //the force doubleplay
             //sets current hand equal to the players/pile's hand array
             if (id < 4) {
@@ -1204,7 +1204,7 @@ public class DominoGameState extends GameState {
                 }
             }
             if (id >= 4) {
-                doublePlay = false;//sets double to false
+                this.doublePlay = false;//sets double to false
                 return true;//sets double play boolean to false then should continue your turn
                 // as usual but without forcing you to play on double
             }

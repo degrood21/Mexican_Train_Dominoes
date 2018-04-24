@@ -3,10 +3,13 @@ package com.example.degrood21.mexican_train_dominoes;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.degrood21.mexican_train_dominoes.game.GameHumanPlayer;
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
@@ -51,9 +54,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
     // cstor for Human Player
     public MTHumanPlayer(String name) {
-
         super(name);
-
     }
 
     /**
@@ -76,24 +77,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
      */
     @Override
     public void receiveInfo(GameInfo info) {
-
         if (!(info instanceof DominoGameState)) {
-
             return;
-
         }
 
         this.state = (DominoGameState) info; //gets reference to state
 
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
-        myText.setText("DOUBLE PLAY!");
-        myText.setTextColor(Color.BLACK);
-        myText.setBackgroundColor(Color.argb(255, 255, 0, 0));
+        myText.setText("DOUBLE PLAY!");//double play is active, displays this text to help the user see
+        myText.setTextColor(Color.BLACK);//sets text to black
+        myText.setBackgroundColor(Color.argb(255, 255, 0, 0));//sets backround of textview to red so its noticable
 
         if (state.doublePlay) {
-            myText.setVisibility(View.VISIBLE);
+            myText.setVisibility(View.VISIBLE);//if double play is true make it visible
         } else {
-            myText.setVisibility(View.INVISIBLE);
+            myText.setVisibility(View.INVISIBLE);//if not double play its false
         }
 
         state.doubleEndOfTrain(0);

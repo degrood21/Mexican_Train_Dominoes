@@ -4,7 +4,7 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Computer play action
+ * Computer play action initiates an action that allows the computer to play
  *
  * @authors Dylan DeGrood, Callum Morham, Logan Crawford, Devin Smith
  */

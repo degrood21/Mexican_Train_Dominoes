@@ -4,7 +4,9 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by dylandegrood on 4/19/18.
+ * Place Action - allows the user to place dominoes on their selected ImageViews
+ *
+ * @author Dylan Degrood, Devin Smith, Callum Morham, Logan Crawford
  */
 
 public class MTPlaceAction extends GameAction {

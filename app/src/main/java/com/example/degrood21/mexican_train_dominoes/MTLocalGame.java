@@ -23,9 +23,7 @@ public class MTLocalGame extends LocalGame {
      * @param numberOfPlayers
      */
     public MTLocalGame(int numberOfPlayers) {
-
         state = new DominoGameState(numberOfPlayers, 12);
-
     }
 
     /**
@@ -94,7 +92,7 @@ public class MTLocalGame extends LocalGame {
         if (playerIdx < 0 || playerIdx > 3) {
             //if our player-number is out of range, return false.
             return false;
-        } else if (playerIdx == state.playerTurn) {
+        } else if (playerIdx == state.playerTurn) {//sets the turn to the playerId
             return true;
         }
         return false;
@@ -109,6 +107,7 @@ public class MTLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
 
+        //calls the action based on which action got called
         if (action instanceof MTPlaceAction) {
             return placeAction(action);
         } else if (action instanceof MTDrawAction) {
@@ -120,7 +119,7 @@ public class MTLocalGame extends LocalGame {
         } else if (action instanceof MTSmartPlayAction) {
             return smartComputerPlayAction(action);
         } else {
-            return false;
+            return false;//no action was called
         }
 
     }
@@ -136,80 +135,98 @@ public class MTLocalGame extends LocalGame {
      */
     public void doubleHelper() {
 
-        if (playerNum == state.playerTurn) {
-            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {
-                state.doublePlay = false;
-                if(state.playerTurn == state.doublePlayTrain) {
-                    state.playerPublic.set(playerNum, false);
+        if (playerNum == state.playerTurn) {//if it is the players turn
+            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {//tries to place domino
+                state.doublePlay = false;//sets double play to false
+                if(state.playerTurn == state.doublePlayTrain) {//checks if its your turn and you're playing on the double play train
+                    state.playerPublic.set(playerNum, false);//if its your turn sets you train to private
                 }
-                state.playerTurn++;
+                state.playerTurn++;//increments the turn
+                if (state.playerTurn > 3) {
+                    state.playerTurn = 0;
+                }
+
             } else {
-                state.drawAction(playerNum);
+                state.drawAction(playerNum);//if you can't play then you have to draw
                 if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
                     state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                     if(state.playerTurn == state.doublePlayTrain) {
                         state.playerPublic.set(playerNum, false);
                     }
                     state.playerTurn++;
+                    if (state.playerTurn > 3) {
+                        state.playerTurn = 0;
+                    }
                 } else {
                     state.playerPublic.set(playerNum, true);
                     state.playerTurn++;
+                    if (state.playerTurn > 3) {
+                        state.playerTurn = 0;
+                    }
                 }
             }
         }
 
     }
 
+    /**
+     * Place Action method is used for human players to place their domino on the train
+     *
+     * @param action takes in a gameAction
+     * @return returns true if the domino was placed otherwise false
+     */
     public boolean placeAction(GameAction action) {
 
         MTPlaceAction PA = (MTPlaceAction) action;
 
         if (state.playerTurn == this.getPlayerIdx(PA.getPlayer())) {
-            selectedDomino = PA.getSelectedDomino();
-            trainNum = PA.getTrainNumber();
-            playerNum = this.getPlayerIdx(PA.getPlayer());
-            if (state.doublePlay) {
-                doubleHelper();
+            selectedDomino = PA.getSelectedDomino();//gets selected domino
+            trainNum = PA.getTrainNumber();//gets the train you're trying to place on
+            playerNum = this.getPlayerIdx(PA.getPlayer());//gets the player turn
+            if (state.doublePlay) {//checks for double play
+                doubleHelper();//calls the double helper
             } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), playerNum) && trainNum == playerNum) {
-
                 if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), playerNum)) {
 
-                    state.playerPublic.set(playerNum, false);
-                    state.playerTurn++;
+                    state.playerPublic.set(playerNum, false);//sets their train to private if they played on it
+                    state.playerTurn++;//increments the turn
                     if (state.playerTurn > 3) {
                         state.playerTurn = 0;
                     }
-
                 }
-
             } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), trainNum)) {
-
                 if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), trainNum)) {
 
-                    state.playerTurn++;
+                    state.playerTurn++;//increments the turn
                     if (state.playerTurn > 3) {
                         state.playerTurn = 0;
                     }
-
                 }
-
             }
             return true;
         }
-
         return false;
-
     }
 
+    /**
+     * Draw Action method helps the users and computers draw when the draw button is pressed
+     * and they're unable to play on their own
+     *
+     * @param action -takes in a Game Action
+     * @return boolean of true or false
+     */
     public boolean drawAction(GameAction action) {
 
         MTDrawAction DA = (MTDrawAction) action;
 
-        if (state.playerTurn == this.getPlayerIdx(DA.getPlayer())) {
-            playerNum = this.getPlayerIdx(DA.getPlayer());
+        if (state.playerTurn == this.getPlayerIdx(DA.getPlayer())) {//checks if it's their turn
+            playerNum = this.getPlayerIdx(DA.getPlayer());//sets player num equal to player turn
             if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
                 state.playerPublic.set(playerNum, true);
-                state.playerTurn++;
+                state.playerTurn++;//increments the players turn
+                if(state.playerTurn > 3){
+                    state.playerTurn = 0;
+                }
             } else if (!state.checkPlayable(playerNum, 0) && state.hand.get(playerNum).size() <= 20) {
                 state.drawAction(playerNum);
                 //if its double play you can obly play that new domino on the doubleplaytrain
@@ -310,7 +327,6 @@ public class MTLocalGame extends LocalGame {
                         if (state.playerTurn > 3) {//checks turn value for next player
                             state.playerTurn = 0;
                         }
-                        //game.sendAction(new MTSelectAction(this));
                         break;
                     }
 
@@ -368,7 +384,6 @@ public class MTLocalGame extends LocalGame {
                             state.playerTurn = 0;
                         }
                     }
-                    //game.sendAction(new MTDrawAction(this));
                 }
                 return true;
             }

@@ -4,13 +4,18 @@ import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 /**
- * Created by dylandegrood on 4/18/18.
+ * round over action, checks if the round ends through different ways
+ * - A player gets to 0 dominoes in their hand
+ * - nobody is able to play on any trains
+ *
+ *
+ * @authors Dylan DeGrood, Callum Morham, Logan Crawford, Devin Smith
  */
 
 public class roundOverAction extends GameAction {
     private static final long serialVersionUID = -4182018123456439L;
 
-    DominoGameState state;
+    DominoGameState state;//sets the state
 
     /**
      * constructor for GameAction
@@ -20,7 +25,6 @@ public class roundOverAction extends GameAction {
     public roundOverAction(GamePlayer player, DominoGameState initState) {
         super(player);
         state = initState;
-
     }
 
     public boolean checkRoundOver() {
@@ -29,27 +33,28 @@ public class roundOverAction extends GameAction {
             if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
 
+                //used to compare the scores and detect whose is the highest then return them as the winner
                 int less1, less2;
                 if (state.player1Score < state.player2Score) {
-                    less1 = state.player1Score;
+                    less1 = state.player1Score;//player 1 is less than player 2
                 } else {
-                    less1 = state.player2Score;
+                    less1 = state.player2Score;//player 2 is less than player 1
                 }
 
                 if (state.player3Score < state.player4Score) {
-                    less2 = state.player3Score;
+                    less2 = state.player3Score;//player 3 is less than player 4
                 } else {
-                    less2 = state.player4Score;
+                    less2 = state.player4Score;//player 4 is less than player 3
                 }
 
-                if (less1 < less2) {
-                    if (less1 == state.player1Score) {
+                if (less1 < less2) {//compares the higher of the first two rounds
+                    if (less1 == state.player1Score) {//sets the winner
                         return true;
                     } else {
                         return true;
                     }
                 } else {
-                    if (less2 == state.player3Score) {
+                    if (less2 == state.player3Score) {//sets the winner
                         return true;
                     } else {
                         return true;

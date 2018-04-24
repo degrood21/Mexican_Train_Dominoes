@@ -1192,9 +1192,9 @@ public class DominoGameState extends GameState {
             //the force doubleplay
             //sets current hand equal to the players/pile's hand array
             if (id < 4) {
-                currentHand = hand.get(id);
+                currentHand = hand.get(id);//sets arraylist equal to the players arraylist
             } else {
-                currentHand = PileofDominoes;
+                currentHand = PileofDominoes;//sets arraylist equal to the pile of dominoes
             }
 
             for (int i = 0; i < currentHand.size(); i++) {

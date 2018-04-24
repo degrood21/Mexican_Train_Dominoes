@@ -138,7 +138,7 @@ public class MTLocalGame extends LocalGame {
         if (playerNum == state.playerTurn) {//if it is the players turn
             if (state.placeDomino(playerNum, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {//tries to place domino
                 state.doublePlay = false;//sets double play to false
-                if(state.playerTurn == state.doublePlayTrain) {//checks if its your turn and you're playing on the double play train
+                if (state.playerTurn == state.doublePlayTrain) {//checks if its your turn and you're playing on the double play train
                     state.playerPublic.set(playerNum, false);//if its your turn sets you train to private
                 }
                 state.playerTurn++;//increments the turn
@@ -150,7 +150,7 @@ public class MTLocalGame extends LocalGame {
                 state.drawAction(playerNum);//if you can't play then you have to draw
                 if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
                     state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
-                    if(state.playerTurn == state.doublePlayTrain) {
+                    if (state.playerTurn == state.doublePlayTrain) {
                         state.playerPublic.set(playerNum, false);
                     }
                     state.playerTurn++;
@@ -224,7 +224,7 @@ public class MTLocalGame extends LocalGame {
             if (state.PileofDominoes.size() == 0 && !state.checkPlayable(playerNum, 0)) {
                 state.playerPublic.set(playerNum, true);
                 state.playerTurn++;//increments the players turn
-                if(state.playerTurn > 3){
+                if (state.playerTurn > 3) {
                     state.playerTurn = 0;
                 }
             } else if (!state.checkPlayable(playerNum, 0) && state.hand.get(playerNum).size() <= 20) {
@@ -232,14 +232,14 @@ public class MTLocalGame extends LocalGame {
                 //if its double play you can obly play that new domino on the doubleplaytrain
                 if (state.doublePlay) {
                     if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                        //place domino
+                        //you're able to place a domino
                         state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
-                        if(state.playerTurn == state.doublePlayTrain){
+                        if (state.playerTurn == state.doublePlayTrain) {
                             state.playerPublic.set(state.playerTurn, false);
                         }
                         state.doublePlay = false;
                     }
-                    state.playerTurn++;
+                    state.playerTurn++;//increments the turn
                     if (state.playerTurn > 3) {
                         state.playerTurn = 0;
                     }
@@ -290,6 +290,14 @@ public class MTLocalGame extends LocalGame {
         return false;
     }
 
+    /**
+     * Computer Play Action -Allows the computer to play the game, they do this by looking through their who hand
+     * and attempting to play each domino on every train, once they get to the end they draw a domino and end their turn
+     * this is our "random" computer
+     *
+     * @param action -Takes in a Game Action
+     * @return
+     */
     public boolean computerPlayAction(GameAction action) {
 
         MTComputerPlayAction CPA = (MTComputerPlayAction) action;
@@ -420,43 +428,45 @@ public class MTLocalGame extends LocalGame {
                         }
                     }
                 }
-                for (int i = 0; i < state.hand.get(playerNum).size(); i++) {//loops through hand
-                    if (state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 0)//looks to see if you can play on any train
-                            || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 1)
-                            || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 2)
-                            || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 3)
-                            || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 4)) {
+                if (state.playerTurn == this.getPlayerIdx(SCPA.getPlayer())) {
+                    for (int i = 0; i < state.hand.get(playerNum).size(); i++) {//loops through hand
+                        if (state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 0)//looks to see if you can play on any train
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 1)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 2)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 3)
+                                || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 4)) {
 
-                        if (state.doublePlay) {//checks if doubleplay is active
-                            if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), state.doublePlayTrain)) {
-                                state.doublePlay = false;//sets doubleplay to false
-                                state.playerTurn++;//increment turn
-                            } else {
-                                state.playerPublic.set(playerNum, true);
-                                //state.playerTurn++;
+                            if (state.doublePlay) {//checks if doubleplay is active
+                                if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), state.doublePlayTrain)) {
+                                    state.doublePlay = false;//sets doubleplay to false
+                                    state.playerTurn++;//increment turn
+                                } else {
+                                    state.playerPublic.set(playerNum, true);
+                                    //state.playerTurn++;
+                                }
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), playerNum)) {//places on own train
+                                state.playerPublic.set(playerNum, false);
+                                state.playerTurn++;
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 0)) {//places on train 0
+                                state.playerTurn++;
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 1)) {//places on train 1
+                                state.playerTurn++;
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 2)) {//places on train 2
+                                state.playerTurn++;
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 3)) {//places on train 3
+                                state.playerTurn++;
+                            } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 4)) {//places on public train
+                                state.playerTurn++;
                             }
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), playerNum)) {//places on own train
-                            state.playerPublic.set(playerNum, false);
-                            state.playerTurn++;
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 0)) {//places on train 0
-                            state.playerTurn++;
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 1)) {//places on train 1
-                            state.playerTurn++;
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 2)) {//places on train 2
-                            state.playerTurn++;
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 3)) {//places on train 3
-                            state.playerTurn++;
-                        } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 4)) {//places on public train
-                            state.playerTurn++;
+
+                            if (state.playerTurn > 3) {//checks turn value for next player
+                                state.playerTurn = 0;
+                            }
+                            //game.sendAction(new MTSelectAction(this));
+                            break;
                         }
 
-                        if (state.playerTurn > 3) {//checks turn value for next player
-                            state.playerTurn = 0;
-                        }
-                        //game.sendAction(new MTSelectAction(this));
-                        break;
                     }
-
                 }
                 if (state.playerTurn == playerNum) {//if its still your turn then you couldn't play
                     if (state.drawAction(playerNum)) {//draws
@@ -476,7 +486,7 @@ public class MTLocalGame extends LocalGame {
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
-                            //trys to play on all trains with your ned domino
+                            //trys to play on all trains with your new domino
                             if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
                                 state.playerPublic.set(playerNum, false);
                                 state.playerTurn++;
@@ -619,7 +629,7 @@ public class MTLocalGame extends LocalGame {
 
     public void countScores() {
 
-        int newPlayer1Score = 0,newPlayer2Score = 0,newPlayer3Score = 0,newPlayer4Score = 0;
+        int newPlayer1Score = 0, newPlayer2Score = 0, newPlayer3Score = 0, newPlayer4Score = 0;
         for (int i = 0; i < state.hand.get(0).size(); i++) {
             newPlayer1Score += state.hand.get(0).get(i).rightSide + state.hand.get(0).get(i).leftSide;
         }
@@ -632,10 +642,10 @@ public class MTLocalGame extends LocalGame {
         for (int i = 0; i < state.hand.get(3).size(); i++) {
             newPlayer4Score += state.hand.get(3).get(i).rightSide + state.hand.get(3).get(i).leftSide;
         }
-        newPlayer1Score = newPlayer1Score/2;
-        newPlayer2Score = newPlayer2Score/2;
-        newPlayer3Score = newPlayer3Score/2;
-        newPlayer4Score = newPlayer4Score/2;
+        newPlayer1Score = newPlayer1Score / 2;
+        newPlayer2Score = newPlayer2Score / 2;
+        newPlayer3Score = newPlayer3Score / 2;
+        newPlayer4Score = newPlayer4Score / 2;
 
         state.player1Score += newPlayer1Score;
         state.player2Score += newPlayer2Score;

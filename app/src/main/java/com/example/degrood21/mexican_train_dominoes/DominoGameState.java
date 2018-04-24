@@ -230,18 +230,18 @@ public class DominoGameState extends GameState {
      */
     public boolean dealAction() {//deals to each player at the beginning of the round
 
-        for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
+        for (int i = 0; i < 14; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
             hand.get(0).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
 
-        for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
+        for (int i = 0; i < 30; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
             hand.get(1).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile
         }
-        for (int i = 0; i < 15; i++) {//adds 15 dominoes to each hand randomly
+        for (int i = 0; i < 30; i++) {//adds 15 dominoes to each hand randomly
             int dom = randomDomino();
             hand.get(2).add(PileofDominoes.get(dom));
             PileofDominoes.remove(dom);//removes them from the pile

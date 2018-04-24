@@ -522,7 +522,11 @@ public class MTLocalGame extends LocalGame {
         roundOverAction rdOver = (roundOverAction) action;
         if (rdOver.checkRoundOver()) {
 
-            if (state.PileofDominoes.size() == 0) {
+            if (state.PileofDominoes.size() == 0
+                    && state.hand.get(0).size() != 0
+                    && state.hand.get(1).size() != 0
+                    && state.hand.get(2).size() != 0
+                    && state.hand.get(3).size() != 0) {
                 if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                         && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
 

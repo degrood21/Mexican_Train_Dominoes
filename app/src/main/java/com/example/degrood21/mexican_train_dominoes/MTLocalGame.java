@@ -230,7 +230,7 @@ public class MTLocalGame extends LocalGame {
                         || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 2)
                         || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 3)
                         || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
-                    //trys to play on all trains with your ned domino
+                    //trys to play on all trains with your new domino
                     if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
                         state.playerPublic.set(playerNum, false);
                         state.playerTurn++;

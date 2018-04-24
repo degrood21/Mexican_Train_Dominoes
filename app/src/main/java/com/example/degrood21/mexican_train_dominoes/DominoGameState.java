@@ -628,12 +628,12 @@ public class DominoGameState extends GameState {
     public boolean doublePlay(int id, Domino playedDouble, int trainSelection) {
         if (playerTurn == id) { // If Player 1
             if ((playerPublic.get(0) == true && trainSelection == 0) || (id == 0 && trainSelection == 0)) { // Player 1 Train
-                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) {
-                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {
-                        playedDouble.rightSide = -1;
+                if (Player1Train.get(Player1Train.size() - 1).rightSide != -1) { //check rightSide of domino
+                    if (Player1Train.get(Player1Train.size() - 1).rightSide == playedDouble.rightSide) {//if played double matches right side of train
+                        playedDouble.rightSide = -1;//set value to -1 as to not be accessed further on.
                         Player1Train.add(playedDouble);
                         doublePlay = true;
-                        doublePlayDomino = playedDouble.leftSide;
+                        doublePlayDomino = playedDouble.leftSide; //
                         for (int i = 0; i < hand.get(id).size(); i++) {
                             if (hand.get(id).get(i).pictureID == playedDouble.pictureID) {
                                 hand.get(id).remove(i);

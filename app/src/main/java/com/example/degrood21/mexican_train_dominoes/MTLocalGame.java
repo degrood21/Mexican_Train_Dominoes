@@ -234,6 +234,9 @@ public class MTLocalGame extends LocalGame {
                     if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
                         //place domino
                         state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                        if(state.playerTurn == state.doublePlayTrain){
+                            state.playerPublic.set(state.playerTurn, false);
+                        }
                         state.doublePlay = false;
                     }
                     state.playerTurn++;

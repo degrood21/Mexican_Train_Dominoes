@@ -29,8 +29,6 @@ public class roundOverAction extends GameAction {
             if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
 
-                //countScores();
-
                 int less1, less2;
                 if (state.player1Score < state.player2Score) {
                     less1 = state.player1Score;

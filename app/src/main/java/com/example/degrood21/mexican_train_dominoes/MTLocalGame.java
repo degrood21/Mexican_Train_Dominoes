@@ -108,13 +108,7 @@ public class MTLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
-        /*if (checkIfGameOver() != null) {
-            return true;
-        }
-        if (checkIfRoundOver() != null){
-            return true;
-        }*/
-        //sendUpdatedStateTo(players[state.playerTurn]);
+
         if (action instanceof MTPlaceAction) {
             return placeAction(action);
         } else if (action instanceof MTDrawAction) {
@@ -129,82 +123,9 @@ public class MTLocalGame extends LocalGame {
             return false;
         }
 
-        //return false;
     }
 
     protected String checkIfRoundOver() {
-
-        /*if (state.PileofDominoes.size() == 0) {
-            if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
-                    && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))
-                  *//*(state.doublePlay && state.player1Public && state.player2Public && state.player3Public && state.player4Public) || state.PileofDominoes.size() == 0*//*) {
-
-                countScores();
-
-                int less1, less2;
-                if (state.player1Score < state.player2Score) {
-                    less1 = state.player1Score;
-                } else {
-                    less1 = state.player2Score;
-                }
-
-                if (state.player3Score < state.player4Score) {
-                    less2 = state.player3Score;
-                } else {
-                    less2 = state.player4Score;
-                }
-
-                if (less1 < less2) {
-                    if (less1 == state.player1Score) {
-                        state.round--;
-                        state.roundOver = true;
-                        return "Player 1" + " won the Round." + " Score: " + state.player1Score;
-                    } else {
-                        state.round--;
-                        state.roundOver = true;
-                        return "Player 2" + " won the Round." + " Score: " + state.player2Score;
-                    }
-                } else {
-                    if (less2 == state.player3Score) {
-                        state.round--;
-                        state.roundOver = true;
-                        return "Player 3" + " won the Round." + " Score: " + state.player3Score;
-                    } else {
-                        state.round--;
-                        state.roundOver = true;
-                        return "Player 4" + " won the Round." + " Score: " + state.player4Score;
-                    }
-                }
-            }
-
-        } else if (state.round > 0) {
-            //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
-            //in their hand and won the round.
-            if (state.hand.get(0).size() == 0) {
-                countScores();
-                state.round--;
-                state.roundOver = true;
-                return "Player 1" + " won the Round." + " Score: " + state.player1Score; //player one ran out of dominoes and won the round.
-            } else if (state.hand.get(1).size() == 0) {
-                countScores();
-                state.round--;
-                state.roundOver = true;
-                return "Player 2" + " won the Round." + " Score: " + state.player2Score;//player two ran out of dominoes and won the round.
-            } else if (state.hand.get(2).size() == 0) {
-                countScores();
-                state.round--;
-                state.roundOver = true;
-                return "Player 3" + " won the Round." + " Score: " + state.player3Score;//player three ran out of dominoes and won the round.
-            } else if (state.hand.get(3).size() == 0) {
-                countScores();
-                state.round--;
-                state.roundOver = true;
-                return "Player 4" + " won the Round." + " Score: " + state.player4Score; //player four ran out of dominoes and won the round.
-            } else {
-                //All players still have dominoes in their hands, the game goes on.
-                return null;
-            }
-        }*/
         return null;
     }
 
@@ -218,17 +139,20 @@ public class MTLocalGame extends LocalGame {
         if (playerNum == state.playerTurn) {
             if (state.placeDomino(playerNum, state.hand.get(playerNum).get(selectedDomino), state.doublePlayTrain)) {
                 state.doublePlay = false;
+                if(state.playerTurn == state.doublePlayTrain) {
+                    state.playerPublic.set(playerNum, false);
+                }
                 state.playerTurn++;
             } else {
                 state.drawAction(playerNum);
                 if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
-                    state.placeDomino(playerNum
-
-
-                            , state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
-                    state.playerPublic.set(playerNum, false);
+                    state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
+                    if(state.playerTurn == state.doublePlayTrain) {
+                        state.playerPublic.set(playerNum, false);
+                    }
                     state.playerTurn++;
                 } else {
+                    state.playerPublic.set(playerNum, true);
                     state.playerTurn++;
                 }
             }
@@ -245,7 +169,7 @@ public class MTLocalGame extends LocalGame {
             trainNum = PA.getTrainNumber();
             playerNum = this.getPlayerIdx(PA.getPlayer());
             if (state.doublePlay) {
-                doubleHelper(); //
+                doubleHelper();
             } else if (state.playableTrains(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), playerNum) && trainNum == playerNum) {
 
                 if (state.placeDomino(state.playerTurn, state.hand.get(playerNum).get(selectedDomino), playerNum)) {

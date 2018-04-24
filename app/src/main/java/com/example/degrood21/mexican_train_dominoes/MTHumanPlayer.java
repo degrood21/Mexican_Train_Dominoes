@@ -80,6 +80,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         this.state = (DominoGameState) info; //gets reference to state
 
+        drawButton.setEnabled(true);
+
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!\n");
         if(state.doublePlayTrain < 4) {
@@ -375,6 +377,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         drawButton = (Button) myActivity.findViewById(R.id.drawButton);
 
+        drawButton.setEnabled(false);
 
         p1ScoreTV = (TextView) myActivity.findViewById(R.id.player1Score);
         p2ScoreTV = (TextView) myActivity.findViewById(R.id.player2Score);

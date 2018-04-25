@@ -1042,7 +1042,7 @@ public class DominoGameState extends GameState {
 
         if (currentTrain != null) {
             for (int i = 0; i < currentHand.size(); i++) {//loops through each players hand based on size
-                if (currentTrain.size() == 0) {//if train hasnt been started
+                if (currentTrain.size() == 0 && !doublePlay) {//if train hasnt been started
                     if (currentHand.get(i).rightSide == round || currentHand.get(i).leftSide == round) {
                         return true;//trys to play on round
                     }

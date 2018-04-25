@@ -39,8 +39,8 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     private Button quitButton, restartButton, helpButton, drawButton;
     private TextView player1TrainTV, player2TrainTV, player3TrainTV, player4TrainTV, p1ScoreTV, p2ScoreTV, p3ScoreTV, p4ScoreTV, roundTV, pileOfDominoCounter;
     private ImageView turnMarker1, turnMarker2, turnMarker3, turnMarker4, roundDom, p1First, p1Second,
-            p1Third, p1Fourth, p1Fifth, p1Sixth, p2First, p2Second, p2Third, p2Fourth, p2Fifth,
-            p2Sixth, p3First, p3Second, p3Third, p3Fourth, p3Fifth, p3Sixth, p4First, p4Second,
+            p1Third, p1Fourth, p1Fifth, p2Sixth, p2First, p2Second, p2Third, p2Fourth, p2Fifth,
+            p1Sixth, p3First, p3Second, p3Third, p3Fourth, p3Fifth, p3Sixth, p4First, p4Second,
             p4Third, p4Fourth, p4Fifth, p4Sixth, publicFirst, publicSecond, publicThird,
             publicFourth, publicFifth, publicSixth, handOne, handTwo, handThree, handFour, handFive,
             handSix, handSeven, handEight, handNine, handTen, handEleven, handTwelve, handThirteen,

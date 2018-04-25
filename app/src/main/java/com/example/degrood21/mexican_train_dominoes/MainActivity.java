@@ -1,13 +1,11 @@
 package com.example.degrood21.mexican_train_dominoes;
 
 import android.view.View;
-
 import com.example.degrood21.mexican_train_dominoes.game.GameMainActivity;
 import com.example.degrood21.mexican_train_dominoes.game.GamePlayer;
 import com.example.degrood21.mexican_train_dominoes.game.LocalGame;
 import com.example.degrood21.mexican_train_dominoes.game.config.GameConfig;
 import com.example.degrood21.mexican_train_dominoes.game.config.GamePlayerType;
-
 import java.util.ArrayList;
 
 
@@ -38,10 +36,10 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // MexicanTrain has three player types:  human and computer and smartComputer
+        // MexicanTrain has three player types:  human, computer and smartComputer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                if (name.length() > 8) name = name.substring(0, 8);
+                if (name.length() > 8) name = name.substring(0, 8);//Limits the name length to 8 so it doesn't miss align the trains.
                 return new MTHumanPlayer(name);
             }
         });
@@ -61,18 +59,20 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player type 1: a human player
-        defaultConfig.addPlayer("Smart Computer", 2);//player type 3: a smart computer player
         defaultConfig.addPlayer("Computer", 1); // player type 2: a computer player
-
-        defaultConfig.setRemoteData("Remote Human Player", "", 0);
-
+        defaultConfig.addPlayer("Smart Computer", 2);//player type 3: a smart computer player
+        defaultConfig.setRemoteData("Remote Human Player", "", 0);//For playing with other humans over a network
 
         return defaultConfig;
     }
 
     @Override
+    /**
+     * createLocalGame does exactly what the name implies
+     *
+     * @param numberOfPlayers the number of players in the ganme (4)
+     */
     public LocalGame createLocalGame(int numberOfPlayers) {
         return new MTLocalGame(numberOfPlayers);
     }
-
 }

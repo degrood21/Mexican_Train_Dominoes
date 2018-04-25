@@ -1,7 +1,6 @@
 package com.example.degrood21.mexican_train_dominoes;
 
 import com.example.degrood21.mexican_train_dominoes.game.infoMsg.GameState;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,35 +13,39 @@ import java.util.Random;
 public class DominoGameState extends GameState {
     private static final long serialVersionUID = -41820181234569681L;
 
-    //Initiates all ArrayLists that correspond to hands, trains, and pile
+    //Initiates all ArrayLists that correspond to hands, trains, and the pile of dominoes
     ArrayList<ArrayList<Domino>> hand = new ArrayList<>();
     ArrayList<Domino> PileofDominoes = new ArrayList<>();
-    ArrayList<Domino> Player1Hand = new ArrayList<>();
-    ArrayList<Domino> Player2Hand = new ArrayList<>();
-    ArrayList<Domino> Player3Hand = new ArrayList<>();
-    ArrayList<Domino> Player4Hand = new ArrayList<>();
+    private ArrayList<Domino> Player1Hand = new ArrayList<>();
+    private ArrayList<Domino> Player2Hand = new ArrayList<>();
+    private ArrayList<Domino> Player3Hand = new ArrayList<>();
+    private ArrayList<Domino> Player4Hand = new ArrayList<>();
     ArrayList<Domino> Player1Train = new ArrayList<>();
     ArrayList<Domino> Player2Train = new ArrayList<>();
     ArrayList<Domino> Player3Train = new ArrayList<>();
     ArrayList<Domino> Player4Train = new ArrayList<>();
     ArrayList<Domino> PublicTrain = new ArrayList<>();
-    ArrayList<Domino> currentHand = new ArrayList<Domino>(); //helper ArrayList for checkPlayable method
-    ArrayList<Domino> currentTrain = new ArrayList<Domino>(); //helper ArrayList for checkPlayable method
-    private int numPlayers; //contains number of players for game
+    private ArrayList<Domino> currentHand = new ArrayList<Domino>(); //helper ArrayList for multiple check methods
+    private ArrayList<Domino> currentTrain = new ArrayList<Domino>(); //helper ArrayList for multiple check methods
+    private int numPlayers; //contains number of players for game should be 4
     int player1Score, player2Score, player3Score, player4Score;
-    int playerTurn, round, doublePlayTrain, doublePlayDomino;
+    int playerTurn, round, doublePlayTrain;
+    private int doublePlayDomino;
     boolean roundOver;
     boolean doublePlay;
-    Boolean player1Public, player2Public, player3Public, player4Public;
+    private Boolean player1Public, player2Public, player3Public, player4Public;//Objects
     ArrayList<Boolean> playerPublic = new ArrayList<>();
 
     /**
      * Default cstor
      * Sets all instance variables above accordingly
+     *
+     * @param currentRound The round number you're on (12-0)
+     * @param numberOfPlayers The number of players, should be 4
      */
     public DominoGameState(int numberOfPlayers, int currentRound) {
         numPlayers = numberOfPlayers;//used to determine how many players are playing
-        ArrayList<Domino> allDominoes = new ArrayList<Domino>();
+        ArrayList<Domino> allDominoes;//arraylist of dominoes
         DominoPile pile = new DominoPile();
         allDominoes = pile.setOfDominoes;
         PileofDominoes = new ArrayList<>();

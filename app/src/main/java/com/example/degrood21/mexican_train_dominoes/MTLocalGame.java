@@ -12,7 +12,6 @@ import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
  */
 
 public class MTLocalGame extends LocalGame {
-    //Instance Variables
     //Instance variable for the state of the game
     DominoGameState state;
     private int playerNum, trainNum, selectedDomino = 0;
@@ -35,8 +34,7 @@ public class MTLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         //if it's the final round, then check player scores to see who won the game.
         if (state.round == 0) {
-            //check if any of the players' hands have ran out of dominoes, ending the final round of the game
-            //resulting in the end of the game.
+            //check if any of the players' hands have ran out of dominoes, ending the final round of the game resulting in the end of the game.
             if (state.hand.get(0).size() == 0 || state.hand.get(1).size() == 0 || state.hand.get(2).size() == 0
                     || state.hand.get(3).size() == 0) {
                 countScores();
@@ -108,8 +106,7 @@ public class MTLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
 
-        state.doubleEndOfTrain(0);
-
+        state.doubleEndOfTrain(0);//makes sure that a double wasnt the last double that could be played and sets doublePlayTrain to false
         //calls the action based on which action got called
         if (action instanceof MTPlaceAction) {
             return placeAction(action);
@@ -124,7 +121,6 @@ public class MTLocalGame extends LocalGame {
         } else {
             return false;//no action was called
         }
-
     }
 
     protected String checkIfRoundOver() {
@@ -154,14 +150,14 @@ public class MTLocalGame extends LocalGame {
                 if (state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain)) {
                     state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                     if (state.playerTurn == state.doublePlayTrain) {
-                        state.playerPublic.set(playerNum, false);
+                        state.playerPublic.set(playerNum, false);//if you play on the double and its your train set it to false
                     }
                     state.playerTurn++;
                     if (state.playerTurn > 3) {
                         state.playerTurn = 0;
                     }
                 } else {
-                    state.playerPublic.set(playerNum, true);
+                    state.playerPublic.set(playerNum, true);//sets your train to public
                     state.playerTurn++;
                     if (state.playerTurn > 3) {
                         state.playerTurn = 0;
@@ -221,15 +217,14 @@ public class MTLocalGame extends LocalGame {
 
         MTDrawAction DA = (MTDrawAction) action;
 
-        if(action.getPlayer() instanceof MTHumanPlayer){
-
-            if(state.hand.get(state.playerTurn).size() == 20){
-                if(state.checkPlayable(playerNum, 0)){
+        if (action.getPlayer() instanceof MTHumanPlayer) {
+            if (state.hand.get(state.playerTurn).size() == 20) {//if your hand size is 20 you're unable to draw a domino
+                if (state.checkPlayable(playerNum, 0)) {
                     return false;
                 }
-                state.playerPublic.set(state.playerTurn, true);
+                state.playerPublic.set(state.playerTurn, true);//sets your train to public and ends your turn
                 state.playerTurn++;
-                if(state.playerTurn > 3){
+                if (state.playerTurn > 3) {
                     state.playerTurn = 0;
                 }
                 return true;
@@ -253,9 +248,9 @@ public class MTLocalGame extends LocalGame {
                         //you're able to place a domino
                         state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), state.doublePlayTrain);
                         if (state.playerTurn == state.doublePlayTrain) {
-                            state.playerPublic.set(state.playerTurn, false);
+                            state.playerPublic.set(state.playerTurn, false);//sets your train to private
                         }
-                        state.doublePlay = false;
+                        state.doublePlay = false;//sets double play to false since it was satisfied
                     }
                     state.playerTurn++;//increments the turn
                     if (state.playerTurn > 3) {
@@ -270,7 +265,7 @@ public class MTLocalGame extends LocalGame {
                         || state.playableTrains(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), 4)) {
                     //trys to play on all trains with your new domino
                     if (state.placeDomino(playerNum, state.hand.get(playerNum).get(state.hand.get(playerNum).size() - 1), playerNum)) {
-                        state.playerPublic.set(playerNum, false);
+                        state.playerPublic.set(playerNum, false);//sets your train to private
                         state.playerTurn++;
                         if (state.playerTurn > 3) {
                             state.playerTurn = 0;
@@ -329,14 +324,12 @@ public class MTLocalGame extends LocalGame {
                             || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 2)
                             || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 3)
                             || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 4)) {
-
                         if (state.doublePlay) {//checks if doubleplay is active
                             if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), state.doublePlayTrain)) {
                                 state.doublePlay = false;//sets doubleplay to false
                                 state.playerTurn++;//increment turn
                             } else {
                                 state.playerPublic.set(playerNum, true);
-                                //state.playerTurn++;
                             }
                         } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), playerNum)) {//places on own train
                             state.playerPublic.set(playerNum, false);
@@ -352,13 +345,11 @@ public class MTLocalGame extends LocalGame {
                         } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 4)) {//places on public train
                             state.playerTurn++;
                         }
-
                         if (state.playerTurn > 3) {//checks turn value for next player
                             state.playerTurn = 0;
                         }
-                        break;
+                        break;//breaks out of the for loop
                     }
-
                 }
                 if (state.playerTurn == playerNum) {//if its still your turn then you couldnt play
                     if (state.drawAction(playerNum)) {//draws
@@ -414,15 +405,25 @@ public class MTLocalGame extends LocalGame {
                         }
                     }
                 }
-                if(state.playerTurn > 3){ state.playerTurn = 0; }
+                if (state.playerTurn > 3) {
+                    state.playerTurn = 0;
+                }
                 return true;
             }
-
         }
-        if(state.playerTurn > 3){ state.playerTurn = 0; }
+        if (state.playerTurn > 3) {
+            state.playerTurn = 0;
+        }
         return false;
     }
 
+    /**
+     * Smart Computer, is more intelligent then our random computer since it will attempt to play on its own train which will make it private and
+     * thus harder for other players to empty their hand of dominoes
+     *
+     * @param action a simple Game Action
+     * @return true or false for if it played, always true
+     */
     public boolean smartComputerPlayAction(GameAction action) {
 
         MTSmartPlayAction SCPA = (MTSmartPlayAction) action;
@@ -436,7 +437,7 @@ public class MTLocalGame extends LocalGame {
                             //if you can play on your own train
                             if (state.doublePlay) {
                                 if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), state.doublePlayTrain)) {
-                                    state.doublePlay = false;
+                                    state.doublePlay = false;//no longer double play mode
                                     state.playerTurn++;
                                 } else {
                                     state.playerPublic.set(playerNum, true);
@@ -455,14 +456,12 @@ public class MTLocalGame extends LocalGame {
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 2)
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 3)
                                 || state.playableTrains(playerNum, state.hand.get(playerNum).get(i), 4)) {
-
                             if (state.doublePlay) {//checks if doubleplay is active
                                 if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), state.doublePlayTrain)) {
                                     state.doublePlay = false;//sets doubleplay to false
                                     state.playerTurn++;//increment turn
                                 } else {
-                                    state.playerPublic.set(playerNum, true);
-                                    //state.playerTurn++;
+                                    state.playerPublic.set(playerNum, true);//sets your train to public
                                 }
                             } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), playerNum)) {//places on own train
                                 state.playerPublic.set(playerNum, false);
@@ -478,12 +477,10 @@ public class MTLocalGame extends LocalGame {
                             } else if (state.placeDomino(playerNum, state.hand.get(playerNum).get(i), 4)) {//places on public train
                                 state.playerTurn++;
                             }
-
                             if (state.playerTurn > 3) {//checks turn value for next player
                                 state.playerTurn = 0;
                             }
-                            //game.sendAction(new MTSelectAction(this));
-                            break;
+                            break;//breaks out of loop
                         }
 
                     }
@@ -496,7 +493,7 @@ public class MTLocalGame extends LocalGame {
                                 state.doublePlay = false;
                             }
                             state.playerTurn++;
-                            if (state.playerTurn > 3) {//check this
+                            if (state.playerTurn > 3) {
                                 state.playerTurn = 0;
                             }
                         }
@@ -527,7 +524,7 @@ public class MTLocalGame extends LocalGame {
                                     state.playerTurn = 0;
                                 }
                             }
-                        } else if (playerNum == state.playerTurn) {
+                        } else if (playerNum == state.playerTurn) { //if its still your turn increment and sets your train to public
                             state.playerPublic.set(playerNum, true);
                             state.playerTurn++;
                             if (state.playerTurn > 3) {
@@ -542,63 +539,63 @@ public class MTLocalGame extends LocalGame {
                         }
                     }
                 }
-                if(state.playerTurn > 3){ state.playerTurn = 0; }
+                if (state.playerTurn > 3) {
+                    state.playerTurn = 0;
+                }
                 return true;
             }
-
         }
-        if(state.playerTurn > 3){ state.playerTurn = 0; }
+        if (state.playerTurn > 3) {
+            state.playerTurn = 0;
+        }
         return false;
-
     }
 
+    /**
+     * Checks if the round is over
+     *
+     * @param action sends in a game action
+     * @return
+     */
     public boolean roundOver(GameAction action) {
 
         roundOverAction rdOver = (roundOverAction) action;
         if (rdOver.checkRoundOver()) {
 
+            //checks the size of the pile, if 0 it sees if anybody has a playable move, if not ends round
             if (state.PileofDominoes.size() == 0
                     && state.hand.get(0).size() != 0
                     && state.hand.get(1).size() != 0
                     && state.hand.get(2).size() != 0
                     && state.hand.get(3).size() != 0) {
-                if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
+                if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)//checks to see if anyone can play on any public train
                         && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
+                    countScores();//calls count scores to total the scores at the end of a round
 
-                    countScores();
-
-                    int less1, less2;
-                    if (state.player1Score < state.player2Score) {
+                    int less1, less2;//calculates the winning player for each round by comparing their scores
+                    if (state.player1Score < state.player2Score) {//compares player 1 and 2
                         less1 = state.player1Score;
                     } else {
                         less1 = state.player2Score;
                     }
 
-                    if (state.player3Score < state.player4Score) {
+                    if (state.player3Score < state.player4Score) {//cpmpares player 3 and 4
                         less2 = state.player3Score;
                     } else {
                         less2 = state.player4Score;
                     }
 
                     if (less1 < less2) {
-                        if (less1 == state.player1Score) {
+                        if (less1 == state.player1Score) {//compares the lower two scores from above
                             state.round--;
-                            //state.roundOver = true;
-                            //myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score);
                         } else {
                             state.round--;
-                            //state.roundOver = true;
-                            //myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);
                         }
                     } else {
                         if (less2 == state.player3Score) {
                             state.round--;
-                            //state.roundOver = true;
-                            //myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);
                         } else {
                             state.round--;
-                            //state.roundOver = true;
-                            //myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score);
                         }
                     }
                 }
@@ -607,48 +604,36 @@ public class MTLocalGame extends LocalGame {
                 //Check if any of the players hands have reached 0, meaning they have ran out of dominoes
                 //in their hand and won the round.
                 if (state.hand.get(0).size() == 0) {
-                    countScores();
+                    countScores();//calls count scores method
                     state.round--;
-                    //state.roundOver = true;
-                    //myText.setText("Player 1" + " won the Round." + " Score: " + state.player1Score); //player one ran out of dominoes and won the round.
                 } else if (state.hand.get(1).size() == 0) {
                     countScores();
                     state.round--;
-                    //state.roundOver = true;
-                    //myText.setText("Player 2" + " won the Round." + " Score: " + state.player2Score);//player two ran out of dominoes and won the round.
                 } else if (state.hand.get(2).size() == 0) {
                     countScores();
                     state.round--;
-                    //state.roundOver = true;
-                    //myText.setText("Player 3" + " won the Round." + " Score: " + state.player3Score);//player three ran out of dominoes and won the round.
                 } else if (state.hand.get(3).size() == 0) {
                     countScores();
                     state.round--;
-                    //state.roundOver = true;
-                    //myText.setText("Player 4" + " won the Round." + " Score: " + state.player4Score); //player four ran out of dominoes and won the round.
                 } else {
                     //All players still have dominoes in their hands, the game goes on.
                 }
             }
-
             DominoGameState newRound = new DominoGameState(4, state.round);
-            newRound.player1Score = state.player1Score;
+            newRound.player1Score = state.player1Score;//if new round then sets the players scores
             newRound.player2Score = state.player2Score;
             newRound.player3Score = state.player3Score;
             newRound.player4Score = state.player4Score;
             this.state = newRound;
 
             return true;
-
-            //sendInfo(this.state);
-
         }
-
         return false;
-
-
     }
 
+    /**
+     * helper method for counting the scores of all the players and updating their scores so it's displayed on the gui
+     */
     public void countScores() {
 
         int newPlayer1Score = 0, newPlayer2Score = 0, newPlayer3Score = 0, newPlayer4Score = 0;

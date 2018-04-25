@@ -10,6 +10,16 @@ import com.example.degrood21.mexican_train_dominoes.game.config.GamePlayerType;
 
 import java.util.ArrayList;
 
+
+/**
+ * External Citation
+ * Date: 20 April 2018
+ * Problem: Needed the game framework
+ * Resource: https://github.com/srvegdahl/SlapJack
+ * Solution: We got the framework from SlapJack
+ */
+
+
 /**
  * Main Activity
  * Creates Permanent Set of Dominoes
@@ -31,19 +41,22 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // MexicanTrain has three player types:  human and computer and smartComputer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 8) name = name.substring(0, 8);
+                if (name.length() > 8) name = name.substring(0, 8);
                 return new MTHumanPlayer(name);
-            }});
+            }
+        });
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 8) name = name.substring(0, 8);
+                if (name.length() > 8) name = name.substring(0, 8);
                 return new MTComputerPlayer(name, false);
-            }});
+            }
+        });
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
-                if(name.length() > 8) name = name.substring(0, 8);
+                if (name.length() > 8) name = name.substring(0, 8);
                 return new MTComputerPlayer(name, true);
-            }});
+            }
+        });
 
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);

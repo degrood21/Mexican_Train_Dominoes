@@ -28,7 +28,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Define the allowed player types
         ArrayList<GamePlayerType> playerTypes = new ArrayList<GamePlayerType>();
 
-        // MexicanTrain has two player types:  human and computer
+        // MexicanTrain has three player types:  human and computer and smartComputer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
                 if(name.length() > 8) name = name.substring(0, 8);
@@ -37,7 +37,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         playerTypes.add(new GamePlayerType("Computer Player") {
             public GamePlayer createPlayer(String name) {
                 if(name.length() > 8) name = name.substring(0, 8);
-                return new MTComputerPlayer(name);
+                return new MTComputerPlayer(name, false);
             }});
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
@@ -47,9 +47,9 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
 
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);
-        defaultConfig.addPlayer("Human", 0); // player 1: a human player
-        defaultConfig.addPlayer("Smart Computer", 2);
-        defaultConfig.addPlayer("Computer", 1); // player 2: a computer player
+        defaultConfig.addPlayer("Human", 0); // player type 1: a human player
+        defaultConfig.addPlayer("Smart Computer", 2);//player type 3: a smart computer player
+        defaultConfig.addPlayer("Computer", 1); // player type 2: a computer player
 
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
 

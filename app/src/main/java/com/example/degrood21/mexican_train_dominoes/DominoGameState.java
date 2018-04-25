@@ -47,35 +47,35 @@ public class DominoGameState extends GameState {
         allDominoes = pile.setOfDominoes;
         PileofDominoes = new ArrayList<>();
 
-        round = currentRound;
-        for (int i = 0; i < allDominoes.size(); i++) {
+        round = currentRound;//update currentRound to the current round of the game.
+        for (int i = 0; i < allDominoes.size(); i++) { //set the domino values and picture ID's
             int pID = allDominoes.get(i).getPictureID();
             int rSide = allDominoes.get(i).getRightSide();
             int lSide = allDominoes.get(i).getLeftSide();
             Domino copy = new Domino(pID, rSide, lSide);
-            PileofDominoes.add(i, copy);
+            PileofDominoes.add(i, copy);//add the updated & copied domino to the pileofDominoes
 
         }
 
-        PublicTrain = new ArrayList<>();
+        PublicTrain = new ArrayList<>();//An arraylist that will hold the public/private values of all trains.
 
-        for (int i = 0; i < allDominoes.size() - 1; i++) {
+        for (int i = 0; i < allDominoes.size() - 1; i++) {//place the round domino into the public train
             if (PileofDominoes.get(i).leftSide == round && PileofDominoes.get(i).rightSide == round) {
-                allDominoes.get(i).leftSide = -1;
-                PublicTrain.add(0, allDominoes.get(i));
-                PileofDominoes.remove(i);
+                allDominoes.get(i).leftSide = -1;//and set it's leftside to -1, so the game compares the right when placing a domino
+                PublicTrain.add(0, allDominoes.get(i));//add the round domino to the public train
+                PileofDominoes.remove(i);//remove the round domino from the pile so it will not be drawn/dealt
             }
         }
 
-        Player1Train = new ArrayList<>();
-        Player2Train = new ArrayList<>();
-        Player3Train = new ArrayList<>();
-        Player4Train = new ArrayList<>();
+        Player1Train = new ArrayList<>();//arraylist for player 1's train
+        Player2Train = new ArrayList<>();//arraylist for player 2's train
+        Player3Train = new ArrayList<>();//arraylist for player 3's train
+        Player4Train = new ArrayList<>();//arraylist for player 4's train
 
-        Player1Hand = new ArrayList<>();
-        Player2Hand = new ArrayList<>();
-        Player3Hand = new ArrayList<>();
-        Player4Hand = new ArrayList<>();
+        Player1Hand = new ArrayList<>();//arraylist for player 1's hand
+        Player2Hand = new ArrayList<>();//arraylist for player 2's hand
+        Player3Hand = new ArrayList<>();//arraylist for player 3's hand
+        Player4Hand = new ArrayList<>();//arraylist for player 4's hand
 
         //add each individual hand into the arraylist of hand.
         hand.add(Player1Hand);
@@ -86,16 +86,18 @@ public class DominoGameState extends GameState {
         //shuffle and deal out dominoes into respectable hands.
         dealAction();
 
-        roundOver = false;
+        roundOver = false;//set roundOver to false, because it is not the end of the round
+        //this will change when our round over method returns true.
 
         playerTurn = 0; // 0 means it is player 1's turn
 
-        if (round == 12) {
+        if (round == 12) {//set all player scores to 0 at the start of the game, hence when the round is 12 the starting round.
             player1Score = 0;
             player2Score = 0;
             player3Score = 0;
             player4Score = 0;
         }
+        //set all player trains to private unless the draw and that action changes their values.
         player1Public = false;
         player2Public = false;
         player3Public = false;

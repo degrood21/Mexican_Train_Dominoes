@@ -15,10 +15,11 @@ public class MTPlaceAction extends GameAction {
     private int selectedDomino;
 
     /**
-     * constructor for GameAction
+     * constructor for MTPlaceAction
      *
      * @param player the player who created the action
      * @param numOfTrain sends in the value of the train being played on
+     * @param selectedDomino the current selected domino passed in as an integer value
      */
     public MTPlaceAction(GamePlayer player, int numOfTrain, int selectedDomino) {
         super(player);

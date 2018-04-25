@@ -26,15 +26,14 @@ public class roundOverAction extends GameAction {
         super(player);
         state = initState;
     }
+    public boolean checkRoundOver() {//Check's if the round is over, returns true if it is. False otherwise.
 
-    public boolean checkRoundOver() {
-
-        if (state.PileofDominoes.size() == 0
-                && state.hand.get(0).size() != 0
-                && state.hand.get(1).size() != 0
-                && state.hand.get(2).size() != 0
-                && state.hand.get(3).size() != 0) {
-
+        if (state.PileofDominoes.size() == 0//if the pile is 0
+                && state.hand.get(0).size() != 0//and player 1's hand is not 0
+                && state.hand.get(1).size() != 0//and player 2's hand is not 0
+                && state.hand.get(2).size() != 0//and player 3's hand is not 0
+                && state.hand.get(3).size() != 0) {//and player 4's hand is not 0..
+            //then if none of the players can play, then the round is over because no one can play and no one can draw any more dominoes.
             if ((!state.checkPlayable(0, 0) && !state.checkPlayable(1, 0)
                     && !state.checkPlayable(2, 0) && !state.checkPlayable(3, 0))) {
 

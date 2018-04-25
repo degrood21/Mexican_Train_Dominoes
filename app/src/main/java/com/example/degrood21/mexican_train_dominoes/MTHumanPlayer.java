@@ -82,12 +82,12 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         drawButton.setEnabled(true);
 
+        //setup doublePlay message
         TextView myText = (TextView) myActivity.findViewById(R.id.doublePlayTV);
         myText.setText("DOUBLE PLAY!\n");
-        if(state.doublePlayTrain < 4) {
+        if (state.doublePlayTrain < 4) {
             myText.append("Play on: Train " + (state.doublePlayTrain + 1));
-        }
-        else{
+        } else {
             myText.append("Play on: Public Train");
         }
         myText.setTextColor(Color.BLACK);
@@ -99,10 +99,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             myText.setVisibility(View.INVISIBLE);//if not double play its false
         }
 
-        //state.doubleEndOfTrain(0);
-
         game.sendAction(new roundOverAction(this, state));
 
+        //sets the TextView to display the scores of each player after each round
         p1ScoreTV.setText("" + allPlayerNames[0] + ": " + state.player1Score + " pips");
         p2ScoreTV.setText("" + allPlayerNames[1] + ": " + state.player2Score + " pips");
         p3ScoreTV.setText("" + allPlayerNames[2] + ": " + state.player3Score + " pips");
@@ -264,6 +263,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         }
 
+        //highlights the player whose turn it is
         if (state.playerTurn == 0) {
             player1TrainTV.setBackgroundResource(R.color.colorAccent);
             player2TrainTV.setBackgroundResource(R.color.green_playboard);
@@ -366,20 +366,15 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
         activity.setContentView(R.layout.activity_main);
 
-        /**
-         * Creating the button and ImageViews used to draw the dominoes onto the screen
-         *
-         */
+        // Creating the button and ImageViews used to draw the dominoes onto the screen
+
         quitButton = (Button) myActivity.findViewById(R.id.quitButton);
-
         restartButton = (Button) myActivity.findViewById(R.id.restartButton);
-
         helpButton = (Button) myActivity.findViewById(R.id.button);
-
         drawButton = (Button) myActivity.findViewById(R.id.drawButton);
-
         drawButton.setEnabled(false);
 
+        //score TextViews
         p1ScoreTV = (TextView) myActivity.findViewById(R.id.player1Score);
         p2ScoreTV = (TextView) myActivity.findViewById(R.id.player2Score);
         p3ScoreTV = (TextView) myActivity.findViewById(R.id.player3Score);
@@ -387,16 +382,20 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         roundTV = (TextView) myActivity.findViewById(R.id.roundView);
         pileOfDominoCounter = (TextView) myActivity.findViewById(R.id.domPileNumTV);
         roundDom = (ImageView) myActivity.findViewById(R.id.roundDominoIV);
+
+        //will display train image when specific train is public
         turnMarker1 = (ImageView) myActivity.findViewById(R.id.turnMarker);
         turnMarker2 = (ImageView) myActivity.findViewById(R.id.turnMarker2);
         turnMarker3 = (ImageView) myActivity.findViewById(R.id.turnMarker3);
         turnMarker4 = (ImageView) myActivity.findViewById(R.id.turnMarker4);
 
+        //names of players
         player1TrainTV = (TextView) myActivity.findViewById(R.id.player1Train);
         player2TrainTV = (TextView) myActivity.findViewById(R.id.player2Train);
         player3TrainTV = (TextView) myActivity.findViewById(R.id.player3Train);
         player4TrainTV = (TextView) myActivity.findViewById(R.id.player4train);
 
+        //ImageViews of all of the trains
         Player1TrainIVs.add(p1First = (ImageView) myActivity.findViewById(R.id.p1IVone));
         Player1TrainIVs.add(p1Second = (ImageView) myActivity.findViewById(R.id.p1IVtwo));
         Player1TrainIVs.add(p1Third = (ImageView) myActivity.findViewById(R.id.p1IVthree));
@@ -432,6 +431,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         PublicTrainIVs.add(publicFifth = (ImageView) myActivity.findViewById(R.id.pTrainIVfive));
         PublicTrainIVs.add(publicSixth = (ImageView) myActivity.findViewById(R.id.pTrainIVsix));
 
+        //ImageViews for the player's hand
         HandIVs.add(handOne = (ImageView) myActivity.findViewById(R.id.handIVone));
         HandIVs.add(handTwo = (ImageView) myActivity.findViewById(R.id.handIVtwo));
         HandIVs.add(handThree = (ImageView) myActivity.findViewById(R.id.handIVthree));
@@ -454,7 +454,9 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         HandIVs.add(handTwenty = (ImageView) myActivity.findViewById(R.id.handIVtwenty));
 
 
-        // On Click Listeners to listen to Buttons and last ImageView of each train in order to place a domino
+        // OnClickListeners to listen to Buttons and last ImageView of each train in order to place a domino
+
+        //quits game
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -462,6 +464,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
+        //restarts game when button is pushed
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -472,7 +475,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                  Resource: https://stackoverflow.com/questions/16116664/making-a-button-restart-the-activity
                  Solution: I was inspired the code from one of the answers
                  */
-                //restarts game when button is pushed
                 Intent intent = myActivity.getIntent();
                 myActivity.finish();
                 myActivity.startActivity(intent);
@@ -480,6 +482,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
+        //displays menu containing game rules when button is pressed
         helpButton.setOnClickListener(new View.OnClickListener() {
             //displays rules when question mark button is pressed
             @Override
@@ -495,13 +498,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             }
         });
 
+        //draws a domino if the game allows when pressed
         drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
                 if (playerNum == state.playerTurn) {
-                        sendDrawAction();
+                    sendDrawAction();
                 }
 
             }
@@ -517,7 +521,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (playerNum == state.playerTurn) {
 
                     sendPlaceAction(0);
-
                 }
 
             }
@@ -530,7 +533,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == playerNum) {
 
                     sendPlaceAction(1);
-
                 }
 
 
@@ -544,7 +546,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == playerNum) {
 
                     sendPlaceAction(2);
-
                 }
 
             }
@@ -557,7 +558,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == playerNum) {
 
                     sendPlaceAction(3);
-
                 }
 
             }
@@ -570,7 +570,6 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
                 if (state.playerTurn == playerNum) {
 
                     sendPlaceAction(4);
-
                 }
 
             }
@@ -686,21 +685,21 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
     public void onClick(View view) {
     }
 
-    public void sendPlaceAction(int trainNum){
-
+    public void sendPlaceAction(int trainNum) {
         game.sendAction(new MTPlaceAction(this, trainNum, selectedDomino));
         resetPlaceHelpers();
-
     }
 
-    public void sendDrawAction(){
-
+    public void sendDrawAction() {
         game.sendAction(new MTDrawAction(this));
         resetPlaceHelpers();
-
     }
 
-    public void resetPlaceHelpers(){
+    /**
+     * resetPlaceHelpers recolors the space with the purple x and background of selected ImageView
+     * to the color of the board after a domino is placed
+     */
+    public void resetPlaceHelpers() {
 
         selectedDomino = 0;
         //After every place action reset all purple x views
@@ -715,7 +714,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         PublicTrainIVs.get(5).setImageResource(R.color.green_playboard);
         PublicTrainIVs.get(5).getLayoutParams().height = 50;
 
-        for(int i = 0; i < HandIVs.size(); i++){
+        for (int i = 0; i < HandIVs.size(); i++) {
             HandIVs.get(i).setBackgroundResource(R.color.green_playboard);
         }
 

@@ -92,7 +92,15 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         }
         myText.setTextColor(Color.BLACK);
         myText.setBackgroundColor(Color.argb(255, 255, 0, 0));
-
+        /**
+         * External Citation
+         * Date: 9 April 2018
+         * Problem: Causing a text to display only when we are in DoublePlay
+         * Resource: https://stackoverflow.com/questions/23468302/how-to-change-text-visibility-on-android-application
+         * Solution: SetVisibility of mtText to Visible that says DoublePLay is in play
+         * and the train it is occurring onto. This notifies the user that Doubleplay
+         * is in motion, making the user aware.
+         */
         if (state.doublePlay) {
             myText.setVisibility(View.VISIBLE);//if double play is true make it visible
         } else {
@@ -372,6 +380,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         restartButton = (Button) myActivity.findViewById(R.id.restartButton);
         helpButton = (Button) myActivity.findViewById(R.id.button);
         drawButton = (Button) myActivity.findViewById(R.id.drawButton);
+        /**
+         * External Citation
+         * Date: 23 April, 2018
+         * Problem: During Network play, pressing the draw button before host initialized crashed the game.
+         * Source: Professor Nuxoll
+         * Solution: In setAsGUI() we set the drawButton to disabled. And when
+         * receiveInfo gets called for the first time, we enable it.
+         */
         drawButton.setEnabled(false);
 
         //score TextViews

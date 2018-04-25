@@ -18,7 +18,7 @@ public class roundOverAction extends GameAction {
     DominoGameState state;//sets the state
 
     /**
-     * constructor for GameAction
+     * constructor for roundOverAction
      *
      * @param player the player who created the action
      */

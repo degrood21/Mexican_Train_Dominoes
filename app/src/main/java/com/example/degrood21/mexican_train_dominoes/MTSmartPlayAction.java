@@ -13,7 +13,7 @@ import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 public class MTSmartPlayAction extends GameAction {
     /**
-     * constructor for GameAction
+     * constructor for MTSmartPlayAction
      *
      * @param player the player who created the action
      */

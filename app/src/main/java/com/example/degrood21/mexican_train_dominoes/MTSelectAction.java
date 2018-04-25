@@ -11,7 +11,7 @@ import com.example.degrood21.mexican_train_dominoes.game.actionMsg.GameAction;
 
 public class MTSelectAction extends GameAction {
     /**
-     * constructor for GameAction
+     * constructor for MTSelectAction
      *
      * @param player the player who created the action
      */

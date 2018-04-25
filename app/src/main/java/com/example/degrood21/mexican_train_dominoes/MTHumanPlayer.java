@@ -465,6 +465,13 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /**
+                 External Citation:
+                 Date: 13 April 2018
+                 Problem: I wasn't sure how to restart.
+                 Resource: https://stackoverflow.com/questions/16116664/making-a-button-restart-the-activity
+                 Solution: I was inspired the code from one of the answers
+                 */
                 //restarts game when button is pushed
                 Intent intent = myActivity.getIntent();
                 myActivity.finish();

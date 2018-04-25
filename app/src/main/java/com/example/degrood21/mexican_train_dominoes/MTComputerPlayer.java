@@ -56,7 +56,6 @@ public class MTComputerPlayer extends GameComputerPlayer {
 
         //update our variable
         mtState = (DominoGameState) info;
-        //int playerNum = mtState.playerTurn;
         int playerNum = this.playerNum;
 
         if (!comDifficulty) {//Simple AI

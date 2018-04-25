@@ -107,6 +107,8 @@ public class MTLocalGame extends LocalGame {
     @Override
     protected boolean makeMove(GameAction action) {
 
+        state.doubleEndOfTrain(0);
+
         //calls the action based on which action got called
         if (action instanceof MTPlaceAction) {
             return placeAction(action);
@@ -396,10 +398,12 @@ public class MTLocalGame extends LocalGame {
                         }
                     }
                 }
+                if(state.playerTurn > 3){ state.playerTurn = 0; }
                 return true;
             }
 
         }
+        if(state.playerTurn > 3){ state.playerTurn = 0; }
         return false;
     }
 
@@ -522,10 +526,12 @@ public class MTLocalGame extends LocalGame {
                         }
                     }
                 }
+                if(state.playerTurn > 3){ state.playerTurn = 0; }
                 return true;
             }
 
         }
+        if(state.playerTurn > 3){ state.playerTurn = 0; }
         return false;
 
     }

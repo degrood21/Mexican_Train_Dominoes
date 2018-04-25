@@ -99,14 +99,14 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
             myText.setVisibility(View.INVISIBLE);//if not double play its false
         }
 
-        state.doubleEndOfTrain(0);
+        //state.doubleEndOfTrain(0);
 
         game.sendAction(new roundOverAction(this, state));
 
-        p1ScoreTV.setText("Player 1: " + state.player1Score + " pips");
-        p2ScoreTV.setText("Player 2: " + state.player2Score + " pips");
-        p3ScoreTV.setText("Player 3: " + state.player3Score + " pips");
-        p4ScoreTV.setText("Player 4: " + state.player4Score + " pips");
+        p1ScoreTV.setText("" + allPlayerNames[0] + ": " + state.player1Score + " pips");
+        p2ScoreTV.setText("" + allPlayerNames[1] + ": " + state.player2Score + " pips");
+        p3ScoreTV.setText("" + allPlayerNames[2] + ": " + state.player3Score + " pips");
+        p4ScoreTV.setText("" + allPlayerNames[3] + ": " + state.player4Score + " pips");
 
 
         /**
@@ -263,6 +263,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
             }
         }
+
         if (state.playerTurn == 0) {
             player1TrainTV.setBackgroundResource(R.color.colorAccent);
             player2TrainTV.setBackgroundResource(R.color.green_playboard);

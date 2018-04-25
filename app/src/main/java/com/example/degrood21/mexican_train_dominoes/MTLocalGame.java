@@ -39,6 +39,7 @@ public class MTLocalGame extends LocalGame {
             //resulting in the end of the game.
             if (state.hand.get(0).size() == 0 || state.hand.get(1).size() == 0 || state.hand.get(2).size() == 0
                     || state.hand.get(3).size() == 0) {
+                countScores();
                 //if player one's score is higher than the others...
                 if (state.player1Score < state.player2Score && state.player1Score < state.player3Score
                         && state.player1Score < state.player4Score) {
@@ -220,6 +221,22 @@ public class MTLocalGame extends LocalGame {
     public boolean drawAction(GameAction action) {
 
         MTDrawAction DA = (MTDrawAction) action;
+
+        if(action.getPlayer() instanceof MTHumanPlayer){
+
+            if(state.hand.get(state.playerTurn).size() == 20){
+                if(state.checkPlayable(playerNum, 0)){
+                    return false;
+                }
+                state.playerPublic.set(state.playerTurn, true);
+                state.playerTurn++;
+                if(state.playerTurn > 3){
+                    state.playerTurn = 0;
+                }
+                return true;
+            }
+
+        }
 
         if (state.playerTurn == this.getPlayerIdx(DA.getPlayer())) {//checks if it's their turn
             playerNum = this.getPlayerIdx(DA.getPlayer());//sets player num equal to player turn

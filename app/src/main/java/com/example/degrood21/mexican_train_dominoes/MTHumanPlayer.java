@@ -494,7 +494,7 @@ public class MTHumanPlayer extends GameHumanPlayer implements View.OnClickListen
 
                 // When clicked, draws a domino using Player 1 ID (Human Player)
                 if (playerNum == state.playerTurn) {
-                    sendDrawAction();
+                        sendDrawAction();
                 }
 
             }

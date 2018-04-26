@@ -30,7 +30,7 @@ public class DominoGameState extends GameState {
     private int numPlayers; //contains number of players for game should be 4
     int player1Score, player2Score, player3Score, player4Score;
     int playerTurn, round, doublePlayTrain;
-    private int doublePlayDomino;
+    int doublePlayDomino;
     boolean roundOver;
     boolean doublePlay;
     private Boolean player1Public, player2Public, player3Public, player4Public;//Objects

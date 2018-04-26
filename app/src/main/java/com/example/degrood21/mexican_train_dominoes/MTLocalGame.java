@@ -432,7 +432,7 @@ public class MTLocalGame extends LocalGame {
             playerNum = this.getPlayerIdx(SCPA.getPlayer());
             if (state.hand.get(playerNum).size() > 0) {//if you have a domino in hand
                 for (int i = 0; i < state.hand.get(playerNum).size(); i++) {
-                    if (state.playerPublic.get(playerNum)) {//if your train is public
+                    //if (state.playerPublic.get(playerNum)) {//if your train is public
                         if (state.playableTrains(playerNum, state.hand.get(playerNum).get(i), playerNum)) {
                             //if you can play on your own train
                             if (state.doublePlay) {
@@ -447,7 +447,7 @@ public class MTLocalGame extends LocalGame {
                                 state.playerTurn++;//plays on own train
                             }
                         }
-                    }
+                    //}
                 }
                 if (state.playerTurn == this.getPlayerIdx(SCPA.getPlayer())) {
                     for (int i = 0; i < state.hand.get(playerNum).size(); i++) {//loops through hand
@@ -649,10 +649,6 @@ public class MTLocalGame extends LocalGame {
         for (int i = 0; i < state.hand.get(3).size(); i++) {
             newPlayer4Score += state.hand.get(3).get(i).rightSide + state.hand.get(3).get(i).leftSide;
         }
-        newPlayer1Score = newPlayer1Score / 2;
-        newPlayer2Score = newPlayer2Score / 2;
-        newPlayer3Score = newPlayer3Score / 2;
-        newPlayer4Score = newPlayer4Score / 2;
 
         state.player1Score += newPlayer1Score;
         state.player2Score += newPlayer2Score;

@@ -8,6 +8,32 @@ import com.example.degrood21.mexican_train_dominoes.game.config.GameConfig;
 import com.example.degrood21.mexican_train_dominoes.game.config.GamePlayerType;
 import java.util.ArrayList;
 
+/**
+ * Final Release Notes for Mexican Train Dominoes:
+ *
+ * - Meets all specified requirements for the final release
+ * - All known and reported bugs have been fixed and game is finalized
+ * - Code meets the Coding Standard
+ * - 7 JUnit Tests have been created and passed
+ *
+ * - 3 Star Game has been approved by Nux
+ *
+ * - Smart AI is more than random (Dumb AI)
+ *
+ * - Game does only work in landscape mode not portrait
+ *
+ * - Game includes and has Network Play working
+ *
+ * - Game does not crash for any known reason as of now (4.25.18)
+ *
+ * - Extra Features:
+ *      - Quit and Restart Buttons
+ *      - Help Button that displays rules (question mark)
+ *      - Notifications for Double Play (Notifies the player which train they must play on)
+ *      - Notifies the Player when they select a domino, where they can play and on which train
+ *
+ */
+
 
 /**
  * External Citation
@@ -59,9 +85,12 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player type 1: a human player
-        defaultConfig.addPlayer("Computer", 1); // player type 2: a computer player
         defaultConfig.addPlayer("Smart Computer", 2);//player type 3: a smart computer player
-        defaultConfig.setRemoteData("Remote Human Player", "", 0);//For playing with other humans over a network
+        defaultConfig.addPlayer("Computer", 1); // player type 2: a computer player
+        defaultConfig.addPlayer("Computer 2", 3); // player type 2: a computer player
+
+        defaultConfig.setRemoteData("Remote Human Player", "", 0);
+
 
         return defaultConfig;
     }

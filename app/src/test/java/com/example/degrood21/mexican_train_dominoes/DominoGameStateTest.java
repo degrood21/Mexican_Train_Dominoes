@@ -259,26 +259,19 @@ public class DominoGameStateTest {
 
         DominoGameState testState = new DominoGameState(4, 12);
 
-        for (int i = 0; i < testState.hand.get(0).size(); i++) {
-
-            if (testState.hand.get(0).get(i).rightSide == 6 || testState.hand.get(0).get(i).leftSide == 6) {
-
-                testState.Player1Train.add(testState.hand.get(0).get(i));
-
-            }
-
-        }
-
         for (int i = 0; i < testState.hand.get(1).size(); i++) {
 
             if (testState.hand.get(1).get(i).rightSide == 6 || testState.hand.get(1).get(i).leftSide == 6) {
 
                 if (testState.hand.get(1).get(i).rightSide == 6 && testState.hand.get(1).get(i).leftSide == 6) {
                     testState.hand.get(0).add(testState.hand.get(1).get(i));
+                    testState.hand.get(1).remove(i);
                     //break;
                 } else {
                     testState.Player1Train.add(testState.hand.get(1).get(i));
+                    testState.hand.get(1).remove(i);
                 }
+                i = 0;
             }
 
         }
@@ -289,10 +282,13 @@ public class DominoGameStateTest {
 
                 if (testState.hand.get(2).get(i).rightSide == 6 && testState.hand.get(2).get(i).leftSide == 6) {
                     testState.hand.get(0).add(testState.hand.get(2).get(i));
+                    testState.hand.get(2).remove(i);
                     //break;
                 } else {
                     testState.Player1Train.add(testState.hand.get(2).get(i));
+                    testState.hand.get(2).remove(i);
                 }
+                i = 0;
             }
 
         }
@@ -303,10 +299,13 @@ public class DominoGameStateTest {
 
                 if (testState.hand.get(3).get(i).rightSide == 6 && testState.hand.get(3).get(i).leftSide == 6) {
                     testState.hand.get(0).add(testState.hand.get(3).get(i));
+                    testState.hand.get(3).remove(i);
                     //break;
                 } else {
                     testState.Player1Train.add(testState.hand.get(3).get(i));
+                    testState.hand.get(3).remove(i);
                 }
+                i = 0;
             }
 
         }
@@ -317,16 +316,31 @@ public class DominoGameStateTest {
 
                 if (testState.PileofDominoes.get(i).rightSide == 6 && testState.PileofDominoes.get(i).leftSide == 6) {
                     testState.hand.get(0).add(testState.PileofDominoes.get(i));
+                    testState.PileofDominoes.remove(i);
                     //break;
                 } else {
                     testState.Player1Train.add(testState.PileofDominoes.get(i));
+                    testState.PileofDominoes.remove(i);
                 }
-
+                i = 0;
             }
 
         }
 
-        Domino testDomino = testState.PileofDominoes.get(testState.randomDomino());
+        for (int i = 0; i < testState.hand.get(0).size(); i++) {
+
+            if ((testState.hand.get(0).get(i).rightSide == 6 && testState.hand.get(0).get(i).leftSide != 6)
+                    || (testState.hand.get(0).get(i).leftSide == 6 && testState.hand.get(0).get(i).rightSide != 6)) {
+
+                testState.Player1Train.add(testState.hand.get(0).get(i));
+                testState.hand.get(0).remove(i);
+                i = 0;
+
+            }
+
+
+        }
+
         int indexOfDouble = -1;
 
         for (int i = 0; i < testState.hand.get(0).size(); i++) {
@@ -339,6 +353,8 @@ public class DominoGameStateTest {
             }
 
         }
+
+
 
         if (indexOfDouble == -1) {
             //there was no playable domino in their hand

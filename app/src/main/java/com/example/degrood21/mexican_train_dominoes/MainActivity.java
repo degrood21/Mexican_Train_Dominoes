@@ -65,7 +65,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // MexicanTrain has three player types:  human, computer and smartComputer
         playerTypes.add(new GamePlayerType("Local Human Player") {
             public GamePlayer createPlayer(String name) {
-                if (name.length() > 8) name = name.substring(0, 8);//Limits the name length to 8 so it doesn't miss align the trains.
+                if (name.length() > 8) name = name.substring(0, 9);//Limits the name length to 8 so it doesn't miss align the trains.
                 return new MTHumanPlayer(name);
             }
         });
@@ -77,7 +77,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         });
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
-                if (name.length() > 8) name = name.substring(0, 8);
+                if (name.length() > 8) name = name.substring(0, 9);
                 return new MTComputerPlayer(name, true);
             }
         });
@@ -85,9 +85,9 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         // Create a game configuration class for MexicanTrain:
         GameConfig defaultConfig = new GameConfig(playerTypes, 4, 4, "MexicanTrain", PORT_NUMBER);
         defaultConfig.addPlayer("Human", 0); // player type 1: a human player
-        defaultConfig.addPlayer("Smart Computer", 2);//player type 3: a smart computer player
-        defaultConfig.addPlayer("Computer", 1); // player type 2: a computer player
-        defaultConfig.addPlayer("Computer 2", 3); // player type 2: a computer player
+        defaultConfig.addPlayer("Smart AI", 2);//player type 3: a smart computer player
+        defaultConfig.addPlayer("Dumb AI", 1); // player type 2: a computer player
+        defaultConfig.addPlayer("Dumb AI2", 1); // player type 2: a computer player
 
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
 

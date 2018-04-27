@@ -87,7 +87,7 @@ public class MainActivity extends GameMainActivity implements View.OnClickListen
         defaultConfig.addPlayer("Human", 0); // player type 1: a human player
         defaultConfig.addPlayer("Smart AI", 2);//player type 3: a smart computer player
         defaultConfig.addPlayer("Dumb AI", 1); // player type 2: a computer player
-        defaultConfig.addPlayer("Dumb AI2", 1); // player type 2: a computer player
+        defaultConfig.addPlayer("Smart AI 2", 2); // player type 2: a computer player
 
         defaultConfig.setRemoteData("Remote Human Player", "", 0);
 
